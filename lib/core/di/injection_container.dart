@@ -11,7 +11,6 @@ import '../../domain/repositories/auth_repository.dart';
 import '../../domain/repositories/reminders_repository.dart';
 import '../../domain/repositories/settings_repository.dart';
 import '../../domain/usecases/create_reminder_use_case.dart';
-import '../../domain/usecases/login_use_case.dart';
 import '../../presentation/auth/blocs/auth_bloc.dart';
 import '../../presentation/reminders/blocs/reminders_bloc.dart';
 import '../../presentation/settings/blocs/settings_bloc.dart';
@@ -60,10 +59,7 @@ Future<void> initDI() async {
 /// Dependency Injection setup for the Authentication feature
 void _initAuthFeature() {
   // Blocs (Factories ensure a new instance is created on navigation/mount)
-  sl.registerFactory(() => AuthBloc(loginUseCase: sl()));
-
-  // Use cases
-  sl.registerLazySingleton(() => LoginUseCase(sl()));
+  sl.registerFactory(() => AuthBloc(repository: sl()));
 
   // Repository implementations
   sl.registerLazySingleton<AuthRepository>(

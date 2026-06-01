@@ -5,28 +5,31 @@ import '../blocs/auth_bloc.dart';
 import '../blocs/auth_event.dart';
 import '../blocs/auth_state.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class CreatePasswordPage extends StatefulWidget {
+  const CreatePasswordPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<CreatePasswordPage> createState() => _CreatePasswordPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _CreatePasswordPageState extends State<CreatePasswordPage> {
   final _formKey = GlobalKey<FormState>();
   final _passwordController = TextEditingController();
-  bool _obscureText = true;
+  final _confirmController = TextEditingController();
+  bool _obscurePassword = true;
+  bool _obscureConfirm = true;
 
   @override
   void dispose() {
     _passwordController.dispose();
+    _confirmController.dispose();
     super.dispose();
   }
 
   void _submit() {
     if (_formKey.currentState?.validate() ?? false) {
       context.read<AuthBloc>().add(
-            LoginRequested(password: _passwordController.text),
+            CreatePassword(password: _passwordController.text),
           );
     }
   }
@@ -39,10 +42,7 @@ class _LoginPageState extends State<LoginPage> {
           authenticated: () => context.go('/reminders'),
           error: (msg) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(msg),
-                backgroundColor: Theme.of(context).colorScheme.error,
-              ),
+              SnackBar(content: Text(msg), backgroundColor: Colors.red),
             );
           },
           orElse: () {},
@@ -62,15 +62,15 @@ class _LoginPageState extends State<LoginPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      // Lock Emblem Icon
+                      // Header Graphic
                       Icon(
-                        Icons.lock_outline,
-                        size: 80,
+                        Icons.lock_person,
+                        size: 72,
                         color: Theme.of(context).colorScheme.primary,
                       ),
                       const SizedBox(height: 24),
                       Text(
-                        'Unlock App',
+                        'Secure Your App',
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                               fontWeight: FontWeight.bold,
@@ -79,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'Enter your master passcode to unlock your reminders.',
+                        'Create a master passcode to protect your data locally.',
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -94,28 +94,60 @@ class _LoginPageState extends State<LoginPage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
+                              // Master Passcode Field
                               TextFormField(
                                 controller: _passwordController,
-                                obscureText: _obscureText,
+                                obscureText: _obscurePassword,
                                 keyboardType: TextInputType.visiblePassword,
                                 style: const TextStyle(letterSpacing: 2),
                                 decoration: InputDecoration(
-                                  labelText: 'Passcode',
+                                  labelText: 'New Passcode',
                                   prefixIcon: const Icon(Icons.lock),
                                   suffixIcon: IconButton(
                                     icon: Icon(
-                                      _obscureText ? Icons.visibility_off : Icons.visibility,
+                                      _obscurePassword ? Icons.visibility_off : Icons.visibility,
                                     ),
                                     onPressed: () {
                                       setState(() {
-                                        _obscureText = !_obscureText;
+                                        _obscurePassword = !_obscurePassword;
                                       });
                                     },
                                   ),
                                 ),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Please enter your passcode';
+                                    return 'Passcode is required';
+                                  }
+                                  if (value.length < 6) {
+                                    return 'Must be at least 6 characters';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              const SizedBox(height: 20),
+                              // Confirm Passcode Field
+                              TextFormField(
+                                controller: _confirmController,
+                                obscureText: _obscureConfirm,
+                                keyboardType: TextInputType.visiblePassword,
+                                style: const TextStyle(letterSpacing: 2),
+                                decoration: InputDecoration(
+                                  labelText: 'Confirm Passcode',
+                                  prefixIcon: const Icon(Icons.check_circle_outline),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      _obscureConfirm ? Icons.visibility_off : Icons.visibility,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _obscureConfirm = !_obscureConfirm;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                validator: (value) {
+                                  if (value != _passwordController.text) {
+                                    return 'Passcodes do not match';
                                   }
                                   return null;
                                 },
@@ -125,7 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       const SizedBox(height: 36),
-                      // Submit Button
+                      // Action Submit Button
                       ElevatedButton(
                         onPressed: isLoading ? null : _submit,
                         style: ElevatedButton.styleFrom(
@@ -143,7 +175,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               )
                             : const Text(
-                                'Unlock',
+                                'Save Passcode',
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,

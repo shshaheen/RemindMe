@@ -19,21 +19,30 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String username, String password) loginSubmitted,
+    required TResult Function(String password) createPassword,
+    required TResult Function(String password) loginRequested,
+    required TResult Function(String oldPassword, String newPassword)
+        changePasswordRequested,
     required TResult Function() logoutRequested,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String username, String password)? loginSubmitted,
+    TResult? Function(String password)? createPassword,
+    TResult? Function(String password)? loginRequested,
+    TResult? Function(String oldPassword, String newPassword)?
+        changePasswordRequested,
     TResult? Function()? logoutRequested,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String username, String password)? loginSubmitted,
+    TResult Function(String password)? createPassword,
+    TResult Function(String password)? loginRequested,
+    TResult Function(String oldPassword, String newPassword)?
+        changePasswordRequested,
     TResult Function()? logoutRequested,
     required TResult orElse(),
   }) =>
@@ -41,22 +50,29 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AuthStarted value) started,
-    required TResult Function(AuthLoginSubmitted value) loginSubmitted,
-    required TResult Function(AuthLogoutRequested value) logoutRequested,
+    required TResult Function(CreatePassword value) createPassword,
+    required TResult Function(LoginRequested value) loginRequested,
+    required TResult Function(ChangePasswordRequested value)
+        changePasswordRequested,
+    required TResult Function(LogoutRequested value) logoutRequested,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AuthStarted value)? started,
-    TResult? Function(AuthLoginSubmitted value)? loginSubmitted,
-    TResult? Function(AuthLogoutRequested value)? logoutRequested,
+    TResult? Function(CreatePassword value)? createPassword,
+    TResult? Function(LoginRequested value)? loginRequested,
+    TResult? Function(ChangePasswordRequested value)? changePasswordRequested,
+    TResult? Function(LogoutRequested value)? logoutRequested,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthStarted value)? started,
-    TResult Function(AuthLoginSubmitted value)? loginSubmitted,
-    TResult Function(AuthLogoutRequested value)? logoutRequested,
+    TResult Function(CreatePassword value)? createPassword,
+    TResult Function(LoginRequested value)? loginRequested,
+    TResult Function(ChangePasswordRequested value)? changePasswordRequested,
+    TResult Function(LogoutRequested value)? logoutRequested,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -118,7 +134,10 @@ class _$AuthStartedImpl implements AuthStarted {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String username, String password) loginSubmitted,
+    required TResult Function(String password) createPassword,
+    required TResult Function(String password) loginRequested,
+    required TResult Function(String oldPassword, String newPassword)
+        changePasswordRequested,
     required TResult Function() logoutRequested,
   }) {
     return started();
@@ -128,7 +147,10 @@ class _$AuthStartedImpl implements AuthStarted {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String username, String password)? loginSubmitted,
+    TResult? Function(String password)? createPassword,
+    TResult? Function(String password)? loginRequested,
+    TResult? Function(String oldPassword, String newPassword)?
+        changePasswordRequested,
     TResult? Function()? logoutRequested,
   }) {
     return started?.call();
@@ -138,7 +160,10 @@ class _$AuthStartedImpl implements AuthStarted {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String username, String password)? loginSubmitted,
+    TResult Function(String password)? createPassword,
+    TResult Function(String password)? loginRequested,
+    TResult Function(String oldPassword, String newPassword)?
+        changePasswordRequested,
     TResult Function()? logoutRequested,
     required TResult orElse(),
   }) {
@@ -152,8 +177,11 @@ class _$AuthStartedImpl implements AuthStarted {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AuthStarted value) started,
-    required TResult Function(AuthLoginSubmitted value) loginSubmitted,
-    required TResult Function(AuthLogoutRequested value) logoutRequested,
+    required TResult Function(CreatePassword value) createPassword,
+    required TResult Function(LoginRequested value) loginRequested,
+    required TResult Function(ChangePasswordRequested value)
+        changePasswordRequested,
+    required TResult Function(LogoutRequested value) logoutRequested,
   }) {
     return started(this);
   }
@@ -162,8 +190,10 @@ class _$AuthStartedImpl implements AuthStarted {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AuthStarted value)? started,
-    TResult? Function(AuthLoginSubmitted value)? loginSubmitted,
-    TResult? Function(AuthLogoutRequested value)? logoutRequested,
+    TResult? Function(CreatePassword value)? createPassword,
+    TResult? Function(LoginRequested value)? loginRequested,
+    TResult? Function(ChangePasswordRequested value)? changePasswordRequested,
+    TResult? Function(LogoutRequested value)? logoutRequested,
   }) {
     return started?.call(this);
   }
@@ -172,8 +202,10 @@ class _$AuthStartedImpl implements AuthStarted {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthStarted value)? started,
-    TResult Function(AuthLoginSubmitted value)? loginSubmitted,
-    TResult Function(AuthLogoutRequested value)? logoutRequested,
+    TResult Function(CreatePassword value)? createPassword,
+    TResult Function(LoginRequested value)? loginRequested,
+    TResult Function(ChangePasswordRequested value)? changePasswordRequested,
+    TResult Function(LogoutRequested value)? logoutRequested,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -188,33 +220,28 @@ abstract class AuthStarted implements AuthEvent {
 }
 
 /// @nodoc
-abstract class _$$AuthLoginSubmittedImplCopyWith<$Res> {
-  factory _$$AuthLoginSubmittedImplCopyWith(_$AuthLoginSubmittedImpl value,
-          $Res Function(_$AuthLoginSubmittedImpl) then) =
-      __$$AuthLoginSubmittedImplCopyWithImpl<$Res>;
+abstract class _$$CreatePasswordImplCopyWith<$Res> {
+  factory _$$CreatePasswordImplCopyWith(_$CreatePasswordImpl value,
+          $Res Function(_$CreatePasswordImpl) then) =
+      __$$CreatePasswordImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String username, String password});
+  $Res call({String password});
 }
 
 /// @nodoc
-class __$$AuthLoginSubmittedImplCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$AuthLoginSubmittedImpl>
-    implements _$$AuthLoginSubmittedImplCopyWith<$Res> {
-  __$$AuthLoginSubmittedImplCopyWithImpl(_$AuthLoginSubmittedImpl _value,
-      $Res Function(_$AuthLoginSubmittedImpl) _then)
+class __$$CreatePasswordImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$CreatePasswordImpl>
+    implements _$$CreatePasswordImplCopyWith<$Res> {
+  __$$CreatePasswordImplCopyWithImpl(
+      _$CreatePasswordImpl _value, $Res Function(_$CreatePasswordImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? username = null,
     Object? password = null,
   }) {
-    return _then(_$AuthLoginSubmittedImpl(
-      username: null == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
-              as String,
+    return _then(_$CreatePasswordImpl(
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
@@ -225,71 +252,75 @@ class __$$AuthLoginSubmittedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AuthLoginSubmittedImpl implements AuthLoginSubmitted {
-  const _$AuthLoginSubmittedImpl(
-      {required this.username, required this.password});
+class _$CreatePasswordImpl implements CreatePassword {
+  const _$CreatePasswordImpl({required this.password});
 
-  @override
-  final String username;
   @override
   final String password;
 
   @override
   String toString() {
-    return 'AuthEvent.loginSubmitted(username: $username, password: $password)';
+    return 'AuthEvent.createPassword(password: $password)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AuthLoginSubmittedImpl &&
-            (identical(other.username, username) ||
-                other.username == username) &&
+            other is _$CreatePasswordImpl &&
             (identical(other.password, password) ||
                 other.password == password));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, username, password);
+  int get hashCode => Object.hash(runtimeType, password);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AuthLoginSubmittedImplCopyWith<_$AuthLoginSubmittedImpl> get copyWith =>
-      __$$AuthLoginSubmittedImplCopyWithImpl<_$AuthLoginSubmittedImpl>(
+  _$$CreatePasswordImplCopyWith<_$CreatePasswordImpl> get copyWith =>
+      __$$CreatePasswordImplCopyWithImpl<_$CreatePasswordImpl>(
           this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String username, String password) loginSubmitted,
+    required TResult Function(String password) createPassword,
+    required TResult Function(String password) loginRequested,
+    required TResult Function(String oldPassword, String newPassword)
+        changePasswordRequested,
     required TResult Function() logoutRequested,
   }) {
-    return loginSubmitted(username, password);
+    return createPassword(password);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String username, String password)? loginSubmitted,
+    TResult? Function(String password)? createPassword,
+    TResult? Function(String password)? loginRequested,
+    TResult? Function(String oldPassword, String newPassword)?
+        changePasswordRequested,
     TResult? Function()? logoutRequested,
   }) {
-    return loginSubmitted?.call(username, password);
+    return createPassword?.call(password);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String username, String password)? loginSubmitted,
+    TResult Function(String password)? createPassword,
+    TResult Function(String password)? loginRequested,
+    TResult Function(String oldPassword, String newPassword)?
+        changePasswordRequested,
     TResult Function()? logoutRequested,
     required TResult orElse(),
   }) {
-    if (loginSubmitted != null) {
-      return loginSubmitted(username, password);
+    if (createPassword != null) {
+      return createPassword(password);
     }
     return orElse();
   }
@@ -298,69 +329,404 @@ class _$AuthLoginSubmittedImpl implements AuthLoginSubmitted {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AuthStarted value) started,
-    required TResult Function(AuthLoginSubmitted value) loginSubmitted,
-    required TResult Function(AuthLogoutRequested value) logoutRequested,
+    required TResult Function(CreatePassword value) createPassword,
+    required TResult Function(LoginRequested value) loginRequested,
+    required TResult Function(ChangePasswordRequested value)
+        changePasswordRequested,
+    required TResult Function(LogoutRequested value) logoutRequested,
   }) {
-    return loginSubmitted(this);
+    return createPassword(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AuthStarted value)? started,
-    TResult? Function(AuthLoginSubmitted value)? loginSubmitted,
-    TResult? Function(AuthLogoutRequested value)? logoutRequested,
+    TResult? Function(CreatePassword value)? createPassword,
+    TResult? Function(LoginRequested value)? loginRequested,
+    TResult? Function(ChangePasswordRequested value)? changePasswordRequested,
+    TResult? Function(LogoutRequested value)? logoutRequested,
   }) {
-    return loginSubmitted?.call(this);
+    return createPassword?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthStarted value)? started,
-    TResult Function(AuthLoginSubmitted value)? loginSubmitted,
-    TResult Function(AuthLogoutRequested value)? logoutRequested,
+    TResult Function(CreatePassword value)? createPassword,
+    TResult Function(LoginRequested value)? loginRequested,
+    TResult Function(ChangePasswordRequested value)? changePasswordRequested,
+    TResult Function(LogoutRequested value)? logoutRequested,
     required TResult orElse(),
   }) {
-    if (loginSubmitted != null) {
-      return loginSubmitted(this);
+    if (createPassword != null) {
+      return createPassword(this);
     }
     return orElse();
   }
 }
 
-abstract class AuthLoginSubmitted implements AuthEvent {
-  const factory AuthLoginSubmitted(
-      {required final String username,
-      required final String password}) = _$AuthLoginSubmittedImpl;
+abstract class CreatePassword implements AuthEvent {
+  const factory CreatePassword({required final String password}) =
+      _$CreatePasswordImpl;
 
-  String get username;
   String get password;
   @JsonKey(ignore: true)
-  _$$AuthLoginSubmittedImplCopyWith<_$AuthLoginSubmittedImpl> get copyWith =>
+  _$$CreatePasswordImplCopyWith<_$CreatePasswordImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$AuthLogoutRequestedImplCopyWith<$Res> {
-  factory _$$AuthLogoutRequestedImplCopyWith(_$AuthLogoutRequestedImpl value,
-          $Res Function(_$AuthLogoutRequestedImpl) then) =
-      __$$AuthLogoutRequestedImplCopyWithImpl<$Res>;
+abstract class _$$LoginRequestedImplCopyWith<$Res> {
+  factory _$$LoginRequestedImplCopyWith(_$LoginRequestedImpl value,
+          $Res Function(_$LoginRequestedImpl) then) =
+      __$$LoginRequestedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String password});
 }
 
 /// @nodoc
-class __$$AuthLogoutRequestedImplCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$AuthLogoutRequestedImpl>
-    implements _$$AuthLogoutRequestedImplCopyWith<$Res> {
-  __$$AuthLogoutRequestedImplCopyWithImpl(_$AuthLogoutRequestedImpl _value,
-      $Res Function(_$AuthLogoutRequestedImpl) _then)
+class __$$LoginRequestedImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$LoginRequestedImpl>
+    implements _$$LoginRequestedImplCopyWith<$Res> {
+  __$$LoginRequestedImplCopyWithImpl(
+      _$LoginRequestedImpl _value, $Res Function(_$LoginRequestedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? password = null,
+  }) {
+    return _then(_$LoginRequestedImpl(
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$LoginRequestedImpl implements LoginRequested {
+  const _$LoginRequestedImpl({required this.password});
+
+  @override
+  final String password;
+
+  @override
+  String toString() {
+    return 'AuthEvent.loginRequested(password: $password)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoginRequestedImpl &&
+            (identical(other.password, password) ||
+                other.password == password));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, password);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoginRequestedImplCopyWith<_$LoginRequestedImpl> get copyWith =>
+      __$$LoginRequestedImplCopyWithImpl<_$LoginRequestedImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(String password) createPassword,
+    required TResult Function(String password) loginRequested,
+    required TResult Function(String oldPassword, String newPassword)
+        changePasswordRequested,
+    required TResult Function() logoutRequested,
+  }) {
+    return loginRequested(password);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(String password)? createPassword,
+    TResult? Function(String password)? loginRequested,
+    TResult? Function(String oldPassword, String newPassword)?
+        changePasswordRequested,
+    TResult? Function()? logoutRequested,
+  }) {
+    return loginRequested?.call(password);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(String password)? createPassword,
+    TResult Function(String password)? loginRequested,
+    TResult Function(String oldPassword, String newPassword)?
+        changePasswordRequested,
+    TResult Function()? logoutRequested,
+    required TResult orElse(),
+  }) {
+    if (loginRequested != null) {
+      return loginRequested(password);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AuthStarted value) started,
+    required TResult Function(CreatePassword value) createPassword,
+    required TResult Function(LoginRequested value) loginRequested,
+    required TResult Function(ChangePasswordRequested value)
+        changePasswordRequested,
+    required TResult Function(LogoutRequested value) logoutRequested,
+  }) {
+    return loginRequested(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AuthStarted value)? started,
+    TResult? Function(CreatePassword value)? createPassword,
+    TResult? Function(LoginRequested value)? loginRequested,
+    TResult? Function(ChangePasswordRequested value)? changePasswordRequested,
+    TResult? Function(LogoutRequested value)? logoutRequested,
+  }) {
+    return loginRequested?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AuthStarted value)? started,
+    TResult Function(CreatePassword value)? createPassword,
+    TResult Function(LoginRequested value)? loginRequested,
+    TResult Function(ChangePasswordRequested value)? changePasswordRequested,
+    TResult Function(LogoutRequested value)? logoutRequested,
+    required TResult orElse(),
+  }) {
+    if (loginRequested != null) {
+      return loginRequested(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LoginRequested implements AuthEvent {
+  const factory LoginRequested({required final String password}) =
+      _$LoginRequestedImpl;
+
+  String get password;
+  @JsonKey(ignore: true)
+  _$$LoginRequestedImplCopyWith<_$LoginRequestedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ChangePasswordRequestedImplCopyWith<$Res> {
+  factory _$$ChangePasswordRequestedImplCopyWith(
+          _$ChangePasswordRequestedImpl value,
+          $Res Function(_$ChangePasswordRequestedImpl) then) =
+      __$$ChangePasswordRequestedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String oldPassword, String newPassword});
+}
+
+/// @nodoc
+class __$$ChangePasswordRequestedImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$ChangePasswordRequestedImpl>
+    implements _$$ChangePasswordRequestedImplCopyWith<$Res> {
+  __$$ChangePasswordRequestedImplCopyWithImpl(
+      _$ChangePasswordRequestedImpl _value,
+      $Res Function(_$ChangePasswordRequestedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? oldPassword = null,
+    Object? newPassword = null,
+  }) {
+    return _then(_$ChangePasswordRequestedImpl(
+      oldPassword: null == oldPassword
+          ? _value.oldPassword
+          : oldPassword // ignore: cast_nullable_to_non_nullable
+              as String,
+      newPassword: null == newPassword
+          ? _value.newPassword
+          : newPassword // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ChangePasswordRequestedImpl implements ChangePasswordRequested {
+  const _$ChangePasswordRequestedImpl(
+      {required this.oldPassword, required this.newPassword});
+
+  @override
+  final String oldPassword;
+  @override
+  final String newPassword;
+
+  @override
+  String toString() {
+    return 'AuthEvent.changePasswordRequested(oldPassword: $oldPassword, newPassword: $newPassword)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ChangePasswordRequestedImpl &&
+            (identical(other.oldPassword, oldPassword) ||
+                other.oldPassword == oldPassword) &&
+            (identical(other.newPassword, newPassword) ||
+                other.newPassword == newPassword));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, oldPassword, newPassword);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ChangePasswordRequestedImplCopyWith<_$ChangePasswordRequestedImpl>
+      get copyWith => __$$ChangePasswordRequestedImplCopyWithImpl<
+          _$ChangePasswordRequestedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(String password) createPassword,
+    required TResult Function(String password) loginRequested,
+    required TResult Function(String oldPassword, String newPassword)
+        changePasswordRequested,
+    required TResult Function() logoutRequested,
+  }) {
+    return changePasswordRequested(oldPassword, newPassword);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(String password)? createPassword,
+    TResult? Function(String password)? loginRequested,
+    TResult? Function(String oldPassword, String newPassword)?
+        changePasswordRequested,
+    TResult? Function()? logoutRequested,
+  }) {
+    return changePasswordRequested?.call(oldPassword, newPassword);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(String password)? createPassword,
+    TResult Function(String password)? loginRequested,
+    TResult Function(String oldPassword, String newPassword)?
+        changePasswordRequested,
+    TResult Function()? logoutRequested,
+    required TResult orElse(),
+  }) {
+    if (changePasswordRequested != null) {
+      return changePasswordRequested(oldPassword, newPassword);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AuthStarted value) started,
+    required TResult Function(CreatePassword value) createPassword,
+    required TResult Function(LoginRequested value) loginRequested,
+    required TResult Function(ChangePasswordRequested value)
+        changePasswordRequested,
+    required TResult Function(LogoutRequested value) logoutRequested,
+  }) {
+    return changePasswordRequested(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AuthStarted value)? started,
+    TResult? Function(CreatePassword value)? createPassword,
+    TResult? Function(LoginRequested value)? loginRequested,
+    TResult? Function(ChangePasswordRequested value)? changePasswordRequested,
+    TResult? Function(LogoutRequested value)? logoutRequested,
+  }) {
+    return changePasswordRequested?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AuthStarted value)? started,
+    TResult Function(CreatePassword value)? createPassword,
+    TResult Function(LoginRequested value)? loginRequested,
+    TResult Function(ChangePasswordRequested value)? changePasswordRequested,
+    TResult Function(LogoutRequested value)? logoutRequested,
+    required TResult orElse(),
+  }) {
+    if (changePasswordRequested != null) {
+      return changePasswordRequested(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ChangePasswordRequested implements AuthEvent {
+  const factory ChangePasswordRequested(
+      {required final String oldPassword,
+      required final String newPassword}) = _$ChangePasswordRequestedImpl;
+
+  String get oldPassword;
+  String get newPassword;
+  @JsonKey(ignore: true)
+  _$$ChangePasswordRequestedImplCopyWith<_$ChangePasswordRequestedImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LogoutRequestedImplCopyWith<$Res> {
+  factory _$$LogoutRequestedImplCopyWith(_$LogoutRequestedImpl value,
+          $Res Function(_$LogoutRequestedImpl) then) =
+      __$$LogoutRequestedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LogoutRequestedImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$LogoutRequestedImpl>
+    implements _$$LogoutRequestedImplCopyWith<$Res> {
+  __$$LogoutRequestedImplCopyWithImpl(
+      _$LogoutRequestedImpl _value, $Res Function(_$LogoutRequestedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$AuthLogoutRequestedImpl implements AuthLogoutRequested {
-  const _$AuthLogoutRequestedImpl();
+class _$LogoutRequestedImpl implements LogoutRequested {
+  const _$LogoutRequestedImpl();
 
   @override
   String toString() {
@@ -370,8 +736,7 @@ class _$AuthLogoutRequestedImpl implements AuthLogoutRequested {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AuthLogoutRequestedImpl);
+        (other.runtimeType == runtimeType && other is _$LogoutRequestedImpl);
   }
 
   @override
@@ -381,7 +746,10 @@ class _$AuthLogoutRequestedImpl implements AuthLogoutRequested {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String username, String password) loginSubmitted,
+    required TResult Function(String password) createPassword,
+    required TResult Function(String password) loginRequested,
+    required TResult Function(String oldPassword, String newPassword)
+        changePasswordRequested,
     required TResult Function() logoutRequested,
   }) {
     return logoutRequested();
@@ -391,7 +759,10 @@ class _$AuthLogoutRequestedImpl implements AuthLogoutRequested {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String username, String password)? loginSubmitted,
+    TResult? Function(String password)? createPassword,
+    TResult? Function(String password)? loginRequested,
+    TResult? Function(String oldPassword, String newPassword)?
+        changePasswordRequested,
     TResult? Function()? logoutRequested,
   }) {
     return logoutRequested?.call();
@@ -401,7 +772,10 @@ class _$AuthLogoutRequestedImpl implements AuthLogoutRequested {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String username, String password)? loginSubmitted,
+    TResult Function(String password)? createPassword,
+    TResult Function(String password)? loginRequested,
+    TResult Function(String oldPassword, String newPassword)?
+        changePasswordRequested,
     TResult Function()? logoutRequested,
     required TResult orElse(),
   }) {
@@ -415,8 +789,11 @@ class _$AuthLogoutRequestedImpl implements AuthLogoutRequested {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AuthStarted value) started,
-    required TResult Function(AuthLoginSubmitted value) loginSubmitted,
-    required TResult Function(AuthLogoutRequested value) logoutRequested,
+    required TResult Function(CreatePassword value) createPassword,
+    required TResult Function(LoginRequested value) loginRequested,
+    required TResult Function(ChangePasswordRequested value)
+        changePasswordRequested,
+    required TResult Function(LogoutRequested value) logoutRequested,
   }) {
     return logoutRequested(this);
   }
@@ -425,8 +802,10 @@ class _$AuthLogoutRequestedImpl implements AuthLogoutRequested {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AuthStarted value)? started,
-    TResult? Function(AuthLoginSubmitted value)? loginSubmitted,
-    TResult? Function(AuthLogoutRequested value)? logoutRequested,
+    TResult? Function(CreatePassword value)? createPassword,
+    TResult? Function(LoginRequested value)? loginRequested,
+    TResult? Function(ChangePasswordRequested value)? changePasswordRequested,
+    TResult? Function(LogoutRequested value)? logoutRequested,
   }) {
     return logoutRequested?.call(this);
   }
@@ -435,8 +814,10 @@ class _$AuthLogoutRequestedImpl implements AuthLogoutRequested {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthStarted value)? started,
-    TResult Function(AuthLoginSubmitted value)? loginSubmitted,
-    TResult Function(AuthLogoutRequested value)? logoutRequested,
+    TResult Function(CreatePassword value)? createPassword,
+    TResult Function(LoginRequested value)? loginRequested,
+    TResult Function(ChangePasswordRequested value)? changePasswordRequested,
+    TResult Function(LogoutRequested value)? logoutRequested,
     required TResult orElse(),
   }) {
     if (logoutRequested != null) {
@@ -446,6 +827,6 @@ class _$AuthLogoutRequestedImpl implements AuthLogoutRequested {
   }
 }
 
-abstract class AuthLogoutRequested implements AuthEvent {
-  const factory AuthLogoutRequested() = _$AuthLogoutRequestedImpl;
+abstract class LogoutRequested implements AuthEvent {
+  const factory LogoutRequested() = _$LogoutRequestedImpl;
 }
