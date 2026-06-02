@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:reminder_app/core/router/app_router.dart';
 import '../blocs/auth_bloc.dart';
 import '../blocs/auth_event.dart';
 import '../blocs/auth_state.dart';
+import '../../../core/widgets/custom_text_field.dart';
 
 class CreatePasswordPage extends StatefulWidget {
   const CreatePasswordPage({super.key});
@@ -16,8 +18,6 @@ class _CreatePasswordPageState extends State<CreatePasswordPage> {
   final _formKey = GlobalKey<FormState>();
   final _passwordController = TextEditingController();
   final _confirmController = TextEditingController();
-  bool _obscurePassword = true;
-  bool _obscureConfirm = true;
 
   @override
   void dispose() {
@@ -39,7 +39,7 @@ class _CreatePasswordPageState extends State<CreatePasswordPage> {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         state.maybeWhen(
-          authenticated: () => context.go('/reminders'),
+          authenticated: () => context.go(AppRouter.remindersScreen),
           error: (msg) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(msg), backgroundColor: Colors.red),
@@ -88,79 +88,45 @@ class _CreatePasswordPageState extends State<CreatePasswordPage> {
                       ),
                       const SizedBox(height: 36),
                       // Card Form Layout
-                      Card(
-                        elevation: 2,
-                        child: Padding(
-                          padding: const EdgeInsets.all(20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              // Master Passcode Field
-                              TextFormField(
-                                controller: _passwordController,
-                                obscureText: _obscurePassword,
-                                keyboardType: TextInputType.visiblePassword,
-                                style: const TextStyle(letterSpacing: 2),
-                                decoration: InputDecoration(
-                                  labelText: 'New Passcode',
-                                  prefixIcon: const Icon(Icons.lock),
-                                  suffixIcon: IconButton(
-                                    icon: Icon(
-                                      _obscurePassword
-                                          ? Icons.visibility_off
-                                          : Icons.visibility,
-                                    ),
-                                    onPressed: () {
-                                      setState(() {
-                                        _obscurePassword = !_obscurePassword;
-                                      });
-                                    },
-                                  ),
-                                ),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Passcode is required';
-                                  }
-                                  if (value.length < 6) {
-                                    return 'Must be at least 6 characters';
-                                  }
-                                  return null;
-                                },
-                              ),
-                              const SizedBox(height: 20),
-                              // Confirm Passcode Field
-                              TextFormField(
-                                controller: _confirmController,
-                                obscureText: _obscureConfirm,
-                                keyboardType: TextInputType.visiblePassword,
-                                style: const TextStyle(letterSpacing: 2),
-                                decoration: InputDecoration(
-                                  labelText: 'Confirm Passcode',
-                                  prefixIcon: const Icon(
-                                    Icons.check_circle_outline,
-                                  ),
-                                  suffixIcon: IconButton(
-                                    icon: Icon(
-                                      _obscureConfirm
-                                          ? Icons.visibility_off
-                                          : Icons.visibility,
-                                    ),
-                                    onPressed: () {
-                                      setState(() {
-                                        _obscureConfirm = !_obscureConfirm;
-                                      });
-                                    },
-                                  ),
-                                ),
-                                validator: (value) {
-                                  if (value != _passwordController.text) {
-                                    return 'Passcodes do not match';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ],
-                          ),
+                      Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            // Master Passcode Field using reusable widget
+                            CustomTextField(
+                              controller: _passwordController,
+                              labelText: 'New Passcode',
+                              hintText: 'Enter new passcode',
+                              prefixIcon: Icons.lock_rounded,
+                              textInputAction: TextInputAction.next,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Passcode is required';
+                                }
+                                if (value.length < 6) {
+                                  return 'Must be at least 6 characters';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 20),
+                            // Confirm Passcode Field using reusable widget
+                            CustomTextField(
+                              controller: _confirmController,
+                              labelText: 'Confirm Passcode',
+                              hintText: 'Re-enter passcode',
+                              prefixIcon: Icons.check_circle_outline_rounded,
+                              textInputAction: TextInputAction.done,
+                              onFieldSubmitted: (_) => _submit(),
+                              validator: (value) {
+                                if (value != _passwordController.text) {
+                                  return 'Passcodes do not match';
+                                }
+                                return null;
+                              },
+                            ),
+                          ],
                         ),
                       ),
                       const SizedBox(height: 36),
@@ -175,6 +141,10 @@ class _CreatePasswordPageState extends State<CreatePasswordPage> {
                             context,
                           ).colorScheme.onPrimary,
                           padding: const EdgeInsets.symmetric(vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          elevation: 2,
                         ),
                         child: isLoading
                             ? const SizedBox(

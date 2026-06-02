@@ -1,3 +1,4 @@
+import '../../core/services/hive_service.dart';
 import '../models/settings_model.dart';
 
 abstract class SettingsLocalDataSource {
@@ -13,12 +14,17 @@ class SettingsLocalDataSourceImpl implements SettingsLocalDataSource {
 
   @override
   Future<SettingsModel?> getSettings() async {
-    // Fetches settings map from Hive settingsBox
+    final rawData = HiveService.settingsBox.get('app_settings');
+    if (rawData == null) return null;
+    if (rawData is Map) {
+      final json = Map<String, dynamic>.from(rawData);
+      return SettingsModel.fromJson(json);
+    }
     return null;
   }
 
   @override
   Future<void> saveSettings(SettingsModel settings) async {
-    // Writes settings to Hive settingsBox
+    await HiveService.settingsBox.put('app_settings', settings.toJson());
   }
 }

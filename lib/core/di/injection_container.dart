@@ -79,7 +79,10 @@ void _initRemindersFeature() {
 
   // Repository implementations
   sl.registerLazySingleton<RemindersRepository>(
-    () => RemindersRepositoryImpl(localDataSource: sl()),
+    () => RemindersRepositoryImpl(
+      localDataSource: sl(),
+      notificationService: sl(),
+    ),
   );
 
   // Data sources

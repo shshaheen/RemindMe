@@ -85,6 +85,16 @@ class MyApp extends StatelessWidget {
 
           // Declarative Navigation configuration using GoRouter
           routerConfig: AppRouter.router,
+
+          // Smooth global transition animation when changing theme modes
+          builder: (context, child) {
+            return AnimatedTheme(
+              data: isDarkMode ? AppTheme.darkTheme : AppTheme.lightTheme,
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.easeInOutCubic, 
+              child: child!,
+            );
+          },
         );
       },
     );

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../blocs/auth_bloc.dart';
 import '../blocs/auth_event.dart';
 import '../blocs/auth_state.dart';
+import '../../../core/widgets/custom_text_field.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   const ChangePasswordPage({super.key});
@@ -17,10 +18,6 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   final _oldPasswordController = TextEditingController();
   final _newPasswordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-
-  bool _obscureOld = true;
-  bool _obscureNew = true;
-  bool _obscureConfirm = true;
 
   @override
   void dispose() {
@@ -95,110 +92,61 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                       ),
                     ),
                     const SizedBox(height: 28),
-                    // Form Fields Card
-                    Card(
-                      elevation: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            // Current Passcode Field
-                            TextFormField(
-                              controller: _oldPasswordController,
-                              obscureText: _obscureOld,
-                              keyboardType: TextInputType.visiblePassword,
-                              style: const TextStyle(letterSpacing: 2),
-                              decoration: InputDecoration(
-                                labelText: 'Current Passcode',
-                                prefixIcon: const Icon(Icons.lock_outline),
-                                suffixIcon: IconButton(
-                                  icon: Icon(
-                                    _obscureOld
-                                        ? Icons.visibility_off
-                                        : Icons.visibility,
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      _obscureOld = !_obscureOld;
-                                    });
-                                  },
-                                ),
-                              ),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Current passcode is required';
-                                }
-                                return null;
-                              },
-                            ),
-                            const SizedBox(height: 20),
-                            // New Passcode Field
-                            TextFormField(
-                              controller: _newPasswordController,
-                              obscureText: _obscureNew,
-                              keyboardType: TextInputType.visiblePassword,
-                              style: const TextStyle(letterSpacing: 2),
-                              decoration: InputDecoration(
-                                labelText: 'New Passcode',
-                                prefixIcon: const Icon(Icons.lock),
-                                suffixIcon: IconButton(
-                                  icon: Icon(
-                                    _obscureNew
-                                        ? Icons.visibility_off
-                                        : Icons.visibility,
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      _obscureNew = !_obscureNew;
-                                    });
-                                  },
-                                ),
-                              ),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'New passcode is required';
-                                }
-                                if (value.length < 6) {
-                                  return 'New passcode must be at least 6 characters';
-                                }
-                                return null;
-                              },
-                            ),
-                            const SizedBox(height: 20),
-                            // Confirm New Passcode Field
-                            TextFormField(
-                              controller: _confirmPasswordController,
-                              obscureText: _obscureConfirm,
-                              keyboardType: TextInputType.visiblePassword,
-                              style: const TextStyle(letterSpacing: 2),
-                              decoration: InputDecoration(
-                                labelText: 'Confirm New Passcode',
-                                prefixIcon: const Icon(
-                                  Icons.check_circle_outline,
-                                ),
-                                suffixIcon: IconButton(
-                                  icon: Icon(
-                                    _obscureConfirm
-                                        ? Icons.visibility_off
-                                        : Icons.visibility,
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      _obscureConfirm = !_obscureConfirm;
-                                    });
-                                  },
-                                ),
-                              ),
-                              validator: (value) {
-                                if (value != _newPasswordController.text) {
-                                  return 'Passcodes do not match';
-                                }
-                                return null;
-                              },
-                            ),
-                          ],
-                        ),
+                    // Form Fields
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          // Current Passcode Field
+                          CustomTextField(
+                            controller: _oldPasswordController,
+                            labelText: 'Current Passcode',
+                            hintText: 'Enter current passcode',
+                            prefixIcon: Icons.lock_outline_rounded,
+                            textInputAction: TextInputAction.next,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Current passcode is required';
+                              }
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 20),
+                          // New Passcode Field
+                          CustomTextField(
+                            controller: _newPasswordController,
+                            labelText: 'New Passcode',
+                            hintText: 'Enter new passcode',
+                            prefixIcon: Icons.lock_rounded,
+                            textInputAction: TextInputAction.next,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'New passcode is required';
+                              }
+                              if (value.length < 6) {
+                                return 'New passcode must be at least 6 characters';
+                              }
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 20),
+                          // Confirm New Passcode Field
+                          CustomTextField(
+                            controller: _confirmPasswordController,
+                            labelText: 'Confirm New Passcode',
+                            hintText: 'Re-enter new passcode',
+                            prefixIcon: Icons.check_circle_outline_rounded,
+                            textInputAction: TextInputAction.done,
+                            onFieldSubmitted: (_) => _submit(),
+                            validator: (value) {
+                              if (value != _newPasswordController.text) {
+                                return 'Passcodes do not match';
+                              }
+                              return null;
+                            },
+                          ),
+                        ],
                       ),
                     ),
                     const SizedBox(height: 36),
@@ -211,6 +159,10 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                           context,
                         ).colorScheme.onPrimary,
                         padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        elevation: 2,
                       ),
                       child: isLoading
                           ? const SizedBox(

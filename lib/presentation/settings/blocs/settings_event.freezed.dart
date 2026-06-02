@@ -20,33 +20,33 @@ mixin _$SettingsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(AppSettings settings) settingsChanged,
+    required TResult Function(AppSettings settings) themeChanged,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(AppSettings settings)? settingsChanged,
+    TResult? Function(AppSettings settings)? themeChanged,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(AppSettings settings)? settingsChanged,
+    TResult Function(AppSettings settings)? themeChanged,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(SettingsStarted value) started,
-    required TResult Function(SettingsChanged value) settingsChanged,
+    required TResult Function(themeChanged value) themeChanged,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SettingsStarted value)? started,
-    TResult? Function(SettingsChanged value)? settingsChanged,
+    TResult? Function(themeChanged value)? themeChanged,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SettingsStarted value)? started,
-    TResult Function(SettingsChanged value)? settingsChanged,
+    TResult Function(themeChanged value)? themeChanged,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 }
@@ -117,7 +117,7 @@ class _$SettingsStartedImpl implements SettingsStarted {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(AppSettings settings) settingsChanged,
+    required TResult Function(AppSettings settings) themeChanged,
   }) {
     return started();
   }
@@ -126,7 +126,7 @@ class _$SettingsStartedImpl implements SettingsStarted {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(AppSettings settings)? settingsChanged,
+    TResult? Function(AppSettings settings)? themeChanged,
   }) {
     return started?.call();
   }
@@ -135,7 +135,7 @@ class _$SettingsStartedImpl implements SettingsStarted {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(AppSettings settings)? settingsChanged,
+    TResult Function(AppSettings settings)? themeChanged,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -148,7 +148,7 @@ class _$SettingsStartedImpl implements SettingsStarted {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(SettingsStarted value) started,
-    required TResult Function(SettingsChanged value) settingsChanged,
+    required TResult Function(themeChanged value) themeChanged,
   }) {
     return started(this);
   }
@@ -157,7 +157,7 @@ class _$SettingsStartedImpl implements SettingsStarted {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SettingsStarted value)? started,
-    TResult? Function(SettingsChanged value)? settingsChanged,
+    TResult? Function(themeChanged value)? themeChanged,
   }) {
     return started?.call(this);
   }
@@ -166,7 +166,7 @@ class _$SettingsStartedImpl implements SettingsStarted {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SettingsStarted value)? started,
-    TResult Function(SettingsChanged value)? settingsChanged,
+    TResult Function(themeChanged value)? themeChanged,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -181,22 +181,22 @@ abstract class SettingsStarted implements SettingsEvent {
 }
 
 /// @nodoc
-abstract class _$$SettingsChangedImplCopyWith<$Res> {
-  factory _$$SettingsChangedImplCopyWith(
-    _$SettingsChangedImpl value,
-    $Res Function(_$SettingsChangedImpl) then,
-  ) = __$$SettingsChangedImplCopyWithImpl<$Res>;
+abstract class _$$themeChangedImplCopyWith<$Res> {
+  factory _$$themeChangedImplCopyWith(
+    _$themeChangedImpl value,
+    $Res Function(_$themeChangedImpl) then,
+  ) = __$$themeChangedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({AppSettings settings});
 }
 
 /// @nodoc
-class __$$SettingsChangedImplCopyWithImpl<$Res>
-    extends _$SettingsEventCopyWithImpl<$Res, _$SettingsChangedImpl>
-    implements _$$SettingsChangedImplCopyWith<$Res> {
-  __$$SettingsChangedImplCopyWithImpl(
-    _$SettingsChangedImpl _value,
-    $Res Function(_$SettingsChangedImpl) _then,
+class __$$themeChangedImplCopyWithImpl<$Res>
+    extends _$SettingsEventCopyWithImpl<$Res, _$themeChangedImpl>
+    implements _$$themeChangedImplCopyWith<$Res> {
+  __$$themeChangedImplCopyWithImpl(
+    _$themeChangedImpl _value,
+    $Res Function(_$themeChangedImpl) _then,
   ) : super(_value, _then);
 
   /// Create a copy of SettingsEvent
@@ -205,7 +205,7 @@ class __$$SettingsChangedImplCopyWithImpl<$Res>
   @override
   $Res call({Object? settings = null}) {
     return _then(
-      _$SettingsChangedImpl(
+      _$themeChangedImpl(
         settings: null == settings
             ? _value.settings
             : settings // ignore: cast_nullable_to_non_nullable
@@ -217,22 +217,22 @@ class __$$SettingsChangedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SettingsChangedImpl implements SettingsChanged {
-  const _$SettingsChangedImpl({required this.settings});
+class _$themeChangedImpl implements themeChanged {
+  const _$themeChangedImpl({required this.settings});
 
   @override
   final AppSettings settings;
 
   @override
   String toString() {
-    return 'SettingsEvent.settingsChanged(settings: $settings)';
+    return 'SettingsEvent.themeChanged(settings: $settings)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SettingsChangedImpl &&
+            other is _$themeChangedImpl &&
             (identical(other.settings, settings) ||
                 other.settings == settings));
   }
@@ -245,39 +245,36 @@ class _$SettingsChangedImpl implements SettingsChanged {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$SettingsChangedImplCopyWith<_$SettingsChangedImpl> get copyWith =>
-      __$$SettingsChangedImplCopyWithImpl<_$SettingsChangedImpl>(
-        this,
-        _$identity,
-      );
+  _$$themeChangedImplCopyWith<_$themeChangedImpl> get copyWith =>
+      __$$themeChangedImplCopyWithImpl<_$themeChangedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(AppSettings settings) settingsChanged,
+    required TResult Function(AppSettings settings) themeChanged,
   }) {
-    return settingsChanged(settings);
+    return themeChanged(settings);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(AppSettings settings)? settingsChanged,
+    TResult? Function(AppSettings settings)? themeChanged,
   }) {
-    return settingsChanged?.call(settings);
+    return themeChanged?.call(settings);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(AppSettings settings)? settingsChanged,
+    TResult Function(AppSettings settings)? themeChanged,
     required TResult orElse(),
   }) {
-    if (settingsChanged != null) {
-      return settingsChanged(settings);
+    if (themeChanged != null) {
+      return themeChanged(settings);
     }
     return orElse();
   }
@@ -286,43 +283,43 @@ class _$SettingsChangedImpl implements SettingsChanged {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(SettingsStarted value) started,
-    required TResult Function(SettingsChanged value) settingsChanged,
+    required TResult Function(themeChanged value) themeChanged,
   }) {
-    return settingsChanged(this);
+    return themeChanged(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SettingsStarted value)? started,
-    TResult? Function(SettingsChanged value)? settingsChanged,
+    TResult? Function(themeChanged value)? themeChanged,
   }) {
-    return settingsChanged?.call(this);
+    return themeChanged?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SettingsStarted value)? started,
-    TResult Function(SettingsChanged value)? settingsChanged,
+    TResult Function(themeChanged value)? themeChanged,
     required TResult orElse(),
   }) {
-    if (settingsChanged != null) {
-      return settingsChanged(this);
+    if (themeChanged != null) {
+      return themeChanged(this);
     }
     return orElse();
   }
 }
 
-abstract class SettingsChanged implements SettingsEvent {
-  const factory SettingsChanged({required final AppSettings settings}) =
-      _$SettingsChangedImpl;
+abstract class themeChanged implements SettingsEvent {
+  const factory themeChanged({required final AppSettings settings}) =
+      _$themeChangedImpl;
 
   AppSettings get settings;
 
   /// Create a copy of SettingsEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SettingsChangedImplCopyWith<_$SettingsChangedImpl> get copyWith =>
+  _$$themeChangedImplCopyWith<_$themeChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

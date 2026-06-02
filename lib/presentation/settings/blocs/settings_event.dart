@@ -6,6 +6,6 @@ part 'settings_event.freezed.dart';
 @freezed
 class SettingsEvent with _$SettingsEvent {
   const factory SettingsEvent.started() = SettingsStarted;
-  const factory SettingsEvent.settingsChanged({required AppSettings settings}) =
-      SettingsChanged;
+  const factory SettingsEvent.themeChanged({required AppSettings settings}) =
+      themeChanged;
 }

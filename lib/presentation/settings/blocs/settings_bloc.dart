@@ -11,7 +11,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     on<SettingsEvent>((event, emit) async {
       await event.map(
         started: (e) async => _onStarted(e, emit),
-        settingsChanged: (e) async => _onSettingsChanged(e, emit),
+        themeChanged: (e) async => _onthemeChanged(e, emit),
       );
     });
   }
@@ -28,16 +28,17 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     );
   }
 
-  Future<void> _onSettingsChanged(
-    SettingsChanged event,
+  Future<void> _onthemeChanged(
+    themeChanged event,
     Emitter<SettingsState> emit,
   ) async {
-    emit(const SettingsState.loading());
+    // Optimistically emit the new settings state immediately to prevent UI flicker
+    emit(SettingsState.loaded(settings: event.settings));
     final result = await repository.updateSettings(event.settings);
 
-    await result.fold(
-      (failure) async => emit(SettingsState.error(message: failure.message)),
-      (success) async => add(const SettingsEvent.started()),
+    result.fold(
+      (failure) => emit(SettingsState.error(message: failure.message)),
+      (success) => null, // Already updated state optimistically
     );
   }
 }

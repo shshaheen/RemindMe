@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:reminder_app/core/router/app_router.dart';
 import '../../auth/blocs/auth_bloc.dart';
 import '../../auth/blocs/auth_event.dart';
 import '../blocs/reminders_bloc.dart';
 import '../blocs/reminders_event.dart';
 import '../blocs/reminders_state.dart';
+import '../../settings/blocs/settings_bloc.dart';
+import '../../settings/blocs/settings_state.dart';
+import '../../settings/blocs/settings_event.dart';
+import '../../../domain/entities/app_settings.dart';
 
 class RemindersDashboardPage extends StatefulWidget {
   const RemindersDashboardPage({super.key});
@@ -41,6 +46,9 @@ class _RemindersDashboardPageState extends State<RemindersDashboardPage> {
       context: context,
       builder: (dialogContext) {
         return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
           title: const Text('Delete Reminder'),
           content: const Text(
             'Are you sure you want to permanently delete this reminder?',
@@ -109,49 +117,221 @@ class _RemindersDashboardPageState extends State<RemindersDashboardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Reminders'),
+        title: const Text(
+          'RemindMe',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
         actions: [
+          // Dark/Light Mode Theme Toggle
+          BlocBuilder<SettingsBloc, SettingsState>(
+            builder: (context, settingsState) {
+              final isDark = settingsState.maybeWhen(
+                loaded: (s) => s.isDarkMode,
+                orElse: () => false,
+              );
+              return IconButton(
+                icon: Icon(
+                  isDark ? Icons.light_mode_rounded : Icons.dark_mode_rounded,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                tooltip: isDark
+                    ? 'Switch to Light Mode'
+                    : 'Switch to Dark Mode',
+                onPressed: () {
+                  final currentSettings = settingsState.maybeWhen(
+                    loaded: (s) => s,
+                    orElse: () => const AppSettings(
+                      isDarkMode: false,
+                      isSoundEnabled: true,
+                      isVibrationEnabled: true,
+                    ),
+                  );
+                  context.read<SettingsBloc>().add(
+                    SettingsEvent.themeChanged(
+                      settings: currentSettings.copyWith(isDarkMode: !isDark),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
           // Change Passcode option
           IconButton(
-            icon: const Icon(Icons.password_rounded),
-            tooltip: 'Change Passcode',
-            onPressed: () => context.push('/change-password'),
-          ),
-          // Logout / Lock App option
-          IconButton(
-            icon: const Icon(Icons.lock),
-            tooltip: 'Lock App',
-            onPressed: () {
-              context.read<AuthBloc>().add(const LogoutRequested());
-              context.go('/');
-            },
+            icon: const Icon(Icons.settings),
+            tooltip: 'settings',
+            onPressed: () => context.push('/settings'),
           ),
         ],
       ),
       body: Column(
         children: [
-          // Search Bar Panel
+          // Modern Rounded Search Bar
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
             child: TextField(
               controller: _searchController,
               onChanged: _onSearchChanged,
               decoration: InputDecoration(
                 hintText: 'Search reminders by title or notes...',
-                prefixIcon: const Icon(Icons.search),
+                prefixIcon: Icon(
+                  Icons.search_rounded,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
                 suffixIcon: _searchController.text.isNotEmpty
                     ? IconButton(
-                        icon: const Icon(Icons.clear),
+                        icon: const Icon(Icons.clear_rounded),
                         onPressed: () {
                           _searchController.clear();
                           _onSearchChanged('');
                         },
                       )
                     : null,
-                contentPadding: const EdgeInsets.symmetric(vertical: 12),
+                filled: true,
+                fillColor: Theme.of(
+                  context,
+                ).colorScheme.surfaceVariant.withOpacity(0.3),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 14,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(24),
+                  borderSide: BorderSide.none,
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(24),
+                  borderSide: BorderSide(
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.outline.withOpacity(0.1),
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(24),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).colorScheme.primary,
+                    width: 1.5,
+                  ),
+                ),
               ),
             ),
           ),
+
+          // Gradient Welcome Header Card
+          BlocBuilder<RemindersBloc, RemindersState>(
+            builder: (context, state) {
+              final int count = state.maybeWhen(
+                loaded: (reminders) => reminders.length,
+                orElse: () => 0,
+              );
+              return Container(
+                width: double.infinity,
+                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.all(24),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Theme.of(context).colorScheme.primary,
+                      Theme.of(context).colorScheme.secondary,
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(24),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.primary.withOpacity(0.25),
+                      blurRadius: 15,
+                      offset: const Offset(0, 8),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          _formatDate(DateTime.now()),
+                          style: TextStyle(
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.onPrimary.withOpacity(0.85),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.onPrimary.withOpacity(0.15),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.shield_outlined,
+                                size: 14,
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                'Secure',
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onPrimary,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      'Your Reminders',
+                      style: Theme.of(context).textTheme.headlineSmall
+                          ?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      count == 0
+                          ? 'No reminders scheduled'
+                          : (count == 1
+                                ? '1 active reminder'
+                                : '$count active reminders'),
+                      style: TextStyle(
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.onPrimary.withOpacity(0.9),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+
+          // ListView containing Reminders
           Expanded(
             child: BlocBuilder<RemindersBloc, RemindersState>(
               builder: (context, state) {
@@ -214,20 +394,30 @@ class _RemindersDashboardPageState extends State<RemindersDashboardPage> {
                     }
 
                     return ListView.builder(
-                      padding: const EdgeInsets.all(16),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
                       itemCount: reminders.length,
                       itemBuilder: (context, index) {
                         final reminder = reminders[index];
-                        return Card(
+                        return Container(
                           margin: const EdgeInsets.only(bottom: 12),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.surface,
+                            borderRadius: BorderRadius.circular(18),
+                            border: Border.all(
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.outline.withOpacity(0.08),
+                            ),
+                          ),
                           child: Padding(
                             padding: const EdgeInsets.all(16),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Expanded(
@@ -237,43 +427,45 @@ class _RemindersDashboardPageState extends State<RemindersDashboardPage> {
                                             .textTheme
                                             .titleMedium
                                             ?.copyWith(
-                                              fontWeight: FontWeight.bold,
+                                              fontWeight: FontWeight.w600,
                                             ),
                                       ),
                                     ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        // Edit Button
-                                        IconButton(
-                                          icon: const Icon(Icons.edit_outlined),
-                                          iconSize: 20,
-                                          onPressed: () => context.push(
-                                            '/edit-reminder',
-                                            extra: reminder,
-                                          ),
-                                        ),
-                                        // Delete Button
-                                        IconButton(
-                                          icon: Icon(
-                                            Icons.delete_outline,
-                                            color: Theme.of(
+
+                                    SizedBox(
+                                      height: 32,
+                                      width: 32,
+                                      child: PopupMenuButton<String>(
+                                        icon: const Icon(Icons.more_vert),
+                                        onSelected: (value) {
+                                          if (value == 'edit') {
+                                            context.push(
+                                              '/edit-reminder',
+                                              extra: reminder,
+                                            );
+                                          } else if (value == 'delete') {
+                                            _showDeleteConfirmation(
                                               context,
-                                            ).colorScheme.error,
+                                              reminder.id,
+                                            );
+                                          }
+                                        },
+                                        itemBuilder: (context) => const [
+                                          PopupMenuItem(
+                                            value: 'edit',
+                                            child: Text('Edit'),
                                           ),
-                                          iconSize: 20,
-                                          onPressed: () =>
-                                              _showDeleteConfirmation(
-                                                context,
-                                                reminder.id,
-                                              ),
-                                        ),
-                                      ],
+                                          PopupMenuItem(
+                                            value: 'delete',
+                                            child: Text('Delete'),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),
+
                                 if (reminder.description.isNotEmpty) ...[
-                                  const SizedBox(height: 8),
                                   Text(
                                     reminder.description,
                                     style: Theme.of(context)
@@ -285,45 +477,29 @@ class _RemindersDashboardPageState extends State<RemindersDashboardPage> {
                                           ).colorScheme.onSurfaceVariant,
                                         ),
                                   ),
+                                  const SizedBox(height: 14),
                                 ],
-                                const SizedBox(height: 12),
-                                const Divider(height: 1),
-                                const SizedBox(height: 12),
+
                                 Row(
                                   children: [
                                     Icon(
-                                      Icons.calendar_today_outlined,
-                                      size: 14,
+                                      Icons.schedule_rounded,
+                                      size: 16,
                                       color: Theme.of(
                                         context,
                                       ).colorScheme.primary,
                                     ),
                                     const SizedBox(width: 6),
                                     Text(
-                                      _formatDate(reminder.reminderDateTime),
+                                      '${_formatDate(reminder.reminderDateTime)} • ${_formatTime(reminder.reminderDateTime)}',
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodySmall
                                           ?.copyWith(
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                    ),
-                                    const SizedBox(width: 16),
-                                    Icon(
-                                      Icons.access_time,
-                                      size: 14,
-                                      color: Theme.of(
-                                        context,
-                                      ).colorScheme.primary,
-                                    ),
-                                    const SizedBox(width: 6),
-                                    Text(
-                                      _formatTime(reminder.reminderDateTime),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall
-                                          ?.copyWith(
-                                            fontWeight: FontWeight.w600,
+                                            fontWeight: FontWeight.w500,
+                                            color: Theme.of(
+                                              context,
+                                            ).colorScheme.onSurfaceVariant,
                                           ),
                                     ),
                                   ],
@@ -344,8 +520,12 @@ class _RemindersDashboardPageState extends State<RemindersDashboardPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => context.push('/add-reminder'),
-        child: const Icon(Icons.add),
+        onPressed: () => context.push(AppRouter.addReminderScreen),
+        child: Icon(
+          Icons.add,
+          color: Theme.of(context).colorScheme.primary,
+          size: 32,
+        ),
       ),
     );
   }

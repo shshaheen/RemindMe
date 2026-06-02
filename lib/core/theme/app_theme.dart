@@ -3,10 +3,19 @@ import 'package:flutter/material.dart';
 class AppTheme {
   AppTheme._();
 
-  // Curated Sleek Color Palette
-  static const _primaryColor = Color(0xFF6200EE);
-  static const _secondaryColor = Color(0xFF03DAC6);
-  static const _accentColor = Color(0xFFFF4081);
+  // Curated Sleek Color Palette - Light
+  static const _primaryColorLight = Color(0xFF4F46E5); // Vibrant Indigo
+  static const _secondaryColorLight = Color(0xFF0EA5E9); // Ocean Sky Blue
+  static const _accentColorLight = Color(0xFFEC4899); // Vibrant Pink
+  static const _surfaceColorLight = Color(0xFFF8FAFC); // Very Soft Slate Gray
+  static const _cardColorLight = Color(0xFFFFFFFF); // Pure White
+
+  // Curated Sleek Color Palette - Dark
+  static const _primaryColorDark = Color(0xFF818CF8); // Modern Neon Indigo
+  static const _secondaryColorDark = Color(0xFF38BDF8); // Electric Sky Blue
+  static const _accentColorDark = Color(0xFFF472B6); // Modern Pink
+  static const _surfaceColorDark = Color(0xFF090D16); // Deep Space Midnight
+  static const _cardColorDark = Color(0xFF151C2C); // Deep Charcoal Blue
 
   // Modern Typography Style
   static const String _fontFamily = 'Roboto';
@@ -17,16 +26,16 @@ class AppTheme {
       useMaterial3: true,
       brightness: Brightness.light,
       colorScheme: const ColorScheme.light(
-        primary: _primaryColor,
-        primaryContainer: Color(0xFFEADDFF),
-        secondary: _secondaryColor,
-        secondaryContainer: Color(0xFFE8DEF8),
-        tertiary: _accentColor,
-        surface: Color(0xFFFEF7FF),
-        error: Color(0xFFB00020),
+        primary: _primaryColorLight,
+        primaryContainer: Color(0xFFE0E7FF),
+        secondary: _secondaryColorLight,
+        secondaryContainer: Color(0xFFE0F2FE),
+        tertiary: _accentColorLight,
+        surface: _surfaceColorLight,
+        error: Color(0xFFEF4444),
         onPrimary: Colors.white,
-        onSecondary: Colors.black,
-        onSurface: Color(0xFF1D1B20),
+        onSecondary: Colors.white,
+        onSurface: Color(0xFF0F172A),
         onError: Colors.white,
       ),
       fontFamily: _fontFamily,
@@ -36,17 +45,17 @@ class AppTheme {
         elevation: 0,
         scrolledUnderElevation: 2.0,
         titleTextStyle: TextStyle(
-          color: Color(0xFF1D1B20),
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
+          color: Color(0xFF0F172A),
+          fontSize: 22,
+          fontWeight: FontWeight.bold,
           fontFamily: _fontFamily,
         ),
-        iconTheme: IconThemeData(color: Color(0xFF1D1B20)),
+        iconTheme: IconThemeData(color: Color(0xFF0F172A)),
       ),
       cardTheme: CardThemeData(
-        elevation: 1,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        color: const Color(0xFFF7F2FA),
+        elevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        color: _cardColorLight,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -59,7 +68,7 @@ class AppTheme {
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: const Color(0xFFF7F2FA),
+        fillColor: const Color(0xFFF1F5F9),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,
@@ -70,7 +79,7 @@ class AppTheme {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: _primaryColor, width: 2),
+          borderSide: const BorderSide(color: _primaryColorLight, width: 2),
         ),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
@@ -86,36 +95,37 @@ class AppTheme {
       useMaterial3: true,
       brightness: Brightness.dark,
       colorScheme: const ColorScheme.dark(
-        primary: Color(0xFFD0BCFF),
-        primaryContainer: Color(0xFF4F378B),
-        secondary: Color(0xFFCCC2DC),
-        secondaryContainer: Color(0xFF4A4458),
-        tertiary: Color(0xFFEFB8C8),
-        surface: Color(0xFF141218),
-        error: Color(0xFFF2B8B5),
-        onPrimary: Color(0xFF381E72),
-        onSecondary: Color(0xFF332D41),
-        onSurface: Color(0xFFE6E1E5),
-        onError: Color(0xFF601410),
+        primary: _primaryColorDark,
+        primaryContainer: Color(0xFF1E1B4B),
+        secondary: _secondaryColorDark,
+        secondaryContainer: Color(0xFF0C4A6E),
+        tertiary: _accentColorDark,
+        surface: _surfaceColorDark,
+        error: Color(0xFFF87171),
+        onPrimary: Colors.white,
+        onSecondary: Colors.white,
+        onSurface: Color(0xFFF1F5F9),
+        onError: Colors.white,
       ),
       fontFamily: _fontFamily,
+      scaffoldBackgroundColor: _surfaceColorDark,
       appBarTheme: const AppBarTheme(
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
         scrolledUnderElevation: 2.0,
         titleTextStyle: TextStyle(
-          color: Color(0xFFE6E1E5),
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
+          color: Color(0xFFF1F5F9),
+          fontSize: 22,
+          fontWeight: FontWeight.bold,
           fontFamily: _fontFamily,
         ),
-        iconTheme: IconThemeData(color: Color(0xFFE6E1E5)),
+        iconTheme: IconThemeData(color: Color(0xFFF1F5F9)),
       ),
       cardTheme: CardThemeData(
-        elevation: 1,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        color: const Color(0xFF211F26),
+        elevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        color: _cardColorDark,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -128,7 +138,7 @@ class AppTheme {
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: const Color(0xFF211F26),
+        fillColor: _cardColorDark,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,
@@ -139,7 +149,7 @@ class AppTheme {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Color(0xFFD0BCFF), width: 2),
+          borderSide: const BorderSide(color: _primaryColorDark, width: 2),
         ),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,

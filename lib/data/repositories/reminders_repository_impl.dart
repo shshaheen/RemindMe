@@ -2,11 +2,17 @@ import '../../domain/entities/reminder.dart';
 import '../../domain/repositories/reminders_repository.dart';
 import '../datasources/reminders_local_data_source.dart';
 import '../models/reminder_model.dart';
+import '../../core/services/notification_service.dart';
+import 'package:flutter/foundation.dart';
 
 class RemindersRepositoryImpl implements RemindersRepository {
   final RemindersLocalDataSource localDataSource;
+  final NotificationService notificationService;
 
-  RemindersRepositoryImpl({required this.localDataSource});
+  RemindersRepositoryImpl({
+    required this.localDataSource,
+    required this.notificationService,
+  });
 
   @override
   Future<List<Reminder>> getAllReminders() async {
@@ -19,19 +25,120 @@ class RemindersRepositoryImpl implements RemindersRepository {
 
   @override
   Future<void> addReminder(Reminder reminder) async {
+    if (kDebugMode) {
+      print(
+        'RemindersRepositoryImpl [DEBUG]: addReminder called for "${reminder.title}" at ${reminder.reminderDateTime}',
+      );
+    }
     final model = ReminderModel.fromDomain(reminder);
     await localDataSource.cacheReminder(model);
+
+    final now = DateTime.now();
+    final isFuture = reminder.reminderDateTime.isAfter(now);
+    if (kDebugMode) {
+      print(
+        'RemindersRepositoryImpl [DEBUG]: Current system time: $now, isFuture? $isFuture',
+      );
+    }
+
+    if (isFuture) {
+      if (kDebugMode) {
+        print(
+          'RemindersRepositoryImpl [DEBUG]: Calling scheduleNotification...',
+        );
+      }
+      try {
+        await notificationService.scheduleNotification(
+          id: reminder.id.hashCode.abs() & 0x7FFFFFFF,
+          title: reminder.title,
+          body: reminder.description.isNotEmpty
+              ? reminder.description
+              : 'Your reminder is due!',
+          scheduledDate: reminder.reminderDateTime,
+          payload: reminder.id,
+        );
+      } catch (e) {
+        if (kDebugMode) {
+          print(
+            'RemindersRepositoryImpl [DEBUG]: Error inside scheduleNotification: $e',
+          );
+        }
+      }
+    } else {
+      if (kDebugMode) {
+        print(
+          'RemindersRepositoryImpl [DEBUG]: Skipping notification scheduling because scheduled time is in the past.',
+        );
+      }
+    }
   }
 
   @override
   Future<void> updateReminder(Reminder reminder) async {
+    if (kDebugMode) {
+      print(
+        'RemindersRepositoryImpl [DEBUG]: updateReminder called for "${reminder.title}" at ${reminder.reminderDateTime}',
+      );
+    }
     final model = ReminderModel.fromDomain(reminder);
     await localDataSource.cacheReminder(model);
+
+    final notificationId = reminder.id.hashCode.abs() & 0x7FFFFFFF;
+    if (kDebugMode) {
+      print(
+        'RemindersRepositoryImpl [DEBUG]: Canceling old notification with ID: $notificationId',
+      );
+    }
+    await notificationService.cancelNotification(notificationId);
+
+    final now = DateTime.now();
+    final isFuture = reminder.reminderDateTime.isAfter(now);
+    if (kDebugMode) {
+      print(
+        'RemindersRepositoryImpl [DEBUG]: Current system time: $now, isFuture? $isFuture',
+      );
+    }
+
+    if (isFuture) {
+      if (kDebugMode) {
+        print(
+          'RemindersRepositoryImpl [DEBUG]: Calling scheduleNotification for updated reminder...',
+        );
+      }
+      try {
+        await notificationService.scheduleNotification(
+          id: notificationId,
+          title: reminder.title,
+          body: reminder.description.isNotEmpty
+              ? reminder.description
+              : 'Your reminder is due!',
+          scheduledDate: reminder.reminderDateTime,
+          payload: reminder.id,
+        );
+      } catch (e) {
+        if (kDebugMode) {
+          print(
+            'RemindersRepositoryImpl [DEBUG]: Error inside scheduleNotification for updated reminder: $e',
+          );
+        }
+      }
+    } else {
+      if (kDebugMode) {
+        print(
+          'RemindersRepositoryImpl [DEBUG]: Skipping notification scheduling because scheduled time is in the past.',
+        );
+      }
+    }
   }
 
   @override
   Future<void> deleteReminder(String id) async {
     await localDataSource.deleteCachedReminder(id);
+
+    // Cancel any scheduled notification
+    await notificationService.cancelNotification(
+      id.hashCode.abs() & 0x7FFFFFFF,
+    );
   }
 
   @override

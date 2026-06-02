@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:reminder_app/core/router/app_router.dart';
 import '../blocs/auth_bloc.dart';
 import '../blocs/auth_state.dart';
 
@@ -17,9 +18,9 @@ class _SplashPageState extends State<SplashPage> {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         state.maybeWhen(
-          needsPasswordSetup: () => context.go('/create-password'),
-          unauthenticated: () => context.go('/login'),
-          authenticated: () => context.go('/reminders'),
+          needsPasswordSetup: () => context.go(AppRouter.createPasswordScreen),
+          unauthenticated: () => context.go(AppRouter.loginScreen),
+          authenticated: () => context.go(AppRouter.remindersScreen),
           error: (msg) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(msg), backgroundColor: Colors.red),

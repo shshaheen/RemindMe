@@ -1,71 +1,53 @@
 import 'package:go_router/go_router.dart';
-import '../../domain/entities/reminder.dart';
 import '../../presentation/auth/pages/splash_page.dart';
 import '../../presentation/auth/pages/create_password_page.dart';
 import '../../presentation/auth/pages/login_page.dart';
 import '../../presentation/auth/pages/change_password_page.dart';
 import '../../presentation/reminders/pages/reminders_dashboard_page.dart';
 import '../../presentation/reminders/pages/add_reminder_page.dart';
-import '../../presentation/reminders/pages/edit_reminder_page.dart';
-import '../../presentation/settings/pages/settings_page.dart';
 
 class AppRouter {
   AppRouter._();
 
-  static const String splashPath = '/';
-  static const String createPasswordPath = '/create-password';
-  static const String loginPath = '/login';
-  static const String changePasswordPath = '/change-password';
-  static const String remindersPath = '/reminders';
-  static const String addReminderPath = '/add-reminder';
-  static const String editReminderPath = '/edit-reminder';
-  static const String settingsPath = '/settings';
+  static const String splashScreen = '/';
+  static const String createPasswordScreen = '/create-password';
+  static const String loginScreen = '/login';
+  static const String changePasswordScreen = '/change-password';
+  static const String remindersScreen = '/reminders';
+  static const String addReminderScreen = '/add-reminder';
 
   static final GoRouter router = GoRouter(
-    initialLocation: splashPath,
+    initialLocation: splashScreen,
     routes: [
       GoRoute(
-        path: splashPath,
+        path: splashScreen,
         name: 'splash',
         builder: (context, state) => const SplashPage(),
       ),
       GoRoute(
-        path: createPasswordPath,
+        path: createPasswordScreen,
         name: 'create-password',
         builder: (context, state) => const CreatePasswordPage(),
       ),
       GoRoute(
-        path: loginPath,
+        path: loginScreen,
         name: 'login',
         builder: (context, state) => const LoginPage(),
       ),
       GoRoute(
-        path: changePasswordPath,
+        path: changePasswordScreen,
         name: 'change-password',
         builder: (context, state) => const ChangePasswordPage(),
       ),
       GoRoute(
-        path: remindersPath,
+        path: remindersScreen,
         name: 'reminders',
         builder: (context, state) => const RemindersDashboardPage(),
       ),
       GoRoute(
-        path: addReminderPath,
+        path: addReminderScreen,
         name: 'add-reminder',
         builder: (context, state) => const AddReminderPage(),
-      ),
-      GoRoute(
-        path: editReminderPath,
-        name: 'edit-reminder',
-        builder: (context, state) {
-          final reminder = state.extra as Reminder;
-          return EditReminderPage(reminder: reminder);
-        },
-      ),
-      GoRoute(
-        path: settingsPath,
-        name: 'settings',
-        builder: (context, state) => const SettingsPage(),
       ),
     ],
   );
