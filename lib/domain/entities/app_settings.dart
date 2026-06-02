@@ -33,7 +33,9 @@ class AppSettings {
 
   @override
   int get hashCode =>
-      isDarkMode.hashCode ^ isSoundEnabled.hashCode ^ isVibrationEnabled.hashCode;
+      isDarkMode.hashCode ^
+      isSoundEnabled.hashCode ^
+      isVibrationEnabled.hashCode;
 
   @override
   String toString() =>

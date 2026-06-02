@@ -29,8 +29,8 @@ class _CreatePasswordPageState extends State<CreatePasswordPage> {
   void _submit() {
     if (_formKey.currentState?.validate() ?? false) {
       context.read<AuthBloc>().add(
-            CreatePassword(password: _passwordController.text),
-          );
+        CreatePassword(password: _passwordController.text),
+      );
     }
   }
 
@@ -72,7 +72,8 @@ class _CreatePasswordPageState extends State<CreatePasswordPage> {
                       Text(
                         'Secure Your App',
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        style: Theme.of(context).textTheme.headlineMedium
+                            ?.copyWith(
                               fontWeight: FontWeight.bold,
                               color: Theme.of(context).colorScheme.onSurface,
                             ),
@@ -82,8 +83,8 @@ class _CreatePasswordPageState extends State<CreatePasswordPage> {
                         'Create a master passcode to protect your data locally.',
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Theme.of(context).colorScheme.onSurfaceVariant,
-                            ),
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
                       ),
                       const SizedBox(height: 36),
                       // Card Form Layout
@@ -105,7 +106,9 @@ class _CreatePasswordPageState extends State<CreatePasswordPage> {
                                   prefixIcon: const Icon(Icons.lock),
                                   suffixIcon: IconButton(
                                     icon: Icon(
-                                      _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                                      _obscurePassword
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
                                     ),
                                     onPressed: () {
                                       setState(() {
@@ -133,10 +136,14 @@ class _CreatePasswordPageState extends State<CreatePasswordPage> {
                                 style: const TextStyle(letterSpacing: 2),
                                 decoration: InputDecoration(
                                   labelText: 'Confirm Passcode',
-                                  prefixIcon: const Icon(Icons.check_circle_outline),
+                                  prefixIcon: const Icon(
+                                    Icons.check_circle_outline,
+                                  ),
                                   suffixIcon: IconButton(
                                     icon: Icon(
-                                      _obscureConfirm ? Icons.visibility_off : Icons.visibility,
+                                      _obscureConfirm
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
                                     ),
                                     onPressed: () {
                                       setState(() {
@@ -161,8 +168,12 @@ class _CreatePasswordPageState extends State<CreatePasswordPage> {
                       ElevatedButton(
                         onPressed: isLoading ? null : _submit,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Theme.of(context).colorScheme.primary,
-                          foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                          backgroundColor: Theme.of(
+                            context,
+                          ).colorScheme.primary,
+                          foregroundColor: Theme.of(
+                            context,
+                          ).colorScheme.onPrimary,
                           padding: const EdgeInsets.symmetric(vertical: 16),
                         ),
                         child: isLoading

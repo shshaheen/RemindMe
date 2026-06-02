@@ -1,32 +1,28 @@
 class Reminder {
-  final int id;
+  final String id;
   final String title;
-  final String body;
-  final DateTime dateTime;
-  final bool isEnabled;
+  final String description;
+  final DateTime reminderDateTime;
 
   const Reminder({
     required this.id,
     required this.title,
-    required this.body,
-    required this.dateTime,
-    required this.isEnabled,
+    this.description = '',
+    required this.reminderDateTime,
   });
 
   /// standard copy helper
   Reminder copyWith({
-    int? id,
+    String? id,
     String? title,
-    String? body,
-    DateTime? dateTime,
-    bool? isEnabled,
+    String? description,
+    DateTime? reminderDateTime,
   }) {
     return Reminder(
       id: id ?? this.id,
       title: title ?? this.title,
-      body: body ?? this.body,
-      dateTime: dateTime ?? this.dateTime,
-      isEnabled: isEnabled ?? this.isEnabled,
+      description: description ?? this.description,
+      reminderDateTime: reminderDateTime ?? this.reminderDateTime,
     );
   }
 
@@ -37,19 +33,17 @@ class Reminder {
           runtimeType == other.runtimeType &&
           id == other.id &&
           title == other.title &&
-          body == other.body &&
-          dateTime == other.dateTime &&
-          isEnabled == other.isEnabled;
+          description == other.description &&
+          reminderDateTime == other.reminderDateTime;
 
   @override
   int get hashCode =>
       id.hashCode ^
       title.hashCode ^
-      body.hashCode ^
-      dateTime.hashCode ^
-      isEnabled.hashCode;
+      description.hashCode ^
+      reminderDateTime.hashCode;
 
   @override
   String toString() =>
-      'Reminder(id: $id, title: $title, body: $body, dateTime: $dateTime, isEnabled: $isEnabled)';
+      'Reminder(id: $id, title: $title, description: $description, reminderDateTime: $reminderDateTime)';
 }

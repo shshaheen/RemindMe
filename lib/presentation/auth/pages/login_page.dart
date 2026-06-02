@@ -26,8 +26,8 @@ class _LoginPageState extends State<LoginPage> {
   void _submit() {
     if (_formKey.currentState?.validate() ?? false) {
       context.read<AuthBloc>().add(
-            LoginRequested(password: _passwordController.text),
-          );
+        LoginRequested(password: _passwordController.text),
+      );
     }
   }
 
@@ -72,7 +72,8 @@ class _LoginPageState extends State<LoginPage> {
                       Text(
                         'Unlock App',
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        style: Theme.of(context).textTheme.headlineMedium
+                            ?.copyWith(
                               fontWeight: FontWeight.bold,
                               color: Theme.of(context).colorScheme.onSurface,
                             ),
@@ -82,8 +83,8 @@ class _LoginPageState extends State<LoginPage> {
                         'Enter your master passcode to unlock your reminders.',
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Theme.of(context).colorScheme.onSurfaceVariant,
-                            ),
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
                       ),
                       const SizedBox(height: 36),
                       // Card Form Layout
@@ -104,7 +105,9 @@ class _LoginPageState extends State<LoginPage> {
                                   prefixIcon: const Icon(Icons.lock),
                                   suffixIcon: IconButton(
                                     icon: Icon(
-                                      _obscureText ? Icons.visibility_off : Icons.visibility,
+                                      _obscureText
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
                                     ),
                                     onPressed: () {
                                       setState(() {
@@ -129,8 +132,12 @@ class _LoginPageState extends State<LoginPage> {
                       ElevatedButton(
                         onPressed: isLoading ? null : _submit,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Theme.of(context).colorScheme.primary,
-                          foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                          backgroundColor: Theme.of(
+                            context,
+                          ).colorScheme.primary,
+                          foregroundColor: Theme.of(
+                            context,
+                          ).colorScheme.onPrimary,
                           padding: const EdgeInsets.symmetric(vertical: 16),
                         ),
                         child: isLoading

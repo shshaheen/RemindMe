@@ -18,13 +18,17 @@ class SettingsRepositoryImpl implements SettingsRepository {
         return Right(model.toDomain());
       }
       // Defaults when no preferences cached yet
-      return const Right(AppSettings(
-        isDarkMode: false,
-        isSoundEnabled: true,
-        isVibrationEnabled: true,
-      ));
+      return const Right(
+        AppSettings(
+          isDarkMode: false,
+          isSoundEnabled: true,
+          isVibrationEnabled: true,
+        ),
+      );
     } catch (e) {
-      return Left(CacheFailure('Failed to retrieve preference states: ${e.toString()}'));
+      return Left(
+        CacheFailure('Failed to retrieve preference states: ${e.toString()}'),
+      );
     }
   }
 
@@ -35,7 +39,11 @@ class SettingsRepositoryImpl implements SettingsRepository {
       await localDataSource.saveSettings(model);
       return const Right(null);
     } catch (e) {
-      return Left(CacheFailure('Failed to save preference configurations: ${e.toString()}'));
+      return Left(
+        CacheFailure(
+          'Failed to save preference configurations: ${e.toString()}',
+        ),
+      );
     }
   }
 }

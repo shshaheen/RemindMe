@@ -52,7 +52,9 @@ class _SplashPageState extends State<SplashPage> {
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: Theme.of(context).colorScheme.primary.withAlpha(51),
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.primary.withAlpha(51),
                         blurRadius: 20,
                         offset: const Offset(0, 10),
                       ),
@@ -69,17 +71,17 @@ class _SplashPageState extends State<SplashPage> {
                 Text(
                   'ReminderMe',
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1.2,
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.2,
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
                 ),
                 const SizedBox(height: 8),
                 Text(
                   'Your premium personal dashboard',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
                 ),
                 const SizedBox(height: 48),
                 // Subtle loader indicator

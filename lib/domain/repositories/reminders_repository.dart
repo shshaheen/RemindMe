@@ -1,14 +1,18 @@
-import 'package:dartz/dartz.dart';
-import '../../core/error/failures.dart';
 import '../entities/reminder.dart';
 
 abstract class RemindersRepository {
-  /// Loads all reminders stored locally
-  Future<Either<Failure, List<Reminder>>> getReminders();
+  /// Loads all reminders stored locally, sorted chronologically (nearest first)
+  Future<List<Reminder>> getAllReminders();
 
-  /// Saves a reminder, updating or adding it to storage and triggering notifications
-  Future<Either<Failure, void>> saveReminder(Reminder reminder);
+  /// Adds a new reminder to storage
+  Future<void> addReminder(Reminder reminder);
 
-  /// Deletes a reminder, clearing notifications and storage
-  Future<Either<Failure, void>> deleteReminder(int id);
+  /// Updates an existing reminder in storage
+  Future<void> updateReminder(Reminder reminder);
+
+  /// Deletes a reminder by its String ID
+  Future<void> deleteReminder(String id);
+
+  /// Searches reminders in-memory by checking title and description (case-insensitive)
+  Future<List<Reminder>> searchReminders(String query);
 }

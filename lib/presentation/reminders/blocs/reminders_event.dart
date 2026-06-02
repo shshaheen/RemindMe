@@ -5,7 +5,17 @@ part 'reminders_event.freezed.dart';
 
 @freezed
 class RemindersEvent with _$RemindersEvent {
-  const factory RemindersEvent.started() = RemindersStarted;
-  const factory RemindersEvent.reminderAdded({required Reminder reminder}) = ReminderAdded;
-  const factory RemindersEvent.reminderDeleted({required int id}) = ReminderDeleted;
+  const factory RemindersEvent.loadReminders() = LoadReminders;
+
+  const factory RemindersEvent.addReminder({required Reminder reminder}) =
+      AddReminder;
+
+  const factory RemindersEvent.updateReminder({required Reminder reminder}) =
+      UpdateReminder;
+
+  const factory RemindersEvent.deleteReminder({required String id}) =
+      DeleteReminder;
+
+  const factory RemindersEvent.searchReminders({required String query}) =
+      SearchReminders;
 }

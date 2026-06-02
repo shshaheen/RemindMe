@@ -17,41 +17,48 @@ import 'package:reminder_app/presentation/settings/blocs/settings_state.dart';
 
 void main() {
   // Zone-based error trapping for high stability in production environment
-  runZonedGuarded<Future<void>>(() async {
-    WidgetsFlutterBinding.ensureInitialized();
+  runZonedGuarded<Future<void>>(
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
 
-    // 1. Initialize Dependency Injection Graph
-    await initDI();
+      // 1. Initialize Dependency Injection Graph
+      await initDI();
 
-    // 2. Initialize Hive local databases
-    await HiveService.init();
+      // 2. Initialize Hive local databases
+      await HiveService.init();
 
-    // 3. Initialize Notification system & Timezones
-    await sl<NotificationService>().init();
+      // 3. Initialize Notification system & Timezones
+      await sl<NotificationService>().init();
 
-    runApp(
-      MultiBlocProvider(
-        providers: [
-          BlocProvider<SettingsBloc>(
-            create: (context) => sl<SettingsBloc>()..add(const SettingsEvent.started()),
-          ),
-          BlocProvider<AuthBloc>(
-            create: (context) => sl<AuthBloc>()..add(const AuthEvent.started()),
-          ),
-          BlocProvider<RemindersBloc>(
-            create: (context) => sl<RemindersBloc>()..add(const RemindersEvent.started()),
-          ),
-        ],
-        child: const MyApp(),
-      ),
-    );
-  }, (error, stackTrace) {
-    if (kDebugMode) {
-      print('Caught unhandled global error: $error');
-      print(stackTrace);
-    }
-    // Integrate Crashlytics or remote error reporting here
-  });
+      runApp(
+        MultiBlocProvider(
+          providers: [
+            BlocProvider<SettingsBloc>(
+              create: (context) =>
+                  sl<SettingsBloc>()..add(const SettingsEvent.started()),
+            ),
+            BlocProvider<AuthBloc>(
+              create: (context) =>
+                  sl<AuthBloc>()..add(const AuthEvent.started()),
+            ),
+            BlocProvider<RemindersBloc>(
+              create: (context) =>
+                  sl<RemindersBloc>()
+                    ..add(const RemindersEvent.loadReminders()),
+            ),
+          ],
+          child: const MyApp(),
+        ),
+      );
+    },
+    (error, stackTrace) {
+      if (kDebugMode) {
+        print('Caught unhandled global error: $error');
+        print(stackTrace);
+      }
+      // Integrate Crashlytics or remote error reporting here
+    },
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -70,7 +77,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp.router(
           title: 'RemindMe',
           debugShowCheckedModeBanner: false,
-          
+
           // Material 3 Custom Theme definitions
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,

@@ -12,7 +12,8 @@ part of 'auth_event.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$AuthEvent {
@@ -22,41 +23,37 @@ mixin _$AuthEvent {
     required TResult Function(String password) createPassword,
     required TResult Function(String password) loginRequested,
     required TResult Function(String oldPassword, String newPassword)
-        changePasswordRequested,
+    changePasswordRequested,
     required TResult Function() logoutRequested,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(String password)? createPassword,
     TResult? Function(String password)? loginRequested,
     TResult? Function(String oldPassword, String newPassword)?
-        changePasswordRequested,
+    changePasswordRequested,
     TResult? Function()? logoutRequested,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(String password)? createPassword,
     TResult Function(String password)? loginRequested,
     TResult Function(String oldPassword, String newPassword)?
-        changePasswordRequested,
+    changePasswordRequested,
     TResult Function()? logoutRequested,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AuthStarted value) started,
     required TResult Function(CreatePassword value) createPassword,
     required TResult Function(LoginRequested value) loginRequested,
     required TResult Function(ChangePasswordRequested value)
-        changePasswordRequested,
+    changePasswordRequested,
     required TResult Function(LogoutRequested value) logoutRequested,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AuthStarted value)? started,
@@ -64,8 +61,7 @@ mixin _$AuthEvent {
     TResult? Function(LoginRequested value)? loginRequested,
     TResult? Function(ChangePasswordRequested value)? changePasswordRequested,
     TResult? Function(LogoutRequested value)? logoutRequested,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthStarted value)? started,
@@ -74,8 +70,7 @@ mixin _$AuthEvent {
     TResult Function(ChangePasswordRequested value)? changePasswordRequested,
     TResult Function(LogoutRequested value)? logoutRequested,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -93,13 +88,17 @@ class _$AuthEventCopyWithImpl<$Res, $Val extends AuthEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 abstract class _$$AuthStartedImplCopyWith<$Res> {
   factory _$$AuthStartedImplCopyWith(
-          _$AuthStartedImpl value, $Res Function(_$AuthStartedImpl) then) =
-      __$$AuthStartedImplCopyWithImpl<$Res>;
+    _$AuthStartedImpl value,
+    $Res Function(_$AuthStartedImpl) then,
+  ) = __$$AuthStartedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -107,8 +106,12 @@ class __$$AuthStartedImplCopyWithImpl<$Res>
     extends _$AuthEventCopyWithImpl<$Res, _$AuthStartedImpl>
     implements _$$AuthStartedImplCopyWith<$Res> {
   __$$AuthStartedImplCopyWithImpl(
-      _$AuthStartedImpl _value, $Res Function(_$AuthStartedImpl) _then)
-      : super(_value, _then);
+    _$AuthStartedImpl _value,
+    $Res Function(_$AuthStartedImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -137,7 +140,7 @@ class _$AuthStartedImpl implements AuthStarted {
     required TResult Function(String password) createPassword,
     required TResult Function(String password) loginRequested,
     required TResult Function(String oldPassword, String newPassword)
-        changePasswordRequested,
+    changePasswordRequested,
     required TResult Function() logoutRequested,
   }) {
     return started();
@@ -150,7 +153,7 @@ class _$AuthStartedImpl implements AuthStarted {
     TResult? Function(String password)? createPassword,
     TResult? Function(String password)? loginRequested,
     TResult? Function(String oldPassword, String newPassword)?
-        changePasswordRequested,
+    changePasswordRequested,
     TResult? Function()? logoutRequested,
   }) {
     return started?.call();
@@ -163,7 +166,7 @@ class _$AuthStartedImpl implements AuthStarted {
     TResult Function(String password)? createPassword,
     TResult Function(String password)? loginRequested,
     TResult Function(String oldPassword, String newPassword)?
-        changePasswordRequested,
+    changePasswordRequested,
     TResult Function()? logoutRequested,
     required TResult orElse(),
   }) {
@@ -180,7 +183,7 @@ class _$AuthStartedImpl implements AuthStarted {
     required TResult Function(CreatePassword value) createPassword,
     required TResult Function(LoginRequested value) loginRequested,
     required TResult Function(ChangePasswordRequested value)
-        changePasswordRequested,
+    changePasswordRequested,
     required TResult Function(LogoutRequested value) logoutRequested,
   }) {
     return started(this);
@@ -221,9 +224,10 @@ abstract class AuthStarted implements AuthEvent {
 
 /// @nodoc
 abstract class _$$CreatePasswordImplCopyWith<$Res> {
-  factory _$$CreatePasswordImplCopyWith(_$CreatePasswordImpl value,
-          $Res Function(_$CreatePasswordImpl) then) =
-      __$$CreatePasswordImplCopyWithImpl<$Res>;
+  factory _$$CreatePasswordImplCopyWith(
+    _$CreatePasswordImpl value,
+    $Res Function(_$CreatePasswordImpl) then,
+  ) = __$$CreatePasswordImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String password});
 }
@@ -233,20 +237,23 @@ class __$$CreatePasswordImplCopyWithImpl<$Res>
     extends _$AuthEventCopyWithImpl<$Res, _$CreatePasswordImpl>
     implements _$$CreatePasswordImplCopyWith<$Res> {
   __$$CreatePasswordImplCopyWithImpl(
-      _$CreatePasswordImpl _value, $Res Function(_$CreatePasswordImpl) _then)
-      : super(_value, _then);
+    _$CreatePasswordImpl _value,
+    $Res Function(_$CreatePasswordImpl) _then,
+  ) : super(_value, _then);
 
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? password = null,
-  }) {
-    return _then(_$CreatePasswordImpl(
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+  $Res call({Object? password = null}) {
+    return _then(
+      _$CreatePasswordImpl(
+        password: null == password
+            ? _value.password
+            : password // ignore: cast_nullable_to_non_nullable
+                  as String,
+      ),
+    );
   }
 }
 
@@ -275,12 +282,16 @@ class _$CreatePasswordImpl implements CreatePassword {
   @override
   int get hashCode => Object.hash(runtimeType, password);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CreatePasswordImplCopyWith<_$CreatePasswordImpl> get copyWith =>
       __$$CreatePasswordImplCopyWithImpl<_$CreatePasswordImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   @optionalTypeArgs
@@ -289,7 +300,7 @@ class _$CreatePasswordImpl implements CreatePassword {
     required TResult Function(String password) createPassword,
     required TResult Function(String password) loginRequested,
     required TResult Function(String oldPassword, String newPassword)
-        changePasswordRequested,
+    changePasswordRequested,
     required TResult Function() logoutRequested,
   }) {
     return createPassword(password);
@@ -302,7 +313,7 @@ class _$CreatePasswordImpl implements CreatePassword {
     TResult? Function(String password)? createPassword,
     TResult? Function(String password)? loginRequested,
     TResult? Function(String oldPassword, String newPassword)?
-        changePasswordRequested,
+    changePasswordRequested,
     TResult? Function()? logoutRequested,
   }) {
     return createPassword?.call(password);
@@ -315,7 +326,7 @@ class _$CreatePasswordImpl implements CreatePassword {
     TResult Function(String password)? createPassword,
     TResult Function(String password)? loginRequested,
     TResult Function(String oldPassword, String newPassword)?
-        changePasswordRequested,
+    changePasswordRequested,
     TResult Function()? logoutRequested,
     required TResult orElse(),
   }) {
@@ -332,7 +343,7 @@ class _$CreatePasswordImpl implements CreatePassword {
     required TResult Function(CreatePassword value) createPassword,
     required TResult Function(LoginRequested value) loginRequested,
     required TResult Function(ChangePasswordRequested value)
-        changePasswordRequested,
+    changePasswordRequested,
     required TResult Function(LogoutRequested value) logoutRequested,
   }) {
     return createPassword(this);
@@ -372,16 +383,20 @@ abstract class CreatePassword implements AuthEvent {
       _$CreatePasswordImpl;
 
   String get password;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CreatePasswordImplCopyWith<_$CreatePasswordImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$LoginRequestedImplCopyWith<$Res> {
-  factory _$$LoginRequestedImplCopyWith(_$LoginRequestedImpl value,
-          $Res Function(_$LoginRequestedImpl) then) =
-      __$$LoginRequestedImplCopyWithImpl<$Res>;
+  factory _$$LoginRequestedImplCopyWith(
+    _$LoginRequestedImpl value,
+    $Res Function(_$LoginRequestedImpl) then,
+  ) = __$$LoginRequestedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String password});
 }
@@ -391,20 +406,23 @@ class __$$LoginRequestedImplCopyWithImpl<$Res>
     extends _$AuthEventCopyWithImpl<$Res, _$LoginRequestedImpl>
     implements _$$LoginRequestedImplCopyWith<$Res> {
   __$$LoginRequestedImplCopyWithImpl(
-      _$LoginRequestedImpl _value, $Res Function(_$LoginRequestedImpl) _then)
-      : super(_value, _then);
+    _$LoginRequestedImpl _value,
+    $Res Function(_$LoginRequestedImpl) _then,
+  ) : super(_value, _then);
 
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? password = null,
-  }) {
-    return _then(_$LoginRequestedImpl(
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+  $Res call({Object? password = null}) {
+    return _then(
+      _$LoginRequestedImpl(
+        password: null == password
+            ? _value.password
+            : password // ignore: cast_nullable_to_non_nullable
+                  as String,
+      ),
+    );
   }
 }
 
@@ -433,12 +451,16 @@ class _$LoginRequestedImpl implements LoginRequested {
   @override
   int get hashCode => Object.hash(runtimeType, password);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LoginRequestedImplCopyWith<_$LoginRequestedImpl> get copyWith =>
       __$$LoginRequestedImplCopyWithImpl<_$LoginRequestedImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   @optionalTypeArgs
@@ -447,7 +469,7 @@ class _$LoginRequestedImpl implements LoginRequested {
     required TResult Function(String password) createPassword,
     required TResult Function(String password) loginRequested,
     required TResult Function(String oldPassword, String newPassword)
-        changePasswordRequested,
+    changePasswordRequested,
     required TResult Function() logoutRequested,
   }) {
     return loginRequested(password);
@@ -460,7 +482,7 @@ class _$LoginRequestedImpl implements LoginRequested {
     TResult? Function(String password)? createPassword,
     TResult? Function(String password)? loginRequested,
     TResult? Function(String oldPassword, String newPassword)?
-        changePasswordRequested,
+    changePasswordRequested,
     TResult? Function()? logoutRequested,
   }) {
     return loginRequested?.call(password);
@@ -473,7 +495,7 @@ class _$LoginRequestedImpl implements LoginRequested {
     TResult Function(String password)? createPassword,
     TResult Function(String password)? loginRequested,
     TResult Function(String oldPassword, String newPassword)?
-        changePasswordRequested,
+    changePasswordRequested,
     TResult Function()? logoutRequested,
     required TResult orElse(),
   }) {
@@ -490,7 +512,7 @@ class _$LoginRequestedImpl implements LoginRequested {
     required TResult Function(CreatePassword value) createPassword,
     required TResult Function(LoginRequested value) loginRequested,
     required TResult Function(ChangePasswordRequested value)
-        changePasswordRequested,
+    changePasswordRequested,
     required TResult Function(LogoutRequested value) logoutRequested,
   }) {
     return loginRequested(this);
@@ -530,7 +552,10 @@ abstract class LoginRequested implements AuthEvent {
       _$LoginRequestedImpl;
 
   String get password;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoginRequestedImplCopyWith<_$LoginRequestedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -538,9 +563,9 @@ abstract class LoginRequested implements AuthEvent {
 /// @nodoc
 abstract class _$$ChangePasswordRequestedImplCopyWith<$Res> {
   factory _$$ChangePasswordRequestedImplCopyWith(
-          _$ChangePasswordRequestedImpl value,
-          $Res Function(_$ChangePasswordRequestedImpl) then) =
-      __$$ChangePasswordRequestedImplCopyWithImpl<$Res>;
+    _$ChangePasswordRequestedImpl value,
+    $Res Function(_$ChangePasswordRequestedImpl) then,
+  ) = __$$ChangePasswordRequestedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String oldPassword, String newPassword});
 }
@@ -550,34 +575,37 @@ class __$$ChangePasswordRequestedImplCopyWithImpl<$Res>
     extends _$AuthEventCopyWithImpl<$Res, _$ChangePasswordRequestedImpl>
     implements _$$ChangePasswordRequestedImplCopyWith<$Res> {
   __$$ChangePasswordRequestedImplCopyWithImpl(
-      _$ChangePasswordRequestedImpl _value,
-      $Res Function(_$ChangePasswordRequestedImpl) _then)
-      : super(_value, _then);
+    _$ChangePasswordRequestedImpl _value,
+    $Res Function(_$ChangePasswordRequestedImpl) _then,
+  ) : super(_value, _then);
 
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? oldPassword = null,
-    Object? newPassword = null,
-  }) {
-    return _then(_$ChangePasswordRequestedImpl(
-      oldPassword: null == oldPassword
-          ? _value.oldPassword
-          : oldPassword // ignore: cast_nullable_to_non_nullable
-              as String,
-      newPassword: null == newPassword
-          ? _value.newPassword
-          : newPassword // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+  $Res call({Object? oldPassword = null, Object? newPassword = null}) {
+    return _then(
+      _$ChangePasswordRequestedImpl(
+        oldPassword: null == oldPassword
+            ? _value.oldPassword
+            : oldPassword // ignore: cast_nullable_to_non_nullable
+                  as String,
+        newPassword: null == newPassword
+            ? _value.newPassword
+            : newPassword // ignore: cast_nullable_to_non_nullable
+                  as String,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$ChangePasswordRequestedImpl implements ChangePasswordRequested {
-  const _$ChangePasswordRequestedImpl(
-      {required this.oldPassword, required this.newPassword});
+  const _$ChangePasswordRequestedImpl({
+    required this.oldPassword,
+    required this.newPassword,
+  });
 
   @override
   final String oldPassword;
@@ -603,12 +631,16 @@ class _$ChangePasswordRequestedImpl implements ChangePasswordRequested {
   @override
   int get hashCode => Object.hash(runtimeType, oldPassword, newPassword);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ChangePasswordRequestedImplCopyWith<_$ChangePasswordRequestedImpl>
-      get copyWith => __$$ChangePasswordRequestedImplCopyWithImpl<
-          _$ChangePasswordRequestedImpl>(this, _$identity);
+  get copyWith =>
+      __$$ChangePasswordRequestedImplCopyWithImpl<
+        _$ChangePasswordRequestedImpl
+      >(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -617,7 +649,7 @@ class _$ChangePasswordRequestedImpl implements ChangePasswordRequested {
     required TResult Function(String password) createPassword,
     required TResult Function(String password) loginRequested,
     required TResult Function(String oldPassword, String newPassword)
-        changePasswordRequested,
+    changePasswordRequested,
     required TResult Function() logoutRequested,
   }) {
     return changePasswordRequested(oldPassword, newPassword);
@@ -630,7 +662,7 @@ class _$ChangePasswordRequestedImpl implements ChangePasswordRequested {
     TResult? Function(String password)? createPassword,
     TResult? Function(String password)? loginRequested,
     TResult? Function(String oldPassword, String newPassword)?
-        changePasswordRequested,
+    changePasswordRequested,
     TResult? Function()? logoutRequested,
   }) {
     return changePasswordRequested?.call(oldPassword, newPassword);
@@ -643,7 +675,7 @@ class _$ChangePasswordRequestedImpl implements ChangePasswordRequested {
     TResult Function(String password)? createPassword,
     TResult Function(String password)? loginRequested,
     TResult Function(String oldPassword, String newPassword)?
-        changePasswordRequested,
+    changePasswordRequested,
     TResult Function()? logoutRequested,
     required TResult orElse(),
   }) {
@@ -660,7 +692,7 @@ class _$ChangePasswordRequestedImpl implements ChangePasswordRequested {
     required TResult Function(CreatePassword value) createPassword,
     required TResult Function(LoginRequested value) loginRequested,
     required TResult Function(ChangePasswordRequested value)
-        changePasswordRequested,
+    changePasswordRequested,
     required TResult Function(LogoutRequested value) logoutRequested,
   }) {
     return changePasswordRequested(this);
@@ -696,22 +728,27 @@ class _$ChangePasswordRequestedImpl implements ChangePasswordRequested {
 }
 
 abstract class ChangePasswordRequested implements AuthEvent {
-  const factory ChangePasswordRequested(
-      {required final String oldPassword,
-      required final String newPassword}) = _$ChangePasswordRequestedImpl;
+  const factory ChangePasswordRequested({
+    required final String oldPassword,
+    required final String newPassword,
+  }) = _$ChangePasswordRequestedImpl;
 
   String get oldPassword;
   String get newPassword;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ChangePasswordRequestedImplCopyWith<_$ChangePasswordRequestedImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$LogoutRequestedImplCopyWith<$Res> {
-  factory _$$LogoutRequestedImplCopyWith(_$LogoutRequestedImpl value,
-          $Res Function(_$LogoutRequestedImpl) then) =
-      __$$LogoutRequestedImplCopyWithImpl<$Res>;
+  factory _$$LogoutRequestedImplCopyWith(
+    _$LogoutRequestedImpl value,
+    $Res Function(_$LogoutRequestedImpl) then,
+  ) = __$$LogoutRequestedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -719,8 +756,12 @@ class __$$LogoutRequestedImplCopyWithImpl<$Res>
     extends _$AuthEventCopyWithImpl<$Res, _$LogoutRequestedImpl>
     implements _$$LogoutRequestedImplCopyWith<$Res> {
   __$$LogoutRequestedImplCopyWithImpl(
-      _$LogoutRequestedImpl _value, $Res Function(_$LogoutRequestedImpl) _then)
-      : super(_value, _then);
+    _$LogoutRequestedImpl _value,
+    $Res Function(_$LogoutRequestedImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -749,7 +790,7 @@ class _$LogoutRequestedImpl implements LogoutRequested {
     required TResult Function(String password) createPassword,
     required TResult Function(String password) loginRequested,
     required TResult Function(String oldPassword, String newPassword)
-        changePasswordRequested,
+    changePasswordRequested,
     required TResult Function() logoutRequested,
   }) {
     return logoutRequested();
@@ -762,7 +803,7 @@ class _$LogoutRequestedImpl implements LogoutRequested {
     TResult? Function(String password)? createPassword,
     TResult? Function(String password)? loginRequested,
     TResult? Function(String oldPassword, String newPassword)?
-        changePasswordRequested,
+    changePasswordRequested,
     TResult? Function()? logoutRequested,
   }) {
     return logoutRequested?.call();
@@ -775,7 +816,7 @@ class _$LogoutRequestedImpl implements LogoutRequested {
     TResult Function(String password)? createPassword,
     TResult Function(String password)? loginRequested,
     TResult Function(String oldPassword, String newPassword)?
-        changePasswordRequested,
+    changePasswordRequested,
     TResult Function()? logoutRequested,
     required TResult orElse(),
   }) {
@@ -792,7 +833,7 @@ class _$LogoutRequestedImpl implements LogoutRequested {
     required TResult Function(CreatePassword value) createPassword,
     required TResult Function(LoginRequested value) loginRequested,
     required TResult Function(ChangePasswordRequested value)
-        changePasswordRequested,
+    changePasswordRequested,
     required TResult Function(LogoutRequested value) logoutRequested,
   }) {
     return logoutRequested(this);

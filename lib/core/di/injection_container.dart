@@ -10,7 +10,7 @@ import '../../data/repositories/settings_repository_impl.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../../domain/repositories/reminders_repository.dart';
 import '../../domain/repositories/settings_repository.dart';
-import '../../domain/usecases/create_reminder_use_case.dart';
+
 import '../../presentation/auth/blocs/auth_bloc.dart';
 import '../../presentation/reminders/blocs/reminders_bloc.dart';
 import '../../presentation/settings/blocs/settings_bloc.dart';
@@ -75,19 +75,11 @@ void _initAuthFeature() {
 /// Dependency Injection setup for the Reminders feature
 void _initRemindersFeature() {
   // Blocs
-  sl.registerFactory(
-    () => RemindersBloc(repository: sl(), createReminderUseCase: sl()),
-  );
-
-  // Use cases
-  sl.registerLazySingleton(() => CreateReminderUseCase(sl()));
+  sl.registerFactory(() => RemindersBloc(repository: sl()));
 
   // Repository implementations
   sl.registerLazySingleton<RemindersRepository>(
-    () => RemindersRepositoryImpl(
-      localDataSource: sl(),
-      notificationService: sl(),
-    ),
+    () => RemindersRepositoryImpl(localDataSource: sl()),
   );
 
   // Data sources

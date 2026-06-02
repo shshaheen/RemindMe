@@ -12,7 +12,8 @@ part of 'reminders_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$RemindersState {
@@ -22,16 +23,14 @@ mixin _$RemindersState {
     required TResult Function() loading,
     required TResult Function(List<Reminder> reminders) loaded,
     required TResult Function(String message) error,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<Reminder> reminders)? loaded,
     TResult? Function(String message)? error,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
@@ -39,40 +38,37 @@ mixin _$RemindersState {
     TResult Function(List<Reminder> reminders)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
-  }) =>
-      throw _privateConstructorUsedError;
+    required TResult Function(RemindersInitial value) initial,
+    required TResult Function(RemindersLoading value) loading,
+    required TResult Function(RemindersLoaded value) loaded,
+    required TResult Function(RemindersError value) error,
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Error value)? error,
-  }) =>
-      throw _privateConstructorUsedError;
+    TResult? Function(RemindersInitial value)? initial,
+    TResult? Function(RemindersLoading value)? loading,
+    TResult? Function(RemindersLoaded value)? loaded,
+    TResult? Function(RemindersError value)? error,
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
+    TResult Function(RemindersInitial value)? initial,
+    TResult Function(RemindersLoading value)? loading,
+    TResult Function(RemindersLoaded value)? loaded,
+    TResult Function(RemindersError value)? error,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $RemindersStateCopyWith<$Res> {
   factory $RemindersStateCopyWith(
-          RemindersState value, $Res Function(RemindersState) then) =
-      _$RemindersStateCopyWithImpl<$Res, RemindersState>;
+    RemindersState value,
+    $Res Function(RemindersState) then,
+  ) = _$RemindersStateCopyWithImpl<$Res, RemindersState>;
 }
 
 /// @nodoc
@@ -84,28 +80,36 @@ class _$RemindersStateCopyWithImpl<$Res, $Val extends RemindersState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of RemindersState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$InitialImplCopyWith<$Res> {
-  factory _$$InitialImplCopyWith(
-          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
-      __$$InitialImplCopyWithImpl<$Res>;
+abstract class _$$RemindersInitialImplCopyWith<$Res> {
+  factory _$$RemindersInitialImplCopyWith(
+    _$RemindersInitialImpl value,
+    $Res Function(_$RemindersInitialImpl) then,
+  ) = __$$RemindersInitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$InitialImplCopyWithImpl<$Res>
-    extends _$RemindersStateCopyWithImpl<$Res, _$InitialImpl>
-    implements _$$InitialImplCopyWith<$Res> {
-  __$$InitialImplCopyWithImpl(
-      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
-      : super(_value, _then);
+class __$$RemindersInitialImplCopyWithImpl<$Res>
+    extends _$RemindersStateCopyWithImpl<$Res, _$RemindersInitialImpl>
+    implements _$$RemindersInitialImplCopyWith<$Res> {
+  __$$RemindersInitialImplCopyWithImpl(
+    _$RemindersInitialImpl _value,
+    $Res Function(_$RemindersInitialImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of RemindersState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$InitialImpl implements _Initial {
-  const _$InitialImpl();
+class _$RemindersInitialImpl implements RemindersInitial {
+  const _$RemindersInitialImpl();
 
   @override
   String toString() {
@@ -115,7 +119,7 @@ class _$InitialImpl implements _Initial {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitialImpl);
+        (other.runtimeType == runtimeType && other is _$RemindersInitialImpl);
   }
 
   @override
@@ -161,10 +165,10 @@ class _$InitialImpl implements _Initial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
+    required TResult Function(RemindersInitial value) initial,
+    required TResult Function(RemindersLoading value) loading,
+    required TResult Function(RemindersLoaded value) loaded,
+    required TResult Function(RemindersError value) error,
   }) {
     return initial(this);
   }
@@ -172,10 +176,10 @@ class _$InitialImpl implements _Initial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Error value)? error,
+    TResult? Function(RemindersInitial value)? initial,
+    TResult? Function(RemindersLoading value)? loading,
+    TResult? Function(RemindersLoaded value)? loaded,
+    TResult? Function(RemindersError value)? error,
   }) {
     return initial?.call(this);
   }
@@ -183,10 +187,10 @@ class _$InitialImpl implements _Initial {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
+    TResult Function(RemindersInitial value)? initial,
+    TResult Function(RemindersLoading value)? loading,
+    TResult Function(RemindersLoaded value)? loaded,
+    TResult Function(RemindersError value)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -196,30 +200,35 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements RemindersState {
-  const factory _Initial() = _$InitialImpl;
+abstract class RemindersInitial implements RemindersState {
+  const factory RemindersInitial() = _$RemindersInitialImpl;
 }
 
 /// @nodoc
-abstract class _$$LoadingImplCopyWith<$Res> {
-  factory _$$LoadingImplCopyWith(
-          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
-      __$$LoadingImplCopyWithImpl<$Res>;
+abstract class _$$RemindersLoadingImplCopyWith<$Res> {
+  factory _$$RemindersLoadingImplCopyWith(
+    _$RemindersLoadingImpl value,
+    $Res Function(_$RemindersLoadingImpl) then,
+  ) = __$$RemindersLoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$RemindersStateCopyWithImpl<$Res, _$LoadingImpl>
-    implements _$$LoadingImplCopyWith<$Res> {
-  __$$LoadingImplCopyWithImpl(
-      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
-      : super(_value, _then);
+class __$$RemindersLoadingImplCopyWithImpl<$Res>
+    extends _$RemindersStateCopyWithImpl<$Res, _$RemindersLoadingImpl>
+    implements _$$RemindersLoadingImplCopyWith<$Res> {
+  __$$RemindersLoadingImplCopyWithImpl(
+    _$RemindersLoadingImpl _value,
+    $Res Function(_$RemindersLoadingImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of RemindersState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$LoadingImpl implements _Loading {
-  const _$LoadingImpl();
+class _$RemindersLoadingImpl implements RemindersLoading {
+  const _$RemindersLoadingImpl();
 
   @override
   String toString() {
@@ -229,7 +238,7 @@ class _$LoadingImpl implements _Loading {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadingImpl);
+        (other.runtimeType == runtimeType && other is _$RemindersLoadingImpl);
   }
 
   @override
@@ -275,10 +284,10 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
+    required TResult Function(RemindersInitial value) initial,
+    required TResult Function(RemindersLoading value) loading,
+    required TResult Function(RemindersLoaded value) loaded,
+    required TResult Function(RemindersError value) error,
   }) {
     return loading(this);
   }
@@ -286,10 +295,10 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Error value)? error,
+    TResult? Function(RemindersInitial value)? initial,
+    TResult? Function(RemindersLoading value)? loading,
+    TResult? Function(RemindersLoaded value)? loaded,
+    TResult? Function(RemindersError value)? error,
   }) {
     return loading?.call(this);
   }
@@ -297,10 +306,10 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
+    TResult Function(RemindersInitial value)? initial,
+    TResult Function(RemindersLoading value)? loading,
+    TResult Function(RemindersLoaded value)? loaded,
+    TResult Function(RemindersError value)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -310,46 +319,50 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements RemindersState {
-  const factory _Loading() = _$LoadingImpl;
+abstract class RemindersLoading implements RemindersState {
+  const factory RemindersLoading() = _$RemindersLoadingImpl;
 }
 
 /// @nodoc
-abstract class _$$LoadedImplCopyWith<$Res> {
-  factory _$$LoadedImplCopyWith(
-          _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
-      __$$LoadedImplCopyWithImpl<$Res>;
+abstract class _$$RemindersLoadedImplCopyWith<$Res> {
+  factory _$$RemindersLoadedImplCopyWith(
+    _$RemindersLoadedImpl value,
+    $Res Function(_$RemindersLoadedImpl) then,
+  ) = __$$RemindersLoadedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<Reminder> reminders});
 }
 
 /// @nodoc
-class __$$LoadedImplCopyWithImpl<$Res>
-    extends _$RemindersStateCopyWithImpl<$Res, _$LoadedImpl>
-    implements _$$LoadedImplCopyWith<$Res> {
-  __$$LoadedImplCopyWithImpl(
-      _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
-      : super(_value, _then);
+class __$$RemindersLoadedImplCopyWithImpl<$Res>
+    extends _$RemindersStateCopyWithImpl<$Res, _$RemindersLoadedImpl>
+    implements _$$RemindersLoadedImplCopyWith<$Res> {
+  __$$RemindersLoadedImplCopyWithImpl(
+    _$RemindersLoadedImpl _value,
+    $Res Function(_$RemindersLoadedImpl) _then,
+  ) : super(_value, _then);
 
+  /// Create a copy of RemindersState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? reminders = null,
-  }) {
-    return _then(_$LoadedImpl(
-      reminders: null == reminders
-          ? _value._reminders
-          : reminders // ignore: cast_nullable_to_non_nullable
-              as List<Reminder>,
-    ));
+  $Res call({Object? reminders = null}) {
+    return _then(
+      _$RemindersLoadedImpl(
+        reminders: null == reminders
+            ? _value._reminders
+            : reminders // ignore: cast_nullable_to_non_nullable
+                  as List<Reminder>,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
-class _$LoadedImpl implements _Loaded {
-  const _$LoadedImpl({required final List<Reminder> reminders})
-      : _reminders = reminders;
+class _$RemindersLoadedImpl implements RemindersLoaded {
+  const _$RemindersLoadedImpl({required final List<Reminder> reminders})
+    : _reminders = reminders;
 
   final List<Reminder> _reminders;
   @override
@@ -368,20 +381,27 @@ class _$LoadedImpl implements _Loaded {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LoadedImpl &&
-            const DeepCollectionEquality()
-                .equals(other._reminders, _reminders));
+            other is _$RemindersLoadedImpl &&
+            const DeepCollectionEquality().equals(
+              other._reminders,
+              _reminders,
+            ));
   }
 
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_reminders));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RemindersState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
-      __$$LoadedImplCopyWithImpl<_$LoadedImpl>(this, _$identity);
+  _$$RemindersLoadedImplCopyWith<_$RemindersLoadedImpl> get copyWith =>
+      __$$RemindersLoadedImplCopyWithImpl<_$RemindersLoadedImpl>(
+        this,
+        _$identity,
+      );
 
   @override
   @optionalTypeArgs
@@ -423,10 +443,10 @@ class _$LoadedImpl implements _Loaded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
+    required TResult Function(RemindersInitial value) initial,
+    required TResult Function(RemindersLoading value) loading,
+    required TResult Function(RemindersLoaded value) loaded,
+    required TResult Function(RemindersError value) error,
   }) {
     return loaded(this);
   }
@@ -434,10 +454,10 @@ class _$LoadedImpl implements _Loaded {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Error value)? error,
+    TResult? Function(RemindersInitial value)? initial,
+    TResult? Function(RemindersLoading value)? loading,
+    TResult? Function(RemindersLoaded value)? loaded,
+    TResult? Function(RemindersError value)? error,
   }) {
     return loaded?.call(this);
   }
@@ -445,10 +465,10 @@ class _$LoadedImpl implements _Loaded {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
+    TResult Function(RemindersInitial value)? initial,
+    TResult Function(RemindersLoading value)? loading,
+    TResult Function(RemindersLoaded value)? loaded,
+    TResult Function(RemindersError value)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -458,51 +478,58 @@ class _$LoadedImpl implements _Loaded {
   }
 }
 
-abstract class _Loaded implements RemindersState {
-  const factory _Loaded({required final List<Reminder> reminders}) =
-      _$LoadedImpl;
+abstract class RemindersLoaded implements RemindersState {
+  const factory RemindersLoaded({required final List<Reminder> reminders}) =
+      _$RemindersLoadedImpl;
 
   List<Reminder> get reminders;
-  @JsonKey(ignore: true)
-  _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
+
+  /// Create a copy of RemindersState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$RemindersLoadedImplCopyWith<_$RemindersLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ErrorImplCopyWith<$Res> {
-  factory _$$ErrorImplCopyWith(
-          _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
-      __$$ErrorImplCopyWithImpl<$Res>;
+abstract class _$$RemindersErrorImplCopyWith<$Res> {
+  factory _$$RemindersErrorImplCopyWith(
+    _$RemindersErrorImpl value,
+    $Res Function(_$RemindersErrorImpl) then,
+  ) = __$$RemindersErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$RemindersStateCopyWithImpl<$Res, _$ErrorImpl>
-    implements _$$ErrorImplCopyWith<$Res> {
-  __$$ErrorImplCopyWithImpl(
-      _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
-      : super(_value, _then);
+class __$$RemindersErrorImplCopyWithImpl<$Res>
+    extends _$RemindersStateCopyWithImpl<$Res, _$RemindersErrorImpl>
+    implements _$$RemindersErrorImplCopyWith<$Res> {
+  __$$RemindersErrorImplCopyWithImpl(
+    _$RemindersErrorImpl _value,
+    $Res Function(_$RemindersErrorImpl) _then,
+  ) : super(_value, _then);
 
+  /// Create a copy of RemindersState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$ErrorImpl(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+  $Res call({Object? message = null}) {
+    return _then(
+      _$RemindersErrorImpl(
+        message: null == message
+            ? _value.message
+            : message // ignore: cast_nullable_to_non_nullable
+                  as String,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
-class _$ErrorImpl implements _Error {
-  const _$ErrorImpl({required this.message});
+class _$RemindersErrorImpl implements RemindersError {
+  const _$RemindersErrorImpl({required this.message});
 
   @override
   final String message;
@@ -516,18 +543,23 @@ class _$ErrorImpl implements _Error {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ErrorImpl &&
+            other is _$RemindersErrorImpl &&
             (identical(other.message, message) || other.message == message));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RemindersState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
-      __$$ErrorImplCopyWithImpl<_$ErrorImpl>(this, _$identity);
+  _$$RemindersErrorImplCopyWith<_$RemindersErrorImpl> get copyWith =>
+      __$$RemindersErrorImplCopyWithImpl<_$RemindersErrorImpl>(
+        this,
+        _$identity,
+      );
 
   @override
   @optionalTypeArgs
@@ -569,10 +601,10 @@ class _$ErrorImpl implements _Error {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
+    required TResult Function(RemindersInitial value) initial,
+    required TResult Function(RemindersLoading value) loading,
+    required TResult Function(RemindersLoaded value) loaded,
+    required TResult Function(RemindersError value) error,
   }) {
     return error(this);
   }
@@ -580,10 +612,10 @@ class _$ErrorImpl implements _Error {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Error value)? error,
+    TResult? Function(RemindersInitial value)? initial,
+    TResult? Function(RemindersLoading value)? loading,
+    TResult? Function(RemindersLoaded value)? loaded,
+    TResult? Function(RemindersError value)? error,
   }) {
     return error?.call(this);
   }
@@ -591,10 +623,10 @@ class _$ErrorImpl implements _Error {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
+    TResult Function(RemindersInitial value)? initial,
+    TResult Function(RemindersLoading value)? loading,
+    TResult Function(RemindersLoaded value)? loaded,
+    TResult Function(RemindersError value)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -604,11 +636,15 @@ class _$ErrorImpl implements _Error {
   }
 }
 
-abstract class _Error implements RemindersState {
-  const factory _Error({required final String message}) = _$ErrorImpl;
+abstract class RemindersError implements RemindersState {
+  const factory RemindersError({required final String message}) =
+      _$RemindersErrorImpl;
 
   String get message;
-  @JsonKey(ignore: true)
-  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+
+  /// Create a copy of RemindersState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$RemindersErrorImplCopyWith<_$RemindersErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

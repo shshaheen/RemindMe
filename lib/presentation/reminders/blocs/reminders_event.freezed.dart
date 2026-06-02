@@ -12,61 +12,69 @@ part of 'reminders_event.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$RemindersEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function(Reminder reminder) reminderAdded,
-    required TResult Function(int id) reminderDeleted,
-  }) =>
-      throw _privateConstructorUsedError;
+    required TResult Function() loadReminders,
+    required TResult Function(Reminder reminder) addReminder,
+    required TResult Function(Reminder reminder) updateReminder,
+    required TResult Function(String id) deleteReminder,
+    required TResult Function(String query) searchReminders,
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function(Reminder reminder)? reminderAdded,
-    TResult? Function(int id)? reminderDeleted,
-  }) =>
-      throw _privateConstructorUsedError;
+    TResult? Function()? loadReminders,
+    TResult? Function(Reminder reminder)? addReminder,
+    TResult? Function(Reminder reminder)? updateReminder,
+    TResult? Function(String id)? deleteReminder,
+    TResult? Function(String query)? searchReminders,
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function(Reminder reminder)? reminderAdded,
-    TResult Function(int id)? reminderDeleted,
+    TResult Function()? loadReminders,
+    TResult Function(Reminder reminder)? addReminder,
+    TResult Function(Reminder reminder)? updateReminder,
+    TResult Function(String id)? deleteReminder,
+    TResult Function(String query)? searchReminders,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(RemindersStarted value) started,
-    required TResult Function(ReminderAdded value) reminderAdded,
-    required TResult Function(ReminderDeleted value) reminderDeleted,
-  }) =>
-      throw _privateConstructorUsedError;
+    required TResult Function(LoadReminders value) loadReminders,
+    required TResult Function(AddReminder value) addReminder,
+    required TResult Function(UpdateReminder value) updateReminder,
+    required TResult Function(DeleteReminder value) deleteReminder,
+    required TResult Function(SearchReminders value) searchReminders,
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(RemindersStarted value)? started,
-    TResult? Function(ReminderAdded value)? reminderAdded,
-    TResult? Function(ReminderDeleted value)? reminderDeleted,
-  }) =>
-      throw _privateConstructorUsedError;
+    TResult? Function(LoadReminders value)? loadReminders,
+    TResult? Function(AddReminder value)? addReminder,
+    TResult? Function(UpdateReminder value)? updateReminder,
+    TResult? Function(DeleteReminder value)? deleteReminder,
+    TResult? Function(SearchReminders value)? searchReminders,
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(RemindersStarted value)? started,
-    TResult Function(ReminderAdded value)? reminderAdded,
-    TResult Function(ReminderDeleted value)? reminderDeleted,
+    TResult Function(LoadReminders value)? loadReminders,
+    TResult Function(AddReminder value)? addReminder,
+    TResult Function(UpdateReminder value)? updateReminder,
+    TResult Function(DeleteReminder value)? deleteReminder,
+    TResult Function(SearchReminders value)? searchReminders,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $RemindersEventCopyWith<$Res> {
   factory $RemindersEventCopyWith(
-          RemindersEvent value, $Res Function(RemindersEvent) then) =
-      _$RemindersEventCopyWithImpl<$Res, RemindersEvent>;
+    RemindersEvent value,
+    $Res Function(RemindersEvent) then,
+  ) = _$RemindersEventCopyWithImpl<$Res, RemindersEvent>;
 }
 
 /// @nodoc
@@ -78,38 +86,46 @@ class _$RemindersEventCopyWithImpl<$Res, $Val extends RemindersEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of RemindersEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$RemindersStartedImplCopyWith<$Res> {
-  factory _$$RemindersStartedImplCopyWith(_$RemindersStartedImpl value,
-          $Res Function(_$RemindersStartedImpl) then) =
-      __$$RemindersStartedImplCopyWithImpl<$Res>;
+abstract class _$$LoadRemindersImplCopyWith<$Res> {
+  factory _$$LoadRemindersImplCopyWith(
+    _$LoadRemindersImpl value,
+    $Res Function(_$LoadRemindersImpl) then,
+  ) = __$$LoadRemindersImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$RemindersStartedImplCopyWithImpl<$Res>
-    extends _$RemindersEventCopyWithImpl<$Res, _$RemindersStartedImpl>
-    implements _$$RemindersStartedImplCopyWith<$Res> {
-  __$$RemindersStartedImplCopyWithImpl(_$RemindersStartedImpl _value,
-      $Res Function(_$RemindersStartedImpl) _then)
-      : super(_value, _then);
+class __$$LoadRemindersImplCopyWithImpl<$Res>
+    extends _$RemindersEventCopyWithImpl<$Res, _$LoadRemindersImpl>
+    implements _$$LoadRemindersImplCopyWith<$Res> {
+  __$$LoadRemindersImplCopyWithImpl(
+    _$LoadRemindersImpl _value,
+    $Res Function(_$LoadRemindersImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of RemindersEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$RemindersStartedImpl implements RemindersStarted {
-  const _$RemindersStartedImpl();
+class _$LoadRemindersImpl implements LoadReminders {
+  const _$LoadRemindersImpl();
 
   @override
   String toString() {
-    return 'RemindersEvent.started()';
+    return 'RemindersEvent.loadReminders()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$RemindersStartedImpl);
+        (other.runtimeType == runtimeType && other is _$LoadRemindersImpl);
   }
 
   @override
@@ -118,33 +134,39 @@ class _$RemindersStartedImpl implements RemindersStarted {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function(Reminder reminder) reminderAdded,
-    required TResult Function(int id) reminderDeleted,
+    required TResult Function() loadReminders,
+    required TResult Function(Reminder reminder) addReminder,
+    required TResult Function(Reminder reminder) updateReminder,
+    required TResult Function(String id) deleteReminder,
+    required TResult Function(String query) searchReminders,
   }) {
-    return started();
+    return loadReminders();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function(Reminder reminder)? reminderAdded,
-    TResult? Function(int id)? reminderDeleted,
+    TResult? Function()? loadReminders,
+    TResult? Function(Reminder reminder)? addReminder,
+    TResult? Function(Reminder reminder)? updateReminder,
+    TResult? Function(String id)? deleteReminder,
+    TResult? Function(String query)? searchReminders,
   }) {
-    return started?.call();
+    return loadReminders?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function(Reminder reminder)? reminderAdded,
-    TResult Function(int id)? reminderDeleted,
+    TResult Function()? loadReminders,
+    TResult Function(Reminder reminder)? addReminder,
+    TResult Function(Reminder reminder)? updateReminder,
+    TResult Function(String id)? deleteReminder,
+    TResult Function(String query)? searchReminders,
     required TResult orElse(),
   }) {
-    if (started != null) {
-      return started();
+    if (loadReminders != null) {
+      return loadReminders();
     }
     return orElse();
   }
@@ -152,91 +174,101 @@ class _$RemindersStartedImpl implements RemindersStarted {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(RemindersStarted value) started,
-    required TResult Function(ReminderAdded value) reminderAdded,
-    required TResult Function(ReminderDeleted value) reminderDeleted,
+    required TResult Function(LoadReminders value) loadReminders,
+    required TResult Function(AddReminder value) addReminder,
+    required TResult Function(UpdateReminder value) updateReminder,
+    required TResult Function(DeleteReminder value) deleteReminder,
+    required TResult Function(SearchReminders value) searchReminders,
   }) {
-    return started(this);
+    return loadReminders(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(RemindersStarted value)? started,
-    TResult? Function(ReminderAdded value)? reminderAdded,
-    TResult? Function(ReminderDeleted value)? reminderDeleted,
+    TResult? Function(LoadReminders value)? loadReminders,
+    TResult? Function(AddReminder value)? addReminder,
+    TResult? Function(UpdateReminder value)? updateReminder,
+    TResult? Function(DeleteReminder value)? deleteReminder,
+    TResult? Function(SearchReminders value)? searchReminders,
   }) {
-    return started?.call(this);
+    return loadReminders?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(RemindersStarted value)? started,
-    TResult Function(ReminderAdded value)? reminderAdded,
-    TResult Function(ReminderDeleted value)? reminderDeleted,
+    TResult Function(LoadReminders value)? loadReminders,
+    TResult Function(AddReminder value)? addReminder,
+    TResult Function(UpdateReminder value)? updateReminder,
+    TResult Function(DeleteReminder value)? deleteReminder,
+    TResult Function(SearchReminders value)? searchReminders,
     required TResult orElse(),
   }) {
-    if (started != null) {
-      return started(this);
+    if (loadReminders != null) {
+      return loadReminders(this);
     }
     return orElse();
   }
 }
 
-abstract class RemindersStarted implements RemindersEvent {
-  const factory RemindersStarted() = _$RemindersStartedImpl;
+abstract class LoadReminders implements RemindersEvent {
+  const factory LoadReminders() = _$LoadRemindersImpl;
 }
 
 /// @nodoc
-abstract class _$$ReminderAddedImplCopyWith<$Res> {
-  factory _$$ReminderAddedImplCopyWith(
-          _$ReminderAddedImpl value, $Res Function(_$ReminderAddedImpl) then) =
-      __$$ReminderAddedImplCopyWithImpl<$Res>;
+abstract class _$$AddReminderImplCopyWith<$Res> {
+  factory _$$AddReminderImplCopyWith(
+    _$AddReminderImpl value,
+    $Res Function(_$AddReminderImpl) then,
+  ) = __$$AddReminderImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Reminder reminder});
 }
 
 /// @nodoc
-class __$$ReminderAddedImplCopyWithImpl<$Res>
-    extends _$RemindersEventCopyWithImpl<$Res, _$ReminderAddedImpl>
-    implements _$$ReminderAddedImplCopyWith<$Res> {
-  __$$ReminderAddedImplCopyWithImpl(
-      _$ReminderAddedImpl _value, $Res Function(_$ReminderAddedImpl) _then)
-      : super(_value, _then);
+class __$$AddReminderImplCopyWithImpl<$Res>
+    extends _$RemindersEventCopyWithImpl<$Res, _$AddReminderImpl>
+    implements _$$AddReminderImplCopyWith<$Res> {
+  __$$AddReminderImplCopyWithImpl(
+    _$AddReminderImpl _value,
+    $Res Function(_$AddReminderImpl) _then,
+  ) : super(_value, _then);
 
+  /// Create a copy of RemindersEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? reminder = null,
-  }) {
-    return _then(_$ReminderAddedImpl(
-      reminder: null == reminder
-          ? _value.reminder
-          : reminder // ignore: cast_nullable_to_non_nullable
-              as Reminder,
-    ));
+  $Res call({Object? reminder = null}) {
+    return _then(
+      _$AddReminderImpl(
+        reminder: null == reminder
+            ? _value.reminder
+            : reminder // ignore: cast_nullable_to_non_nullable
+                  as Reminder,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
-class _$ReminderAddedImpl implements ReminderAdded {
-  const _$ReminderAddedImpl({required this.reminder});
+class _$AddReminderImpl implements AddReminder {
+  const _$AddReminderImpl({required this.reminder});
 
   @override
   final Reminder reminder;
 
   @override
   String toString() {
-    return 'RemindersEvent.reminderAdded(reminder: $reminder)';
+    return 'RemindersEvent.addReminder(reminder: $reminder)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ReminderAddedImpl &&
+            other is _$AddReminderImpl &&
             (identical(other.reminder, reminder) ||
                 other.reminder == reminder));
   }
@@ -244,42 +276,50 @@ class _$ReminderAddedImpl implements ReminderAdded {
   @override
   int get hashCode => Object.hash(runtimeType, reminder);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RemindersEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ReminderAddedImplCopyWith<_$ReminderAddedImpl> get copyWith =>
-      __$$ReminderAddedImplCopyWithImpl<_$ReminderAddedImpl>(this, _$identity);
+  _$$AddReminderImplCopyWith<_$AddReminderImpl> get copyWith =>
+      __$$AddReminderImplCopyWithImpl<_$AddReminderImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function(Reminder reminder) reminderAdded,
-    required TResult Function(int id) reminderDeleted,
+    required TResult Function() loadReminders,
+    required TResult Function(Reminder reminder) addReminder,
+    required TResult Function(Reminder reminder) updateReminder,
+    required TResult Function(String id) deleteReminder,
+    required TResult Function(String query) searchReminders,
   }) {
-    return reminderAdded(reminder);
+    return addReminder(reminder);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function(Reminder reminder)? reminderAdded,
-    TResult? Function(int id)? reminderDeleted,
+    TResult? Function()? loadReminders,
+    TResult? Function(Reminder reminder)? addReminder,
+    TResult? Function(Reminder reminder)? updateReminder,
+    TResult? Function(String id)? deleteReminder,
+    TResult? Function(String query)? searchReminders,
   }) {
-    return reminderAdded?.call(reminder);
+    return addReminder?.call(reminder);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function(Reminder reminder)? reminderAdded,
-    TResult Function(int id)? reminderDeleted,
+    TResult Function()? loadReminders,
+    TResult Function(Reminder reminder)? addReminder,
+    TResult Function(Reminder reminder)? updateReminder,
+    TResult Function(String id)? deleteReminder,
+    TResult Function(String query)? searchReminders,
     required TResult orElse(),
   }) {
-    if (reminderAdded != null) {
-      return reminderAdded(reminder);
+    if (addReminder != null) {
+      return addReminder(reminder);
     }
     return orElse();
   }
@@ -287,140 +327,164 @@ class _$ReminderAddedImpl implements ReminderAdded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(RemindersStarted value) started,
-    required TResult Function(ReminderAdded value) reminderAdded,
-    required TResult Function(ReminderDeleted value) reminderDeleted,
+    required TResult Function(LoadReminders value) loadReminders,
+    required TResult Function(AddReminder value) addReminder,
+    required TResult Function(UpdateReminder value) updateReminder,
+    required TResult Function(DeleteReminder value) deleteReminder,
+    required TResult Function(SearchReminders value) searchReminders,
   }) {
-    return reminderAdded(this);
+    return addReminder(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(RemindersStarted value)? started,
-    TResult? Function(ReminderAdded value)? reminderAdded,
-    TResult? Function(ReminderDeleted value)? reminderDeleted,
+    TResult? Function(LoadReminders value)? loadReminders,
+    TResult? Function(AddReminder value)? addReminder,
+    TResult? Function(UpdateReminder value)? updateReminder,
+    TResult? Function(DeleteReminder value)? deleteReminder,
+    TResult? Function(SearchReminders value)? searchReminders,
   }) {
-    return reminderAdded?.call(this);
+    return addReminder?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(RemindersStarted value)? started,
-    TResult Function(ReminderAdded value)? reminderAdded,
-    TResult Function(ReminderDeleted value)? reminderDeleted,
+    TResult Function(LoadReminders value)? loadReminders,
+    TResult Function(AddReminder value)? addReminder,
+    TResult Function(UpdateReminder value)? updateReminder,
+    TResult Function(DeleteReminder value)? deleteReminder,
+    TResult Function(SearchReminders value)? searchReminders,
     required TResult orElse(),
   }) {
-    if (reminderAdded != null) {
-      return reminderAdded(this);
+    if (addReminder != null) {
+      return addReminder(this);
     }
     return orElse();
   }
 }
 
-abstract class ReminderAdded implements RemindersEvent {
-  const factory ReminderAdded({required final Reminder reminder}) =
-      _$ReminderAddedImpl;
+abstract class AddReminder implements RemindersEvent {
+  const factory AddReminder({required final Reminder reminder}) =
+      _$AddReminderImpl;
 
   Reminder get reminder;
-  @JsonKey(ignore: true)
-  _$$ReminderAddedImplCopyWith<_$ReminderAddedImpl> get copyWith =>
+
+  /// Create a copy of RemindersEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AddReminderImplCopyWith<_$AddReminderImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ReminderDeletedImplCopyWith<$Res> {
-  factory _$$ReminderDeletedImplCopyWith(_$ReminderDeletedImpl value,
-          $Res Function(_$ReminderDeletedImpl) then) =
-      __$$ReminderDeletedImplCopyWithImpl<$Res>;
+abstract class _$$UpdateReminderImplCopyWith<$Res> {
+  factory _$$UpdateReminderImplCopyWith(
+    _$UpdateReminderImpl value,
+    $Res Function(_$UpdateReminderImpl) then,
+  ) = __$$UpdateReminderImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({int id});
+  $Res call({Reminder reminder});
 }
 
 /// @nodoc
-class __$$ReminderDeletedImplCopyWithImpl<$Res>
-    extends _$RemindersEventCopyWithImpl<$Res, _$ReminderDeletedImpl>
-    implements _$$ReminderDeletedImplCopyWith<$Res> {
-  __$$ReminderDeletedImplCopyWithImpl(
-      _$ReminderDeletedImpl _value, $Res Function(_$ReminderDeletedImpl) _then)
-      : super(_value, _then);
+class __$$UpdateReminderImplCopyWithImpl<$Res>
+    extends _$RemindersEventCopyWithImpl<$Res, _$UpdateReminderImpl>
+    implements _$$UpdateReminderImplCopyWith<$Res> {
+  __$$UpdateReminderImplCopyWithImpl(
+    _$UpdateReminderImpl _value,
+    $Res Function(_$UpdateReminderImpl) _then,
+  ) : super(_value, _then);
 
+  /// Create a copy of RemindersEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? id = null,
-  }) {
-    return _then(_$ReminderDeletedImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+  $Res call({Object? reminder = null}) {
+    return _then(
+      _$UpdateReminderImpl(
+        reminder: null == reminder
+            ? _value.reminder
+            : reminder // ignore: cast_nullable_to_non_nullable
+                  as Reminder,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
-class _$ReminderDeletedImpl implements ReminderDeleted {
-  const _$ReminderDeletedImpl({required this.id});
+class _$UpdateReminderImpl implements UpdateReminder {
+  const _$UpdateReminderImpl({required this.reminder});
 
   @override
-  final int id;
+  final Reminder reminder;
 
   @override
   String toString() {
-    return 'RemindersEvent.reminderDeleted(id: $id)';
+    return 'RemindersEvent.updateReminder(reminder: $reminder)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ReminderDeletedImpl &&
-            (identical(other.id, id) || other.id == id));
+            other is _$UpdateReminderImpl &&
+            (identical(other.reminder, reminder) ||
+                other.reminder == reminder));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id);
+  int get hashCode => Object.hash(runtimeType, reminder);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RemindersEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ReminderDeletedImplCopyWith<_$ReminderDeletedImpl> get copyWith =>
-      __$$ReminderDeletedImplCopyWithImpl<_$ReminderDeletedImpl>(
-          this, _$identity);
+  _$$UpdateReminderImplCopyWith<_$UpdateReminderImpl> get copyWith =>
+      __$$UpdateReminderImplCopyWithImpl<_$UpdateReminderImpl>(
+        this,
+        _$identity,
+      );
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function(Reminder reminder) reminderAdded,
-    required TResult Function(int id) reminderDeleted,
+    required TResult Function() loadReminders,
+    required TResult Function(Reminder reminder) addReminder,
+    required TResult Function(Reminder reminder) updateReminder,
+    required TResult Function(String id) deleteReminder,
+    required TResult Function(String query) searchReminders,
   }) {
-    return reminderDeleted(id);
+    return updateReminder(reminder);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function(Reminder reminder)? reminderAdded,
-    TResult? Function(int id)? reminderDeleted,
+    TResult? Function()? loadReminders,
+    TResult? Function(Reminder reminder)? addReminder,
+    TResult? Function(Reminder reminder)? updateReminder,
+    TResult? Function(String id)? deleteReminder,
+    TResult? Function(String query)? searchReminders,
   }) {
-    return reminderDeleted?.call(id);
+    return updateReminder?.call(reminder);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function(Reminder reminder)? reminderAdded,
-    TResult Function(int id)? reminderDeleted,
+    TResult Function()? loadReminders,
+    TResult Function(Reminder reminder)? addReminder,
+    TResult Function(Reminder reminder)? updateReminder,
+    TResult Function(String id)? deleteReminder,
+    TResult Function(String query)? searchReminders,
     required TResult orElse(),
   }) {
-    if (reminderDeleted != null) {
-      return reminderDeleted(id);
+    if (updateReminder != null) {
+      return updateReminder(reminder);
     }
     return orElse();
   }
@@ -428,44 +492,381 @@ class _$ReminderDeletedImpl implements ReminderDeleted {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(RemindersStarted value) started,
-    required TResult Function(ReminderAdded value) reminderAdded,
-    required TResult Function(ReminderDeleted value) reminderDeleted,
+    required TResult Function(LoadReminders value) loadReminders,
+    required TResult Function(AddReminder value) addReminder,
+    required TResult Function(UpdateReminder value) updateReminder,
+    required TResult Function(DeleteReminder value) deleteReminder,
+    required TResult Function(SearchReminders value) searchReminders,
   }) {
-    return reminderDeleted(this);
+    return updateReminder(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(RemindersStarted value)? started,
-    TResult? Function(ReminderAdded value)? reminderAdded,
-    TResult? Function(ReminderDeleted value)? reminderDeleted,
+    TResult? Function(LoadReminders value)? loadReminders,
+    TResult? Function(AddReminder value)? addReminder,
+    TResult? Function(UpdateReminder value)? updateReminder,
+    TResult? Function(DeleteReminder value)? deleteReminder,
+    TResult? Function(SearchReminders value)? searchReminders,
   }) {
-    return reminderDeleted?.call(this);
+    return updateReminder?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(RemindersStarted value)? started,
-    TResult Function(ReminderAdded value)? reminderAdded,
-    TResult Function(ReminderDeleted value)? reminderDeleted,
+    TResult Function(LoadReminders value)? loadReminders,
+    TResult Function(AddReminder value)? addReminder,
+    TResult Function(UpdateReminder value)? updateReminder,
+    TResult Function(DeleteReminder value)? deleteReminder,
+    TResult Function(SearchReminders value)? searchReminders,
     required TResult orElse(),
   }) {
-    if (reminderDeleted != null) {
-      return reminderDeleted(this);
+    if (updateReminder != null) {
+      return updateReminder(this);
     }
     return orElse();
   }
 }
 
-abstract class ReminderDeleted implements RemindersEvent {
-  const factory ReminderDeleted({required final int id}) =
-      _$ReminderDeletedImpl;
+abstract class UpdateReminder implements RemindersEvent {
+  const factory UpdateReminder({required final Reminder reminder}) =
+      _$UpdateReminderImpl;
 
-  int get id;
-  @JsonKey(ignore: true)
-  _$$ReminderDeletedImplCopyWith<_$ReminderDeletedImpl> get copyWith =>
+  Reminder get reminder;
+
+  /// Create a copy of RemindersEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UpdateReminderImplCopyWith<_$UpdateReminderImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DeleteReminderImplCopyWith<$Res> {
+  factory _$$DeleteReminderImplCopyWith(
+    _$DeleteReminderImpl value,
+    $Res Function(_$DeleteReminderImpl) then,
+  ) = __$$DeleteReminderImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String id});
+}
+
+/// @nodoc
+class __$$DeleteReminderImplCopyWithImpl<$Res>
+    extends _$RemindersEventCopyWithImpl<$Res, _$DeleteReminderImpl>
+    implements _$$DeleteReminderImplCopyWith<$Res> {
+  __$$DeleteReminderImplCopyWithImpl(
+    _$DeleteReminderImpl _value,
+    $Res Function(_$DeleteReminderImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of RemindersEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? id = null}) {
+    return _then(
+      _$DeleteReminderImpl(
+        id: null == id
+            ? _value.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as String,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$DeleteReminderImpl implements DeleteReminder {
+  const _$DeleteReminderImpl({required this.id});
+
+  @override
+  final String id;
+
+  @override
+  String toString() {
+    return 'RemindersEvent.deleteReminder(id: $id)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DeleteReminderImpl &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id);
+
+  /// Create a copy of RemindersEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DeleteReminderImplCopyWith<_$DeleteReminderImpl> get copyWith =>
+      __$$DeleteReminderImplCopyWithImpl<_$DeleteReminderImpl>(
+        this,
+        _$identity,
+      );
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadReminders,
+    required TResult Function(Reminder reminder) addReminder,
+    required TResult Function(Reminder reminder) updateReminder,
+    required TResult Function(String id) deleteReminder,
+    required TResult Function(String query) searchReminders,
+  }) {
+    return deleteReminder(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loadReminders,
+    TResult? Function(Reminder reminder)? addReminder,
+    TResult? Function(Reminder reminder)? updateReminder,
+    TResult? Function(String id)? deleteReminder,
+    TResult? Function(String query)? searchReminders,
+  }) {
+    return deleteReminder?.call(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadReminders,
+    TResult Function(Reminder reminder)? addReminder,
+    TResult Function(Reminder reminder)? updateReminder,
+    TResult Function(String id)? deleteReminder,
+    TResult Function(String query)? searchReminders,
+    required TResult orElse(),
+  }) {
+    if (deleteReminder != null) {
+      return deleteReminder(id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadReminders value) loadReminders,
+    required TResult Function(AddReminder value) addReminder,
+    required TResult Function(UpdateReminder value) updateReminder,
+    required TResult Function(DeleteReminder value) deleteReminder,
+    required TResult Function(SearchReminders value) searchReminders,
+  }) {
+    return deleteReminder(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadReminders value)? loadReminders,
+    TResult? Function(AddReminder value)? addReminder,
+    TResult? Function(UpdateReminder value)? updateReminder,
+    TResult? Function(DeleteReminder value)? deleteReminder,
+    TResult? Function(SearchReminders value)? searchReminders,
+  }) {
+    return deleteReminder?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadReminders value)? loadReminders,
+    TResult Function(AddReminder value)? addReminder,
+    TResult Function(UpdateReminder value)? updateReminder,
+    TResult Function(DeleteReminder value)? deleteReminder,
+    TResult Function(SearchReminders value)? searchReminders,
+    required TResult orElse(),
+  }) {
+    if (deleteReminder != null) {
+      return deleteReminder(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DeleteReminder implements RemindersEvent {
+  const factory DeleteReminder({required final String id}) =
+      _$DeleteReminderImpl;
+
+  String get id;
+
+  /// Create a copy of RemindersEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DeleteReminderImplCopyWith<_$DeleteReminderImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SearchRemindersImplCopyWith<$Res> {
+  factory _$$SearchRemindersImplCopyWith(
+    _$SearchRemindersImpl value,
+    $Res Function(_$SearchRemindersImpl) then,
+  ) = __$$SearchRemindersImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String query});
+}
+
+/// @nodoc
+class __$$SearchRemindersImplCopyWithImpl<$Res>
+    extends _$RemindersEventCopyWithImpl<$Res, _$SearchRemindersImpl>
+    implements _$$SearchRemindersImplCopyWith<$Res> {
+  __$$SearchRemindersImplCopyWithImpl(
+    _$SearchRemindersImpl _value,
+    $Res Function(_$SearchRemindersImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of RemindersEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? query = null}) {
+    return _then(
+      _$SearchRemindersImpl(
+        query: null == query
+            ? _value.query
+            : query // ignore: cast_nullable_to_non_nullable
+                  as String,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$SearchRemindersImpl implements SearchReminders {
+  const _$SearchRemindersImpl({required this.query});
+
+  @override
+  final String query;
+
+  @override
+  String toString() {
+    return 'RemindersEvent.searchReminders(query: $query)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SearchRemindersImpl &&
+            (identical(other.query, query) || other.query == query));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, query);
+
+  /// Create a copy of RemindersEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SearchRemindersImplCopyWith<_$SearchRemindersImpl> get copyWith =>
+      __$$SearchRemindersImplCopyWithImpl<_$SearchRemindersImpl>(
+        this,
+        _$identity,
+      );
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadReminders,
+    required TResult Function(Reminder reminder) addReminder,
+    required TResult Function(Reminder reminder) updateReminder,
+    required TResult Function(String id) deleteReminder,
+    required TResult Function(String query) searchReminders,
+  }) {
+    return searchReminders(query);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loadReminders,
+    TResult? Function(Reminder reminder)? addReminder,
+    TResult? Function(Reminder reminder)? updateReminder,
+    TResult? Function(String id)? deleteReminder,
+    TResult? Function(String query)? searchReminders,
+  }) {
+    return searchReminders?.call(query);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadReminders,
+    TResult Function(Reminder reminder)? addReminder,
+    TResult Function(Reminder reminder)? updateReminder,
+    TResult Function(String id)? deleteReminder,
+    TResult Function(String query)? searchReminders,
+    required TResult orElse(),
+  }) {
+    if (searchReminders != null) {
+      return searchReminders(query);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadReminders value) loadReminders,
+    required TResult Function(AddReminder value) addReminder,
+    required TResult Function(UpdateReminder value) updateReminder,
+    required TResult Function(DeleteReminder value) deleteReminder,
+    required TResult Function(SearchReminders value) searchReminders,
+  }) {
+    return searchReminders(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadReminders value)? loadReminders,
+    TResult? Function(AddReminder value)? addReminder,
+    TResult? Function(UpdateReminder value)? updateReminder,
+    TResult? Function(DeleteReminder value)? deleteReminder,
+    TResult? Function(SearchReminders value)? searchReminders,
+  }) {
+    return searchReminders?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadReminders value)? loadReminders,
+    TResult Function(AddReminder value)? addReminder,
+    TResult Function(UpdateReminder value)? updateReminder,
+    TResult Function(DeleteReminder value)? deleteReminder,
+    TResult Function(SearchReminders value)? searchReminders,
+    required TResult orElse(),
+  }) {
+    if (searchReminders != null) {
+      return searchReminders(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SearchReminders implements RemindersEvent {
+  const factory SearchReminders({required final String query}) =
+      _$SearchRemindersImpl;
+
+  String get query;
+
+  /// Create a copy of RemindersEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SearchRemindersImplCopyWith<_$SearchRemindersImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

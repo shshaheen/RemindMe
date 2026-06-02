@@ -1,4 +1,5 @@
 import '../models/reminder_model.dart';
+import '../../core/services/hive_service.dart';
 
 abstract class RemindersLocalDataSource {
   /// Retrieves all stored reminder models from local cache
@@ -7,8 +8,8 @@ abstract class RemindersLocalDataSource {
   /// Writes/updates a reminder model inside local cache
   Future<void> cacheReminder(ReminderModel reminder);
 
-  /// Deletes a reminder model from local cache using id
-  Future<void> deleteCachedReminder(int id);
+  /// Deletes a reminder model from local cache using a String id
+  Future<void> deleteCachedReminder(String id);
 }
 
 class RemindersLocalDataSourceImpl implements RemindersLocalDataSource {
@@ -16,17 +17,19 @@ class RemindersLocalDataSourceImpl implements RemindersLocalDataSource {
 
   @override
   Future<List<ReminderModel>> getCachedReminders() async {
-    // Logic to fetch from Hive remindersBox
-    return const [];
+    final box = HiveService.remindersBox;
+    return box.values.cast<ReminderModel>().toList();
   }
 
   @override
   Future<void> cacheReminder(ReminderModel reminder) async {
-    // Logic to write/put inside Hive remindersBox
+    final box = HiveService.remindersBox;
+    await box.put(reminder.id, reminder);
   }
 
   @override
-  Future<void> deleteCachedReminder(int id) async {
-    // Logic to delete key from Hive remindersBox
+  Future<void> deleteCachedReminder(String id) async {
+    final box = HiveService.remindersBox;
+    await box.delete(id);
   }
 }

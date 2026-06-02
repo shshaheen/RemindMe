@@ -1,54 +1,102 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/repositories/reminders_repository.dart';
-import '../../../domain/usecases/create_reminder_use_case.dart';
 import 'reminders_event.dart';
 import 'reminders_state.dart';
 
 class RemindersBloc extends Bloc<RemindersEvent, RemindersState> {
   final RemindersRepository repository;
-  final CreateReminderUseCase createReminderUseCase;
 
-  RemindersBloc({
-    required this.repository,
-    required this.createReminderUseCase,
-  }) : super(const RemindersState.initial()) {
+  RemindersBloc({required this.repository})
+    : super(const RemindersState.initial()) {
     on<RemindersEvent>((event, emit) async {
       await event.map(
-        started: (e) async => _onStarted(e, emit),
-        reminderAdded: (e) async => _onReminderAdded(e, emit),
-        reminderDeleted: (e) async => _onReminderDeleted(e, emit),
+        loadReminders: (e) async => _onLoadReminders(e, emit),
+        addReminder: (e) async => _onAddReminder(e, emit),
+        updateReminder: (e) async => _onUpdateReminder(e, emit),
+        deleteReminder: (e) async => _onDeleteReminder(e, emit),
+        searchReminders: (e) async => _onSearchReminders(e, emit),
       );
     });
   }
 
-  Future<void> _onStarted(RemindersStarted event, Emitter<RemindersState> emit) async {
+  Future<void> _onLoadReminders(
+    LoadReminders event,
+    Emitter<RemindersState> emit,
+  ) async {
     emit(const RemindersState.loading());
-    final result = await repository.getReminders();
-    result.fold(
-      (failure) => emit(RemindersState.error(message: failure.message)),
-      (reminders) => emit(RemindersState.loaded(reminders: reminders)),
-    );
+    try {
+      final reminders = await repository.getAllReminders();
+      emit(RemindersState.loaded(reminders: reminders));
+    } catch (e) {
+      emit(
+        RemindersState.error(
+          message: 'Failed to load reminders: ${e.toString()}',
+        ),
+      );
+    }
   }
- 
-  Future<void> _onReminderAdded(ReminderAdded event, Emitter<RemindersState> emit) async {
+
+  Future<void> _onAddReminder(
+    AddReminder event,
+    Emitter<RemindersState> emit,
+  ) async {
     emit(const RemindersState.loading());
-    final result = await createReminderUseCase(
-      CreateReminderParams(reminder: event.reminder),
-    );
- 
-    await result.fold(
-      (failure) async => emit(RemindersState.error(message: failure.message)),
-      (success) async => add(const RemindersEvent.started()),
-    );
+    try {
+      await repository.addReminder(event.reminder);
+      add(const RemindersEvent.loadReminders());
+    } catch (e) {
+      emit(
+        RemindersState.error(
+          message: 'Failed to add reminder: ${e.toString()}',
+        ),
+      );
+    }
   }
- 
-  Future<void> _onReminderDeleted(ReminderDeleted event, Emitter<RemindersState> emit) async {
+
+  Future<void> _onUpdateReminder(
+    UpdateReminder event,
+    Emitter<RemindersState> emit,
+  ) async {
     emit(const RemindersState.loading());
-    final result = await repository.deleteReminder(event.id);
- 
-    await result.fold(
-      (failure) async => emit(RemindersState.error(message: failure.message)),
-      (success) async => add(const RemindersEvent.started()),
-    );
+    try {
+      await repository.updateReminder(event.reminder);
+      add(const RemindersEvent.loadReminders());
+    } catch (e) {
+      emit(
+        RemindersState.error(
+          message: 'Failed to update reminder: ${e.toString()}',
+        ),
+      );
+    }
+  }
+
+  Future<void> _onDeleteReminder(
+    DeleteReminder event,
+    Emitter<RemindersState> emit,
+  ) async {
+    emit(const RemindersState.loading());
+    try {
+      await repository.deleteReminder(event.id);
+      add(const RemindersEvent.loadReminders());
+    } catch (e) {
+      emit(
+        RemindersState.error(
+          message: 'Failed to delete reminder: ${e.toString()}',
+        ),
+      );
+    }
+  }
+
+  Future<void> _onSearchReminders(
+    SearchReminders event,
+    Emitter<RemindersState> emit,
+  ) async {
+    emit(const RemindersState.loading());
+    try {
+      final reminders = await repository.searchReminders(event.query);
+      emit(RemindersState.loaded(reminders: reminders));
+    } catch (e) {
+      emit(RemindersState.error(message: 'Search failed: ${e.toString()}'));
+    }
   }
 }

@@ -11,7 +11,8 @@ class NotificationService {
 
   static const String channelId = 'reminder_channel';
   static const String channelName = 'Reminders';
-  static const String channelDesc = 'Notification channel for scheduled reminder alarms';
+  static const String channelDesc =
+      'Notification channel for scheduled reminder alarms';
 
   /// Initializes the local notifications plugin and timezone databases.
   Future<void> init() async {
@@ -24,15 +25,17 @@ class NotificationService {
 
     const DarwinInitializationSettings initializationSettingsDarwin =
         DarwinInitializationSettings(
-      requestAlertPermission: false, // Handled explicitly through permission_handler
-      requestBadgePermission: false,
-      requestSoundPermission: false,
-    );
+          requestAlertPermission:
+              false, // Handled explicitly through permission_handler
+          requestBadgePermission: false,
+          requestSoundPermission: false,
+        );
 
-    const InitializationSettings initializationSettings = InitializationSettings(
-      android: initializationSettingsAndroid,
-      iOS: initializationSettingsDarwin,
-    );
+    const InitializationSettings initializationSettings =
+        InitializationSettings(
+          android: initializationSettingsAndroid,
+          iOS: initializationSettingsDarwin,
+        );
 
     await _localNotificationsPlugin.initialize(
       initializationSettings,
@@ -55,7 +58,9 @@ class NotificationService {
     );
 
     await _localNotificationsPlugin
-        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >()
         ?.createNotificationChannel(channel);
   }
 
@@ -90,14 +95,15 @@ class NotificationService {
       throw ArgumentError('Scheduled date must be in the future.');
     }
 
-    const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
-      channelId,
-      channelName,
-      channelDescription: channelDesc,
-      importance: Importance.max,
-      priority: Priority.high,
-      playSound: true,
-    );
+    const AndroidNotificationDetails androidDetails =
+        AndroidNotificationDetails(
+          channelId,
+          channelName,
+          channelDescription: channelDesc,
+          importance: Importance.max,
+          priority: Priority.high,
+          playSound: true,
+        );
 
     const DarwinNotificationDetails iosDetails = DarwinNotificationDetails(
       presentAlert: true,

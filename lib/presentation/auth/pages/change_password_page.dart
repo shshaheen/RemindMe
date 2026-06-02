@@ -17,7 +17,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   final _oldPasswordController = TextEditingController();
   final _newPasswordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-  
+
   bool _obscureOld = true;
   bool _obscureNew = true;
   bool _obscureConfirm = true;
@@ -33,11 +33,11 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   void _submit() {
     if (_formKey.currentState?.validate() ?? false) {
       context.read<AuthBloc>().add(
-            ChangePasswordRequested(
-              oldPassword: _oldPasswordController.text,
-              newPassword: _newPasswordController.text,
-            ),
-          );
+        ChangePasswordRequested(
+          oldPassword: _oldPasswordController.text,
+          newPassword: _newPasswordController.text,
+        ),
+      );
     }
   }
 
@@ -70,9 +70,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         final isLoading = state is AuthLoading;
 
         return Scaffold(
-          appBar: AppBar(
-            title: const Text('Change Passcode'),
-          ),
+          appBar: AppBar(title: const Text('Change Passcode')),
           body: Center(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(24),
@@ -85,16 +83,16 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                       'Update Master Passcode',
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 8),
                     Text(
                       'Provide your current passcode to securely save a new one.',
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Theme.of(context).colorScheme.onSurfaceVariant,
-                          ),
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
                     ),
                     const SizedBox(height: 28),
                     // Form Fields Card
@@ -116,7 +114,9 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                                 prefixIcon: const Icon(Icons.lock_outline),
                                 suffixIcon: IconButton(
                                   icon: Icon(
-                                    _obscureOld ? Icons.visibility_off : Icons.visibility,
+                                    _obscureOld
+                                        ? Icons.visibility_off
+                                        : Icons.visibility,
                                   ),
                                   onPressed: () {
                                     setState(() {
@@ -144,7 +144,9 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                                 prefixIcon: const Icon(Icons.lock),
                                 suffixIcon: IconButton(
                                   icon: Icon(
-                                    _obscureNew ? Icons.visibility_off : Icons.visibility,
+                                    _obscureNew
+                                        ? Icons.visibility_off
+                                        : Icons.visibility,
                                   ),
                                   onPressed: () {
                                     setState(() {
@@ -172,10 +174,14 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                               style: const TextStyle(letterSpacing: 2),
                               decoration: InputDecoration(
                                 labelText: 'Confirm New Passcode',
-                                prefixIcon: const Icon(Icons.check_circle_outline),
+                                prefixIcon: const Icon(
+                                  Icons.check_circle_outline,
+                                ),
                                 suffixIcon: IconButton(
                                   icon: Icon(
-                                    _obscureConfirm ? Icons.visibility_off : Icons.visibility,
+                                    _obscureConfirm
+                                        ? Icons.visibility_off
+                                        : Icons.visibility,
                                   ),
                                   onPressed: () {
                                     setState(() {
@@ -201,7 +207,9 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                       onPressed: isLoading ? null : _submit,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Theme.of(context).colorScheme.primary,
-                        foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                        foregroundColor: Theme.of(
+                          context,
+                        ).colorScheme.onPrimary,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                       ),
                       child: isLoading

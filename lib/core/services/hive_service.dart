@@ -1,4 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import '../../data/models/reminder_model.dart';
 
 class HiveService {
   HiveService._();
@@ -10,9 +11,9 @@ class HiveService {
   /// Initializes Hive and Hive Flutter support
   static Future<void> init() async {
     await Hive.initFlutter();
-    
+
     // Register Adapters here
-    // e.g. Hive.registerAdapter(ReminderModelAdapter());
+    Hive.registerAdapter(ReminderModelAdapter());
 
     // Pre-open boxes required for initial use
     await openBoxes();

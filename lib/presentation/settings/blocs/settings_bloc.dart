@@ -6,7 +6,8 @@ import 'settings_state.dart';
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   final SettingsRepository repository;
 
-  SettingsBloc({required this.repository}) : super(const SettingsState.initial()) {
+  SettingsBloc({required this.repository})
+    : super(const SettingsState.initial()) {
     on<SettingsEvent>((event, emit) async {
       await event.map(
         started: (e) async => _onStarted(e, emit),
@@ -15,7 +16,10 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     });
   }
 
-  Future<void> _onStarted(SettingsStarted event, Emitter<SettingsState> emit) async {
+  Future<void> _onStarted(
+    SettingsStarted event,
+    Emitter<SettingsState> emit,
+  ) async {
     emit(const SettingsState.loading());
     final result = await repository.getSettings();
     result.fold(
@@ -23,11 +27,14 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       (settings) => emit(SettingsState.loaded(settings: settings)),
     );
   }
- 
-  Future<void> _onSettingsChanged(SettingsChanged event, Emitter<SettingsState> emit) async {
+
+  Future<void> _onSettingsChanged(
+    SettingsChanged event,
+    Emitter<SettingsState> emit,
+  ) async {
     emit(const SettingsState.loading());
     final result = await repository.updateSettings(event.settings);
- 
+
     await result.fold(
       (failure) async => emit(SettingsState.error(message: failure.message)),
       (success) async => add(const SettingsEvent.started()),

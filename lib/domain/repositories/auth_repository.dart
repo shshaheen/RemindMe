@@ -12,7 +12,10 @@ abstract class AuthRepository {
   Future<Either<Failure, bool>> validatePassword(String password);
 
   /// Changes the master password, validating the current old password first.
-  Future<Either<Failure, void>> changePassword(String oldPassword, String newPassword);
+  Future<Either<Failure, void>> changePassword(
+    String oldPassword,
+    String newPassword,
+  );
 
   /// Clears the authenticated session state / locks the app.
   Future<Either<Failure, void>> logout();

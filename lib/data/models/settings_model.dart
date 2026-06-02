@@ -1,9 +1,5 @@
-import 'package:json_annotation/json_annotation.dart';
 import '../../domain/entities/app_settings.dart';
 
-part 'settings_model.g.dart';
-
-@JsonSerializable()
 class SettingsModel {
   final bool isDarkMode;
   final bool isSoundEnabled;
@@ -15,10 +11,21 @@ class SettingsModel {
     required this.isVibrationEnabled,
   });
 
-  factory SettingsModel.fromJson(Map<String, dynamic> json) =>
-      _$SettingsModelFromJson(json);
+  factory SettingsModel.fromJson(Map<String, dynamic> json) {
+    return SettingsModel(
+      isDarkMode: json['isDarkMode'] as bool,
+      isSoundEnabled: json['isSoundEnabled'] as bool,
+      isVibrationEnabled: json['isVibrationEnabled'] as bool,
+    );
+  }
 
-  Map<String, dynamic> toJson() => _$SettingsModelToJson(this);
+  Map<String, dynamic> toJson() {
+    return {
+      'isDarkMode': isDarkMode,
+      'isSoundEnabled': isSoundEnabled,
+      'isVibrationEnabled': isVibrationEnabled,
+    };
+  }
 
   /// Converts this data model to its pure domain Entity counterpart
   AppSettings toDomain() {

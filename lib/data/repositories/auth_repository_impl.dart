@@ -14,7 +14,11 @@ class AuthRepositoryImpl implements AuthRepository {
       final exists = await localDataSource.hasPassword();
       return Right(exists);
     } catch (e) {
-      return Left(SecureStorageFailure('Failed to check passcode status: ${e.toString()}'));
+      return Left(
+        SecureStorageFailure(
+          'Failed to check passcode status: ${e.toString()}',
+        ),
+      );
     }
   }
 
@@ -24,7 +28,11 @@ class AuthRepositoryImpl implements AuthRepository {
       await localDataSource.savePasswordHash(password);
       return const Right(null);
     } catch (e) {
-      return Left(SecureStorageFailure('Failed to securely save passcode: ${e.toString()}'));
+      return Left(
+        SecureStorageFailure(
+          'Failed to securely save passcode: ${e.toString()}',
+        ),
+      );
     }
   }
 
@@ -35,12 +43,17 @@ class AuthRepositoryImpl implements AuthRepository {
       final isValid = storedHash == password;
       return Right(isValid);
     } catch (e) {
-      return Left(SecureStorageFailure('Failed to validate passcode: ${e.toString()}'));
+      return Left(
+        SecureStorageFailure('Failed to validate passcode: ${e.toString()}'),
+      );
     }
   }
 
   @override
-  Future<Either<Failure, void>> changePassword(String oldPassword, String newPassword) async {
+  Future<Either<Failure, void>> changePassword(
+    String oldPassword,
+    String newPassword,
+  ) async {
     try {
       final storedHash = await localDataSource.getPasswordHash();
       if (storedHash != oldPassword) {
@@ -49,7 +62,11 @@ class AuthRepositoryImpl implements AuthRepository {
       await localDataSource.savePasswordHash(newPassword);
       return const Right(null);
     } catch (e) {
-      return Left(SecureStorageFailure('Failed to update master passcode: ${e.toString()}'));
+      return Left(
+        SecureStorageFailure(
+          'Failed to update master passcode: ${e.toString()}',
+        ),
+      );
     }
   }
 
