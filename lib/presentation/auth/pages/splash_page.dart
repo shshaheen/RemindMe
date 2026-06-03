@@ -30,64 +30,57 @@ class _SplashPageState extends State<SplashPage> {
         );
       },
       child: Scaffold(
-        body: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Theme.of(context).colorScheme.primary.withAlpha(20),
-                Theme.of(context).colorScheme.surface,
-              ],
+        body: SizedBox.expand(
+          child: Container(
+            width: double.infinity,
+            height: double.infinity,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Theme.of(context).colorScheme.primary.withAlpha(20),
+                  Theme.of(context).colorScheme.surface,
+                ],
+              ),
             ),
-          ),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Premium Brand Icon graphic
-                Container(
-                  padding: const EdgeInsets.all(24),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primaryContainer,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Theme.of(
-                          context,
-                        ).colorScheme.primary.withAlpha(51),
-                        blurRadius: 20,
-                        offset: const Offset(0, 10),
-                      ),
-                    ],
+            child: SafeArea(
+              child: Column(
+                children: [
+                  const Spacer(),
+
+                  Image.asset(
+                    'assets/images/reminderMe.png',
+                    height: 260,
+                    width: 260,
                   ),
-                  child: Icon(
-                    Icons.notifications_active,
-                    size: 64,
-                    color: Theme.of(context).colorScheme.primary,
+
+                  const SizedBox(height: 32),
+
+                  Text(
+                    'ReminderMe',
+                    style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.2,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 24),
-                // App Branding Text
-                Text(
-                  'ReminderMe',
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1.2,
-                    color: Theme.of(context).colorScheme.onSurface,
+
+                  const SizedBox(height: 8),
+
+                  Text(
+                    'Never miss what matters',
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Your premium personal dashboard',
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
-                ),
-                const SizedBox(height: 48),
-                // Subtle loader indicator
-                const CircularProgressIndicator(),
-              ],
+
+                  const SizedBox(height: 40),
+
+                  const CircularProgressIndicator(),
+
+                  const Spacer(),
+                ],
+              ),
             ),
           ),
         ),

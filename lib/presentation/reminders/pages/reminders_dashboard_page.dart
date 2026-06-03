@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reminder_app/core/router/app_router.dart';
-import '../../auth/blocs/auth_bloc.dart';
-import '../../auth/blocs/auth_event.dart';
 import '../blocs/reminders_bloc.dart';
 import '../blocs/reminders_event.dart';
 import '../blocs/reminders_state.dart';
@@ -113,8 +111,13 @@ class _RemindersDashboardPageState extends State<RemindersDashboardPage> {
     return '$hour:$minute $period';
   }
 
+  final dayImage = const AssetImage('assets/images/day_sky.png');
+  final nightImage = const AssetImage('assets/images/night_sky.png');
+
   @override
   Widget build(BuildContext context) {
+    // Detect theme mode
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -231,22 +234,18 @@ class _RemindersDashboardPageState extends State<RemindersDashboardPage> {
                 margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Theme.of(context).colorScheme.primary,
-                      Theme.of(context).colorScheme.secondary,
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
+                  image: DecorationImage(
+                    image: isDarkMode ? nightImage : dayImage,
+                    fit: BoxFit.cover,
                   ),
                   borderRadius: BorderRadius.circular(24),
                   boxShadow: [
                     BoxShadow(
                       color: Theme.of(
                         context,
-                      ).colorScheme.primary.withOpacity(0.25),
-                      blurRadius: 15,
-                      offset: const Offset(0, 8),
+                      ).colorScheme.primary.withOpacity(0.15),
+                      blurRadius: 10,
+                      offset: const Offset(0, 2),
                     ),
                   ],
                 ),
@@ -440,7 +439,7 @@ class _RemindersDashboardPageState extends State<RemindersDashboardPage> {
                                         onSelected: (value) {
                                           if (value == 'edit') {
                                             context.push(
-                                              '/edit-reminder',
+                                              AppRouter.editReminderScreen,
                                               extra: reminder,
                                             );
                                           } else if (value == 'delete') {

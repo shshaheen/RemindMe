@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 class AppTheme {
   AppTheme._();
 
-  // Curated Sleek Color Palette - Light
-  static const _primaryColorLight = Color(0xFF4F46E5); // Vibrant Indigo
-  static const _secondaryColorLight = Color(0xFF0EA5E9); // Ocean Sky Blue
-  static const _accentColorLight = Color(0xFFEC4899); // Vibrant Pink
-  static const _surfaceColorLight = Color(0xFFF8FAFC); // Very Soft Slate Gray
+  // Premium Productivity Palette - Light
+  static const _primaryColorLight = Color(0xFF2563EB); // Professional Blue
+  static const _secondaryColorLight = Color(0xFF3B82F6); // Bright Blue
+  static const _accentColorLight = Color(0xFF64748B); // Elegant Slate
+  static const _surfaceColorLight = Color(0xFFF8FAFC); // Soft White
   static const _cardColorLight = Color(0xFFFFFFFF); // Pure White
 
-  // Curated Sleek Color Palette - Dark
-  static const _primaryColorDark = Color(0xFF818CF8); // Modern Neon Indigo
-  static const _secondaryColorDark = Color(0xFF38BDF8); // Electric Sky Blue
-  static const _accentColorDark = Color(0xFFF472B6); // Modern Pink
-  static const _surfaceColorDark = Color(0xFF090D16); // Deep Space Midnight
-  static const _cardColorDark = Color(0xFF151C2C); // Deep Charcoal Blue
+  // Premium Productivity Palette - Dark
+  static const _primaryColorDark = Color(0xFF60A5FA); // Soft Blue
+  static const _secondaryColorDark = Color(0xFF93C5FD); // Light Blue
+  static const _accentColorDark = Color(0xFFCBD5E1); // Soft Slate
+  static const _surfaceColorDark = Color(0xFF020617); // Rich Black
+  static const _cardColorDark = Color(0xFF111827); // Deep Slate
 
   // Modern Typography Style
   static const String _fontFamily = 'Roboto';
