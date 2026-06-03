@@ -164,7 +164,7 @@ class _RemindersDashboardPageState extends State<RemindersDashboardPage> {
           IconButton(
             icon: const Icon(Icons.settings),
             tooltip: 'settings',
-            onPressed: () => context.push('/settings'),
+            onPressed: () => context.push(AppRouter.changePasswordScreen),
           ),
         ],
       ),
