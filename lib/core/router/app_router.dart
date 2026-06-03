@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:reminder_app/domain/entities/reminder.dart';
 import '../../presentation/auth/pages/splash_page.dart';
 import '../../presentation/auth/pages/create_password_page.dart';
 import '../../presentation/auth/pages/login_page.dart';
@@ -15,6 +16,7 @@ class AppRouter {
   static const String changePasswordScreen = '/change-password';
   static const String remindersScreen = '/reminders';
   static const String addReminderScreen = '/add-reminder';
+  static const String editReminderScreen = '/edit-reminder';
 
   static final GoRouter router = GoRouter(
     initialLocation: splashScreen,
@@ -48,6 +50,14 @@ class AppRouter {
         path: addReminderScreen,
         name: 'add-reminder',
         builder: (context, state) => const AddReminderPage(),
+      ),
+      GoRoute(
+        path: editReminderScreen,
+        name: 'edit-reminder',
+        builder: (context, state) {
+          final reminder = state.extra as Reminder;
+          return AddReminderPage(reminder: reminder);
+        },
       ),
     ],
   );

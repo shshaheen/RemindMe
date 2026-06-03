@@ -51,10 +51,13 @@ class _AddReminderPageState extends State<AddReminderPage> {
     FocusScope.of(context).unfocus();
 
     final now = DateTime.now();
+
+    final initialDate = _selectedDate ?? now;
+
     final picked = await showDatePicker(
       context: context,
-      initialDate: _selectedDate ?? now,
-      firstDate: now,
+      initialDate: initialDate,
+      firstDate: initialDate.isBefore(now) ? initialDate : now,
       lastDate: DateTime(now.year + 5),
     );
     if (picked != null) {
