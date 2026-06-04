@@ -111,8 +111,8 @@ class _RemindersDashboardPageState extends State<RemindersDashboardPage> {
     return '$hour:$minute $period';
   }
 
-  final dayImage = const AssetImage('assets/images/day_sky.png');
-  final nightImage = const AssetImage('assets/images/night_sky.png');
+  final dayImage = const AssetImage('assets/images/day_sky.jpg');
+  final nightImage = const AssetImage('assets/images/night_sky.jpg');
 
   @override
   Widget build(BuildContext context) {
