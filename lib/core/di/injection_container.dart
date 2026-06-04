@@ -16,6 +16,8 @@ import '../../presentation/reminders/blocs/reminders_bloc.dart';
 import '../../presentation/settings/blocs/settings_bloc.dart';
 import '../services/notification_service.dart';
 import '../services/secure_storage_service.dart';
+import '../services/alarm_channel_service.dart';
+import '../services/tts_service.dart';
 
 final GetIt sl = GetIt.instance;
 
@@ -46,6 +48,14 @@ Future<void> initDI() async {
 
   sl.registerLazySingleton<NotificationService>(
     () => NotificationService(sl<FlutterLocalNotificationsPlugin>()),
+  );
+
+  sl.registerLazySingleton<AlarmChannelService>(
+    () => AlarmChannelService(),
+  );
+
+  sl.registerLazySingleton<TtsService>(
+    () => TtsService(),
   );
 
   // ==========================================

@@ -27,3 +27,9 @@
 # Keep plugin classes
 -keep class com.dexterous.** { *; }
 ##---------------End: proguard configuration ----------
+
+# Ignore warnings for missing androidx classes in optional modules/extensions
+-dontwarn androidx.core.**
+-dontwarn androidx.startup.**
+-dontwarn androidx.window.**
+

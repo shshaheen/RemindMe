@@ -4,6 +4,7 @@ import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
+import '../router/app_router.dart';
 
 class NotificationService {
   final FlutterLocalNotificationsPlugin _localNotificationsPlugin;
@@ -11,7 +12,7 @@ class NotificationService {
 
   NotificationService(this._localNotificationsPlugin);
 
-  static const String channelId = 'reminder_alarm_channel_v5';
+  static const String channelId = 'reminder_alarm_channel_v7';
   static const String channelName = 'Reminders';
   static const String channelDesc =
       'Notification channel for scheduled reminder alarms';
@@ -67,6 +68,10 @@ class NotificationService {
             'NotificationService [DEBUG]: Notification clicked: ${response.payload}',
           );
         }
+        final payload = response.payload;
+        if (payload != null && payload.isNotEmpty) {
+          AppRouter.router.go('/alarm?id=$payload');
+        }
       },
     );
 
@@ -78,9 +83,9 @@ class NotificationService {
       importance: Importance.max,
       playSound: true,
       sound: UriAndroidNotificationSound(
-        'content://settings/system/alarm_alert',
+        'content://settings/system/ringtone',
       ),
-      audioAttributesUsage: AudioAttributesUsage.alarm,
+      audioAttributesUsage: AudioAttributesUsage.notificationRingtone,
       enableVibration: true,
     );
 
@@ -183,12 +188,15 @@ class NotificationService {
       channelName,
       channelDescription: channelDesc,
       importance: Importance.max,
-      priority: Priority.high,
+      priority: Priority.max,
       playSound: true,
-      // sound: const UriAndroidNotificationSound('content://settings/system/alarm_alert'),
-      // audioAttributesUsage: AudioAttributesUsage.alarm,
+      sound: const UriAndroidNotificationSound(
+        'content://settings/system/ringtone',
+      ),
+      audioAttributesUsage: AudioAttributesUsage.notificationRingtone,
       category: AndroidNotificationCategory.alarm,
       visibility: NotificationVisibility.public,
+      fullScreenIntent: true,
       additionalFlags: Int32List.fromList(<int>[
         4,
       ]), // Insistent (looping) alarm sound/vibration
@@ -265,12 +273,15 @@ class NotificationService {
           channelName,
           channelDescription: channelDesc,
           importance: Importance.max,
-          priority: Priority.high,
+          priority: Priority.max,
           playSound: true,
           sound: UriAndroidNotificationSound(
-            'content://settings/system/alarm_alert',
+            'content://settings/system/ringtone',
           ),
-          audioAttributesUsage: AudioAttributesUsage.alarm,
+          audioAttributesUsage: AudioAttributesUsage.notificationRingtone,
+          category: AndroidNotificationCategory.alarm,
+          visibility: NotificationVisibility.public,
+          fullScreenIntent: true,
         );
 
     const DarwinNotificationDetails iosDetails = DarwinNotificationDetails(

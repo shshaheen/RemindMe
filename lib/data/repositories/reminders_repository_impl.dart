@@ -50,10 +50,8 @@ class RemindersRepositoryImpl implements RemindersRepository {
       try {
         await notificationService.scheduleNotification(
           id: reminder.id.hashCode.abs() & 0x7FFFFFFF,
-          title: reminder.title,
-          body: reminder.description.isNotEmpty
-              ? reminder.description
-              : 'Your reminder is due!',
+          title: 'Incoming Reminder',
+          body: 'You have a scheduled reminder.',
           scheduledDate: reminder.reminderDateTime,
           payload: reminder.id,
         );
@@ -108,10 +106,8 @@ class RemindersRepositoryImpl implements RemindersRepository {
       try {
         await notificationService.scheduleNotification(
           id: notificationId,
-          title: reminder.title,
-          body: reminder.description.isNotEmpty
-              ? reminder.description
-              : 'Your reminder is due!',
+          title: 'Incoming Reminder',
+          body: 'You have a scheduled reminder.',
           scheduledDate: reminder.reminderDateTime,
           payload: reminder.id,
         );

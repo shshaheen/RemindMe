@@ -6,6 +6,7 @@ import '../../presentation/auth/pages/login_page.dart';
 import '../../presentation/auth/pages/change_password_page.dart';
 import '../../presentation/reminders/pages/reminders_dashboard_page.dart';
 import '../../presentation/reminders/pages/add_reminder_page.dart';
+import '../../presentation/alarm/pages/alarm_screen.dart';
 
 class AppRouter {
   AppRouter._();
@@ -17,6 +18,7 @@ class AppRouter {
   static const String remindersScreen = '/reminders';
   static const String addReminderScreen = '/add-reminder';
   static const String editReminderScreen = '/edit-reminder';
+  static const String alarmScreen = '/alarm';
 
   static final GoRouter router = GoRouter(
     initialLocation: splashScreen,
@@ -57,6 +59,14 @@ class AppRouter {
         builder: (context, state) {
           final reminder = state.extra as Reminder;
           return AddReminderPage(reminder: reminder);
+        },
+      ),
+      GoRoute(
+        path: alarmScreen,
+        name: 'alarm',
+        builder: (context, state) {
+          final id = state.uri.queryParameters['id'] ?? '';
+          return AlarmScreen(reminderId: id);
         },
       ),
     ],
