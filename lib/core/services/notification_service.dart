@@ -333,8 +333,8 @@ class NotificationService {
     );
     await scheduleNotification(
       id: id,
-      title: 'Snoozed Reminder 🌙',
-      body: 'Your snoozed reminder is here.',
+      title: 'Incoming Reminder',
+      body: 'You have a scheduled reminder.',
       scheduledDate: snoozeTime,
       payload: payload,
     );
