@@ -31,7 +31,10 @@ class _SnoozedStateState extends State<SnoozedState>
       vsync: this,
       duration: const Duration(milliseconds: 800),
     );
-    _scale = CurvedAnimation(parent: _entranceController, curve: Curves.elasticOut);
+    _scale = CurvedAnimation(
+      parent: _entranceController,
+      curve: Curves.elasticOut,
+    );
     _fade = CurvedAnimation(parent: _entranceController, curve: Curves.easeOut);
 
     _orbitController = AnimationController(
@@ -80,33 +83,55 @@ class _SnoozedStateState extends State<SnoozedState>
                       children: [
                         // Large orbiting dot
                         Transform.translate(
-                          offset: Offset(52 * math.cos(angle), 52 * math.sin(angle)),
+                          offset: Offset(
+                            52 * math.cos(angle),
+                            52 * math.sin(angle),
+                          ),
                           child: Container(
-                            width: 9, height: 9,
+                            width: 9,
+                            height: 9,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: const Color(0xFFFFB347).withOpacity(0.75),
-                              boxShadow: [BoxShadow(color: const Color(0xFFFFB347).withOpacity(0.5), blurRadius: 8, spreadRadius: 1)],
+                              boxShadow: [
+                                BoxShadow(
+                                  color: const Color(
+                                    0xFFFFB347,
+                                  ).withOpacity(0.5),
+                                  blurRadius: 8,
+                                  spreadRadius: 1,
+                                ),
+                              ],
                             ),
                           ),
                         ),
                         // Small trailing dot (opposite phase)
                         Transform.translate(
-                          offset: Offset(42 * math.cos(angle + math.pi), 42 * math.sin(angle + math.pi)),
+                          offset: Offset(
+                            42 * math.cos(angle + math.pi),
+                            42 * math.sin(angle + math.pi),
+                          ),
                           child: Container(
-                            width: 5, height: 5,
-                            decoration: BoxDecoration(shape: BoxShape.circle, color: const Color(0xFFFFB347).withOpacity(0.35)),
+                            width: 5,
+                            height: 5,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: const Color(0xFFFFB347).withOpacity(0.35),
+                            ),
                           ),
                         ),
                         // Expanding pulse ring
                         Transform.scale(
                           scale: 1.0 + pulseProgress * 0.25,
                           child: Container(
-                            width: 92, height: 92,
+                            width: 92,
+                            height: 92,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               border: Border.all(
-                                color: const Color(0xFFFFB347).withOpacity((0.5 - pulseProgress) * 0.45),
+                                color: const Color(
+                                  0xFFFFB347,
+                                ).withOpacity((0.5 - pulseProgress) * 0.45),
                                 width: 2,
                               ),
                             ),
@@ -114,14 +139,28 @@ class _SnoozedStateState extends State<SnoozedState>
                         ),
                         // Moon circle core
                         Container(
-                          width: 76, height: 76,
+                          width: 76,
+                          height: 76,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: const Color(0xFFFFB347).withOpacity(0.12),
-                            border: Border.all(color: const Color(0xFFFFB347), width: 2.5),
-                            boxShadow: [BoxShadow(color: const Color(0xFFFFB347).withOpacity(0.4), blurRadius: 28, spreadRadius: 3)],
+                            border: Border.all(
+                              color: const Color(0xFFFFB347),
+                              width: 2.5,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: const Color(0xFFFFB347).withOpacity(0.4),
+                                blurRadius: 28,
+                                spreadRadius: 3,
+                              ),
+                            ],
                           ),
-                          child: const Icon(Icons.bedtime_rounded, color: Color(0xFFFFB347), size: 38),
+                          child: const Icon(
+                            Icons.bedtime_rounded,
+                            color: Color(0xFFFFB347),
+                            size: 38,
+                          ),
                         ),
                       ],
                     ),
@@ -142,7 +181,11 @@ class _SnoozedStateState extends State<SnoozedState>
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.notifications_rounded, color: const Color(0xFFFFB347).withOpacity(0.7), size: 14),
+                  Icon(
+                    Icons.notifications_rounded,
+                    color: const Color(0xFFFFB347).withOpacity(0.7),
+                    size: 14,
+                  ),
                   const SizedBox(width: 5),
                   Text(
                     'Ring again at ${_formatTime(widget.ringAt)}',

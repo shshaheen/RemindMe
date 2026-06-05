@@ -1,8 +1,9 @@
 import 'package:flutter/services.dart';
 
 class AlarmChannelService {
-  static const MethodChannel _channel =
-      MethodChannel('com.example.reminder_app/alarm');
+  static const MethodChannel _channel = MethodChannel(
+    'com.example.reminder_app/alarm',
+  );
 
   /// Starts playing the looping alarm ringtone.
   Future<void> startRingtone() async {

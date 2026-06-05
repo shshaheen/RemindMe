@@ -42,10 +42,7 @@ class _AssistantOrbState extends State<AssistantOrb>
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: const RadialGradient(
-                  colors: [
-                    Color(0xFF00F5D4),
-                    Color(0xFF7B2CBF),
-                  ],
+                  colors: [Color(0xFF00F5D4), Color(0xFF7B2CBF)],
                   radius: 0.85,
                 ),
                 boxShadow: [

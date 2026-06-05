@@ -19,10 +19,7 @@ class _SuccessStateState extends State<SuccessState>
       vsync: this,
       duration: const Duration(milliseconds: 700),
     );
-    _scale = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.elasticOut,
-    );
+    _scale = CurvedAnimation(parent: _controller, curve: Curves.elasticOut);
     _controller.forward();
   }
 
@@ -50,10 +47,7 @@ class _SuccessStateState extends State<SuccessState>
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: const Color(0xFF00F5D4).withOpacity(0.12),
-                  border: Border.all(
-                    color: const Color(0xFF00F5D4),
-                    width: 3,
-                  ),
+                  border: Border.all(color: const Color(0xFF00F5D4), width: 3),
                   boxShadow: [
                     BoxShadow(
                       color: const Color(0xFF00F5D4).withOpacity(0.35),

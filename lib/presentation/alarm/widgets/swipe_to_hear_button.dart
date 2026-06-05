@@ -55,7 +55,10 @@ class _SwipeToHearButtonState extends State<SwipeToHearButton>
             children: [
               // Sliding text prompt
               Opacity(
-                opacity: (1.0 - (_dragPosition / maxDrag) * 1.5).clamp(0.0, 1.0),
+                opacity: (1.0 - (_dragPosition / maxDrag) * 1.5).clamp(
+                  0.0,
+                  1.0,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -100,8 +103,10 @@ class _SwipeToHearButtonState extends State<SwipeToHearButton>
                 child: GestureDetector(
                   onHorizontalDragUpdate: (details) {
                     setState(() {
-                      _dragPosition = (_dragPosition + details.delta.dx)
-                          .clamp(0.0, maxDrag);
+                      _dragPosition = (_dragPosition + details.delta.dx).clamp(
+                        0.0,
+                        maxDrag,
+                      );
                     });
                   },
                   onHorizontalDragEnd: (details) {
@@ -122,10 +127,7 @@ class _SwipeToHearButtonState extends State<SwipeToHearButton>
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       gradient: const LinearGradient(
-                        colors: [
-                          Color(0xFF00F5D4),
-                          Color(0xFF00BBF9),
-                        ],
+                        colors: [Color(0xFF00F5D4), Color(0xFF00BBF9)],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
@@ -156,21 +158,21 @@ class _SwipeToHearButtonState extends State<SwipeToHearButton>
     final double startPosition = _dragPosition;
     final int steps = 15;
     int currentStep = 0;
-    
+
     // Simple timer animation back to 0
     Future.doWhile(() async {
       await Future.delayed(const Duration(milliseconds: 10));
       if (!mounted) return false;
-      
+
       currentStep++;
       final double progress = currentStep / steps;
       // Ease out cubic back
       final double easeFactor = 1.0 - math.pow(progress, 3).toDouble();
-      
+
       setState(() {
         _dragPosition = startPosition * easeFactor;
       });
-      
+
       return currentStep < steps;
     });
   }

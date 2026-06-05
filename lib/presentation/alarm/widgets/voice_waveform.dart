@@ -11,7 +11,16 @@ class VoiceWaveform extends StatefulWidget {
 class _VoiceWaveformState extends State<VoiceWaveform>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  final List<double> _baseHeights = [10.0, 22.0, 32.0, 42.0, 28.0, 38.0, 20.0, 12.0];
+  final List<double> _baseHeights = [
+    10.0,
+    22.0,
+    32.0,
+    42.0,
+    28.0,
+    38.0,
+    20.0,
+    12.0,
+  ];
 
   @override
   void initState() {
@@ -53,10 +62,7 @@ class _VoiceWaveformState extends State<VoiceWaveform>
                   gradient: const LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [
-                      Color(0xFF00F5D4),
-                      Color(0xFF00BBF9),
-                    ],
+                    colors: [Color(0xFF00F5D4), Color(0xFF00BBF9)],
                   ),
                 ),
               );

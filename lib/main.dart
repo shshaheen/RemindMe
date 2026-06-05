@@ -91,7 +91,7 @@ class MyApp extends StatelessWidget {
             return AnimatedTheme(
               data: isDarkMode ? AppTheme.darkTheme : AppTheme.lightTheme,
               duration: const Duration(milliseconds: 500),
-              curve: Curves.easeInOutCubic, 
+              curve: Curves.easeInOutCubic,
               child: child!,
             );
           },

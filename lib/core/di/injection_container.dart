@@ -50,13 +50,9 @@ Future<void> initDI() async {
     () => NotificationService(sl<FlutterLocalNotificationsPlugin>()),
   );
 
-  sl.registerLazySingleton<AlarmChannelService>(
-    () => AlarmChannelService(),
-  );
+  sl.registerLazySingleton<AlarmChannelService>(() => AlarmChannelService());
 
-  sl.registerLazySingleton<TtsService>(
-    () => TtsService(),
-  );
+  sl.registerLazySingleton<TtsService>(() => TtsService());
 
   // ==========================================
   // 3. Features registration blocks

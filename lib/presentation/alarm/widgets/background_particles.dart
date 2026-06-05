@@ -11,7 +11,10 @@ class BackgroundParticles extends StatefulWidget {
 class _BackgroundParticlesState extends State<BackgroundParticles>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  final List<_Particle> _particles = List.generate(22, (index) => _Particle.random());
+  final List<_Particle> _particles = List.generate(
+    22,
+    (index) => _Particle.random(),
+  );
 
   @override
   void initState() {

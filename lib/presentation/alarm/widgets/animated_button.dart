@@ -4,7 +4,11 @@ class AnimatedButton extends StatefulWidget {
   final VoidCallback onPressed;
   final Widget child;
 
-  const AnimatedButton({super.key, required this.onPressed, required this.child});
+  const AnimatedButton({
+    super.key,
+    required this.onPressed,
+    required this.child,
+  });
 
   @override
   State<AnimatedButton> createState() => _AnimatedButtonState();
@@ -22,9 +26,10 @@ class _AnimatedButtonState extends State<AnimatedButton>
       vsync: this,
       duration: const Duration(milliseconds: 100),
     );
-    _scale = Tween<double>(begin: 1.0, end: 0.94).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _scale = Tween<double>(
+      begin: 1.0,
+      end: 0.94,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
   @override
@@ -42,10 +47,7 @@ class _AnimatedButtonState extends State<AnimatedButton>
         widget.onPressed();
       },
       onTapCancel: () => _controller.reverse(),
-      child: ScaleTransition(
-        scale: _scale,
-        child: widget.child,
-      ),
+      child: ScaleTransition(scale: _scale, child: widget.child),
     );
   }
 }
