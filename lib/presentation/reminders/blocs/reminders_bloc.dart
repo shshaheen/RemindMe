@@ -15,6 +15,7 @@ class RemindersBloc extends Bloc<RemindersEvent, RemindersState> {
         updateReminder: (e) async => _onUpdateReminder(e, emit),
         deleteReminder: (e) async => _onDeleteReminder(e, emit),
         searchReminders: (e) async => _onSearchReminders(e, emit),
+        snoozeReminder: (e) async => _onSnoozeReminder(e, emit),
       );
     });
   }
@@ -97,6 +98,21 @@ class RemindersBloc extends Bloc<RemindersEvent, RemindersState> {
       emit(RemindersState.loaded(reminders: reminders));
     } catch (e) {
       emit(RemindersState.error(message: 'Search failed: ${e.toString()}'));
+    }
+  }
+
+  Future<void> _onSnoozeReminder(
+    SnoozeReminder event,
+    Emitter<RemindersState> emit,
+  ) async {
+    try {
+      await repository.snoozeReminder(event.reminderId);
+    } catch (e) {
+      emit(
+        RemindersState.error(
+          message: 'Failed to snooze reminder: ${e.toString()}',
+        ),
+      );
     }
   }
 }

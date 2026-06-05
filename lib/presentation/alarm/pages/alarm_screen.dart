@@ -1,5 +1,5 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reminder_app/core/di/injection_container.dart';
 import 'package:reminder_app/core/services/alarm_channel_service.dart';
 import 'package:reminder_app/core/services/hive_service.dart';
@@ -7,6 +7,8 @@ import 'package:reminder_app/core/services/notification_service.dart';
 import 'package:reminder_app/data/models/reminder_model.dart';
 import 'package:reminder_app/domain/entities/reminder.dart';
 import 'package:reminder_app/core/services/tts_service.dart';
+import 'package:reminder_app/presentation/reminders/blocs/reminders_bloc.dart';
+import 'package:reminder_app/presentation/reminders/blocs/reminders_event.dart';
 
 // Custom modular sub-widgets imports
 import '../widgets/background_particles.dart';
@@ -15,8 +17,10 @@ import '../widgets/voice_waveform.dart';
 import '../widgets/success_state.dart';
 import '../widgets/animated_button.dart';
 import '../widgets/swipe_to_hear_button.dart';
+import '../widgets/snooze_button.dart';
+import '../widgets/snoozed_state.dart';
 
-enum AlarmState { idle, speaking, delivered }
+enum AlarmState { idle, speaking, delivered, snoozed }
 
 class AlarmScreen extends StatefulWidget {
   final String reminderId;
@@ -31,13 +35,15 @@ class _AlarmScreenState extends State<AlarmScreen>
     with TickerProviderStateMixin {
   late AnimationController _logoController;
   late Animation<double> _logoScale;
-  
+
   late AnimationController _entranceController;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
 
   Reminder? _reminder;
   AlarmState _currentState = AlarmState.idle;
+  int? _snoozedMinutes;
+  DateTime? _snoozeRingAt;
 
   @override
   void initState() {
@@ -48,7 +54,8 @@ class _AlarmScreenState extends State<AlarmScreen>
     sl<AlarmChannelService>().turnScreenOn();
 
     // Fetch the reminder details synchronously from Hive
-    final model = HiveService.remindersBox.get(widget.reminderId) as ReminderModel?;
+    final model =
+        HiveService.remindersBox.get(widget.reminderId) as ReminderModel?;
     _reminder = model?.toDomain();
 
     // Configure a breathing/pulsing animation for the app logo
@@ -70,12 +77,13 @@ class _AlarmScreenState extends State<AlarmScreen>
       parent: _entranceController,
       curve: Curves.easeOut,
     );
-    _slideAnimation = Tween<Offset>(
-      begin: const Offset(0, 0.08),
-      end: Offset.zero,
-    ).animate(
-      CurvedAnimation(parent: _entranceController, curve: Curves.easeOutCubic),
-    );
+    _slideAnimation =
+        Tween<Offset>(begin: const Offset(0, 0.08), end: Offset.zero).animate(
+          CurvedAnimation(
+            parent: _entranceController,
+            curve: Curves.easeOutCubic,
+          ),
+        );
 
     _entranceController.forward();
   }
@@ -121,12 +129,37 @@ class _AlarmScreenState extends State<AlarmScreen>
       setState(() {
         _currentState = AlarmState.delivered;
       });
-      
+
       // Keep delivered screen showing for 1.8 seconds before closing app
       Future.delayed(const Duration(milliseconds: 1800), () async {
         if (mounted) {
           await sl<AlarmChannelService>().closeApp();
         }
+      });
+    }
+  }
+
+  /// Stop the alarm and delegate snooze scheduling to the Bloc.
+  /// UI concerns (stopping audio) stay here; business logic lives in the repository.
+  Future<void> _handleSnooze() async {
+    await sl<AlarmChannelService>().stopRingtone();
+    await sl<TtsService>().stop();
+
+    // Business logic: cancel existing notification + reschedule 10 min out
+    if (mounted) {
+      context.read<RemindersBloc>().add(
+        RemindersEvent.snoozeReminder(reminderId: widget.reminderId),
+      );
+
+      setState(() {
+        _snoozedMinutes = 10;
+        _snoozeRingAt = DateTime.now().add(const Duration(minutes: 10));
+        _currentState = AlarmState.snoozed;
+      });
+
+      // Close after the confirmation animation plays
+      Future.delayed(const Duration(milliseconds: 2400), () async {
+        if (mounted) await sl<AlarmChannelService>().closeApp();
       });
     }
   }
@@ -177,12 +210,15 @@ class _AlarmScreenState extends State<AlarmScreen>
               child: SlideTransition(
                 position: _slideAnimation,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 24.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 32.0,
+                    vertical: 24.0,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const SizedBox(height: 20),
-                      
+
                       // Brand Header
                       Text(
                         'ReminderMe',
@@ -199,7 +235,7 @@ class _AlarmScreenState extends State<AlarmScreen>
                           ],
                         ),
                       ),
-                      
+
                       const SizedBox(height: 40),
 
                       // Breathing App Logo with Premium assistant glow
@@ -269,7 +305,7 @@ class _AlarmScreenState extends State<AlarmScreen>
                         duration: const Duration(milliseconds: 500),
                         child: _buildBottomActions(),
                       ),
-                      
+
                       const SizedBox(height: 16),
                     ],
                   ),
@@ -340,6 +376,13 @@ class _AlarmScreenState extends State<AlarmScreen>
         );
       case AlarmState.delivered:
         return const SuccessState(key: ValueKey('delivered_state'));
+      case AlarmState.snoozed:
+        return SnoozedState(
+          key: const ValueKey('snoozed_state'),
+          snoozedMinutes: _snoozedMinutes ?? 5,
+          ringAt:
+              _snoozeRingAt ?? DateTime.now().add(const Duration(minutes: 5)),
+        );
     }
   }
 
@@ -382,10 +425,15 @@ class _AlarmScreenState extends State<AlarmScreen>
       key: const ValueKey('idle_actions'),
       mainAxisSize: MainAxisSize.min,
       children: [
-        SwipeToHearButton(
-          onSwipeComplete: _handleAccept,
-        ),
-        const SizedBox(height: 16),
+        // Primary: swipe to hear the reminder out loud
+        SwipeToHearButton(onSwipeComplete: _handleAccept),
+        const SizedBox(height: 14),
+
+        // Snooze — stops alarm and reschedules 10 min out via Bloc
+        SnoozeButton(onTap: _handleSnooze),
+        const SizedBox(height: 14),
+
+        // Dismiss — stop alarm and close immediately
         AnimatedButton(
           onPressed: _handleDismiss,
           child: Container(

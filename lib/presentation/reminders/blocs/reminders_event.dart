@@ -18,4 +18,7 @@ class RemindersEvent with _$RemindersEvent {
 
   const factory RemindersEvent.searchReminders({required String query}) =
       SearchReminders;
+
+  const factory RemindersEvent.snoozeReminder({required String reminderId}) =
+      SnoozeReminder;
 }

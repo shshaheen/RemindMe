@@ -137,6 +137,24 @@ class RemindersRepositoryImpl implements RemindersRepository {
     );
   }
 
+  static const int _snoozeDurationMinutes = 10;
+
+  @override
+  Future<void> snoozeReminder(String reminderId) async {
+    if (kDebugMode) {
+      print(
+        'RemindersRepositoryImpl [DEBUG]: snoozeReminder called for "$reminderId" — rescheduling in $_snoozeDurationMinutes min.',
+      );
+    }
+    final notificationId = reminderId.hashCode.abs() & 0x7FFFFFFF;
+    await notificationService.cancelNotification(notificationId);
+    await notificationService.scheduleSnoozeNotification(
+      id: notificationId,
+      snoozeDurationMinutes: _snoozeDurationMinutes,
+      payload: reminderId,
+    );
+  }
+
   @override
   Future<List<Reminder>> searchReminders(String query) async {
     final allReminders = await getAllReminders();

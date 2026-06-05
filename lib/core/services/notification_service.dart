@@ -82,9 +82,7 @@ class NotificationService {
       description: channelDesc,
       importance: Importance.max,
       playSound: true,
-      sound: UriAndroidNotificationSound(
-        'content://settings/system/ringtone',
-      ),
+      sound: UriAndroidNotificationSound('content://settings/system/ringtone'),
       audioAttributesUsage: AudioAttributesUsage.notificationRingtone,
       enableVibration: true,
     );
@@ -182,32 +180,32 @@ class NotificationService {
       throw ArgumentError('Scheduled date must be in the future.');
     }
 
-    final AndroidNotificationDetails
-    androidDetails = AndroidNotificationDetails(
-      channelId,
-      channelName,
-      channelDescription: channelDesc,
-      importance: Importance.max,
-      priority: Priority.max,
-      playSound: true,
-      sound: const UriAndroidNotificationSound(
-        'content://settings/system/ringtone',
-      ),
-      audioAttributesUsage: AudioAttributesUsage.notificationRingtone,
-      category: AndroidNotificationCategory.alarm,
-      visibility: NotificationVisibility.public,
-      fullScreenIntent: true,
-      additionalFlags: Int32List.fromList(<int>[
-        4,
-      ]), // Insistent (looping) alarm sound/vibration
-      actions: <AndroidNotificationAction>[
-        const AndroidNotificationAction(
-          'dismiss_alarm',
-          'Dismiss',
-          cancelNotification: true,
-        ),
-      ],
-    );
+    final AndroidNotificationDetails androidDetails =
+        AndroidNotificationDetails(
+          channelId,
+          channelName,
+          channelDescription: channelDesc,
+          importance: Importance.max,
+          priority: Priority.max,
+          playSound: true,
+          sound: const UriAndroidNotificationSound(
+            'content://settings/system/ringtone',
+          ),
+          audioAttributesUsage: AudioAttributesUsage.notificationRingtone,
+          category: AndroidNotificationCategory.alarm,
+          visibility: NotificationVisibility.public,
+          fullScreenIntent: true,
+          additionalFlags: Int32List.fromList(<int>[
+            4,
+          ]), // Insistent (looping) alarm sound/vibration
+          actions: <AndroidNotificationAction>[
+            const AndroidNotificationAction(
+              'dismiss_alarm',
+              'Dismiss',
+              cancelNotification: true,
+            ),
+          ],
+        );
 
     const DarwinNotificationDetails iosDetails = DarwinNotificationDetails(
       presentAlert: true,
@@ -316,6 +314,30 @@ class NotificationService {
         debugPrint(stack.toString());
       }
     }
+  }
+
+  /// Re-schedule a notification after a snooze delay.
+  /// Cancels any existing notification with [id] before scheduling.
+  Future<void> scheduleSnoozeNotification({
+    required int id,
+    required int snoozeDurationMinutes,
+    String? payload,
+  }) async {
+    if (kDebugMode) {
+      debugPrint(
+        'NotificationService [DEBUG]: Snoozing notification ID $id for $snoozeDurationMinutes min.',
+      );
+    }
+    final snoozeTime = DateTime.now().add(
+      Duration(minutes: snoozeDurationMinutes),
+    );
+    await scheduleNotification(
+      id: id,
+      title: 'Snoozed Reminder 🌙',
+      body: 'Your snoozed reminder is here.',
+      scheduledDate: snoozeTime,
+      payload: payload,
+    );
   }
 
   /// Cancel a specific notification by ID.

@@ -15,4 +15,8 @@ abstract class RemindersRepository {
 
   /// Searches reminders in-memory by checking title and description (case-insensitive)
   Future<List<Reminder>> searchReminders(String query);
+
+  /// Snoozes a reminder by cancelling its current notification and rescheduling
+  /// it [snoozeDurationMinutes] minutes from now (default: 10 min).
+  Future<void> snoozeReminder(String reminderId);
 }
