@@ -5,6 +5,9 @@ abstract class RemindersLocalDataSource {
   /// Retrieves all stored reminder models from local cache
   Future<List<ReminderModel>> getCachedReminders();
 
+  /// Retrieves a single reminder model by its unique ID, or null if not found.
+  Future<ReminderModel?> getCachedReminderById(String id);
+
   /// Writes/updates a reminder model inside local cache
   Future<void> cacheReminder(ReminderModel reminder);
 
@@ -19,6 +22,12 @@ class RemindersLocalDataSourceImpl implements RemindersLocalDataSource {
   Future<List<ReminderModel>> getCachedReminders() async {
     final box = HiveService.remindersBox;
     return box.values.cast<ReminderModel>().toList();
+  }
+
+  @override
+  Future<ReminderModel?> getCachedReminderById(String id) async {
+    final box = HiveService.remindersBox;
+    return box.get(id) as ReminderModel?;
   }
 
   @override

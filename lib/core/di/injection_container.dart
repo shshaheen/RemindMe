@@ -11,6 +11,7 @@ import '../../domain/repositories/auth_repository.dart';
 import '../../domain/repositories/reminders_repository.dart';
 import '../../domain/repositories/settings_repository.dart';
 
+import '../../presentation/alarm/blocs/alarm_bloc.dart';
 import '../../presentation/auth/blocs/auth_bloc.dart';
 import '../../presentation/reminders/blocs/reminders_bloc.dart';
 import '../../presentation/settings/blocs/settings_bloc.dart';
@@ -57,6 +58,7 @@ Future<void> initDI() async {
   // ==========================================
   // 3. Features registration blocks
   // ==========================================
+  _initAlarmFeature();
   _initAuthFeature();
   _initRemindersFeature();
   _initSettingsFeature();
@@ -75,6 +77,19 @@ void _initAuthFeature() {
   // Data sources
   sl.registerLazySingleton<AuthLocalDataSource>(
     () => AuthLocalDataSourceImpl(secureStorageService: sl()),
+  );
+}
+
+/// Dependency Injection setup for the Alarm feature
+void _initAlarmFeature() {
+  // AlarmBloc is a factory so each alarm screen gets a fresh instance.
+  sl.registerFactory(
+    () => AlarmBloc(
+      repository: sl(),
+      alarmChannelService: sl(),
+      ttsService: sl(),
+      notificationService: sl(),
+    ),
   );
 }
 

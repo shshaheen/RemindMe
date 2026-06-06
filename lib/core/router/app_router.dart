@@ -1,5 +1,9 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reminder_app/domain/entities/reminder.dart';
+import '../../core/di/injection_container.dart';
+import '../../presentation/alarm/blocs/alarm_bloc.dart';
+import '../../presentation/alarm/blocs/alarm_event.dart';
 import '../../presentation/auth/pages/splash_page.dart';
 import '../../presentation/auth/pages/create_password_page.dart';
 import '../../presentation/auth/pages/login_page.dart';
@@ -66,7 +70,11 @@ class AppRouter {
         name: 'alarm',
         builder: (context, state) {
           final id = state.uri.queryParameters['id'] ?? '';
-          return AlarmScreen(reminderId: id);
+          return BlocProvider(
+            create: (_) =>
+                sl<AlarmBloc>()..add(AlarmEvent.started(reminderId: id)),
+            child: AlarmScreen(reminderId: id),
+          );
         },
       ),
     ],

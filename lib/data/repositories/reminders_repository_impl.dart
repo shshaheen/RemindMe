@@ -156,6 +156,12 @@ class RemindersRepositoryImpl implements RemindersRepository {
   }
 
   @override
+  Future<Reminder?> getReminderById(String id) async {
+    final model = await localDataSource.getCachedReminderById(id);
+    return model?.toDomain();
+  }
+
+  @override
   Future<List<Reminder>> searchReminders(String query) async {
     final allReminders = await getAllReminders();
     if (query.isEmpty) return allReminders;
