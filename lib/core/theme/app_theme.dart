@@ -4,19 +4,19 @@ import 'package:flutter/services.dart';
 class AppTheme {
   AppTheme._();
 
-  // Premium Productivity Palette - Light
-  static const _primaryColorLight = Color(0xFF2563EB); // Professional Blue
-  static const _secondaryColorLight = Color(0xFF3B82F6); // Bright Blue
-  static const _accentColorLight = Color(0xFF64748B); // Elegant Slate
-  static const _surfaceColorLight = Color(0xFFF8FAFC); // Soft White
-  static const _cardColorLight = Color(0xFFFFFFFF); // Pure White
+  // Premium ReminderMe Palette - Light
+  static const _primaryColorLight = Color(0xFF1D65CB); // Brand Blue
+  static const _secondaryColorLight = Color(0xFF4D8DF5); // Vibrant Blue
+  static const _accentColorLight = Color(0xFF8CC8FF); // Soft Ice Blue
+  static const _surfaceColorLight = Color(0xFFF8FBFF);
+  static const _cardColorLight = Color(0xFFFFFFFF);
 
-  // Premium Productivity Palette - Dark
-  static const _primaryColorDark = Color(0xFF60A5FA); // Soft Blue
-  static const _secondaryColorDark = Color(0xFF93C5FD); // Light Blue
-  static const _accentColorDark = Color(0xFFCBD5E1); // Soft Slate
-  static const _surfaceColorDark = Color(0xFF020617); // Rich Black
-  static const _cardColorDark = Color(0xFF111827); // Deep Slate
+  // Premium ReminderMe Palette - Dark
+  static const _primaryColorDark = Color(0xFF3D82F0);
+  static const _secondaryColorDark = Color(0xFF6AA6FF);
+  static const _accentColorDark = Color(0xFFAED6FF);
+  static const _surfaceColorDark = Color(0xFF050B16);
+  static const _cardColorDark = Color(0xFF101827);
 
   // Modern Typography Style
   static const String _fontFamily = 'Roboto';
