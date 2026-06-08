@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/enums/reminder_filter.dart';
 import '../../../core/router/app_router.dart';
 import '../../../domain/entities/app_settings.dart';
 import '../../../domain/entities/reminder.dart';
@@ -11,6 +12,7 @@ import '../../settings/blocs/settings_state.dart';
 import '../blocs/reminders_bloc.dart';
 import '../blocs/reminders_event.dart';
 import '../blocs/reminders_state.dart';
+import '../widgets/reminder_filter_chips.dart';
 import '../widgets/reminders_header_card.dart';
 import '../widgets/reminders_list_view.dart';
 
@@ -41,6 +43,10 @@ class _RemindersDashboardPageState extends State<RemindersDashboardPage> {
   void _onSearchChanged(String query) => context.read<RemindersBloc>().add(
     RemindersEvent.searchReminders(query: query),
   );
+
+  void _onFilterChanged(ReminderFilter filter) => context
+      .read<RemindersBloc>()
+      .add(RemindersEvent.filterChanged(filter: filter));
 
   void _onEdit(Reminder reminder) =>
       context.push(AppRouter.editReminderScreen, extra: reminder);
@@ -79,13 +85,31 @@ class _RemindersDashboardPageState extends State<RemindersDashboardPage> {
           children: [
             _buildSearchBar(context),
 
-            // Header card — uses BlocSelector to avoid full rebuilds
-            BlocSelector<RemindersBloc, RemindersState, int>(
-              selector: (state) =>
-                  state.maybeWhen(loaded: (r) => r.length, orElse: () => 0),
-              builder: (_, count) => RemindersHeaderCard(
+            // Filter chips — BlocSelector rebuilds only when activeFilter changes
+            BlocSelector<RemindersBloc, RemindersState, ReminderFilter>(
+              selector: (state) => state.maybeWhen(
+                loaded: (_, filter) => filter,
+                orElse: () => ReminderFilter.all,
+              ),
+              builder: (_, activeFilter) => Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: ReminderFilterChips(
+                  activeFilter: activeFilter,
+                  onFilterSelected: _onFilterChanged,
+                ),
+              ),
+            ),
+
+            // Header card — BlocSelector rebuilds only when count or filter changes
+            BlocSelector<RemindersBloc, RemindersState, (int, ReminderFilter)>(
+              selector: (state) => state.maybeWhen(
+                loaded: (reminders, filter) => (reminders.length, filter),
+                orElse: () => (0, ReminderFilter.all),
+              ),
+              builder: (_, record) => RemindersHeaderCard(
                 isDarkMode: isDarkMode,
-                reminderCount: count,
+                reminderCount: record.$1,
+                activeFilter: record.$2,
               ),
             ),
 

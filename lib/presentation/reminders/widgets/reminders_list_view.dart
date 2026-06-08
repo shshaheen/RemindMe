@@ -43,7 +43,7 @@ class RemindersListView extends StatelessWidget {
               ),
             ),
           ),
-          loaded: (reminders) {
+          loaded: (reminders, _) {
             if (reminders.isEmpty) return const RemindersEmptyState();
 
             return ListView.builder(

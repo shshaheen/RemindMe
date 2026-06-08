@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import '../../../core/enums/reminder_filter.dart';
 import '../../../domain/entities/reminder.dart';
 
 part 'reminders_event.freezed.dart';
@@ -21,4 +22,7 @@ class RemindersEvent with _$RemindersEvent {
 
   const factory RemindersEvent.snoozeReminder({required String reminderId}) =
       SnoozeReminder;
+
+  const factory RemindersEvent.filterChanged({required ReminderFilter filter}) =
+      FilterChanged;
 }

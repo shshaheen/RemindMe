@@ -21,21 +21,27 @@ mixin _$RemindersState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Reminder> reminders) loaded,
+    required TResult Function(
+      List<Reminder> reminders,
+      ReminderFilter activeFilter,
+    )
+    loaded,
     required TResult Function(String message) error,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Reminder> reminders)? loaded,
+    TResult? Function(List<Reminder> reminders, ReminderFilter activeFilter)?
+    loaded,
     TResult? Function(String message)? error,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Reminder> reminders)? loaded,
+    TResult Function(List<Reminder> reminders, ReminderFilter activeFilter)?
+    loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
@@ -130,7 +136,11 @@ class _$RemindersInitialImpl implements RemindersInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Reminder> reminders) loaded,
+    required TResult Function(
+      List<Reminder> reminders,
+      ReminderFilter activeFilter,
+    )
+    loaded,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -141,7 +151,8 @@ class _$RemindersInitialImpl implements RemindersInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Reminder> reminders)? loaded,
+    TResult? Function(List<Reminder> reminders, ReminderFilter activeFilter)?
+    loaded,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -152,7 +163,8 @@ class _$RemindersInitialImpl implements RemindersInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Reminder> reminders)? loaded,
+    TResult Function(List<Reminder> reminders, ReminderFilter activeFilter)?
+    loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -249,7 +261,11 @@ class _$RemindersLoadingImpl implements RemindersLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Reminder> reminders) loaded,
+    required TResult Function(
+      List<Reminder> reminders,
+      ReminderFilter activeFilter,
+    )
+    loaded,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -260,7 +276,8 @@ class _$RemindersLoadingImpl implements RemindersLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Reminder> reminders)? loaded,
+    TResult? Function(List<Reminder> reminders, ReminderFilter activeFilter)?
+    loaded,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -271,7 +288,8 @@ class _$RemindersLoadingImpl implements RemindersLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Reminder> reminders)? loaded,
+    TResult Function(List<Reminder> reminders, ReminderFilter activeFilter)?
+    loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -330,7 +348,7 @@ abstract class _$$RemindersLoadedImplCopyWith<$Res> {
     $Res Function(_$RemindersLoadedImpl) then,
   ) = __$$RemindersLoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Reminder> reminders});
+  $Res call({List<Reminder> reminders, ReminderFilter activeFilter});
 }
 
 /// @nodoc
@@ -346,13 +364,17 @@ class __$$RemindersLoadedImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? reminders = null}) {
+  $Res call({Object? reminders = null, Object? activeFilter = null}) {
     return _then(
       _$RemindersLoadedImpl(
         reminders: null == reminders
             ? _value._reminders
             : reminders // ignore: cast_nullable_to_non_nullable
                   as List<Reminder>,
+        activeFilter: null == activeFilter
+            ? _value.activeFilter
+            : activeFilter // ignore: cast_nullable_to_non_nullable
+                  as ReminderFilter,
       ),
     );
   }
@@ -361,8 +383,10 @@ class __$$RemindersLoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$RemindersLoadedImpl implements RemindersLoaded {
-  const _$RemindersLoadedImpl({required final List<Reminder> reminders})
-    : _reminders = reminders;
+  const _$RemindersLoadedImpl({
+    required final List<Reminder> reminders,
+    this.activeFilter = ReminderFilter.all,
+  }) : _reminders = reminders;
 
   final List<Reminder> _reminders;
   @override
@@ -373,8 +397,12 @@ class _$RemindersLoadedImpl implements RemindersLoaded {
   }
 
   @override
+  @JsonKey()
+  final ReminderFilter activeFilter;
+
+  @override
   String toString() {
-    return 'RemindersState.loaded(reminders: $reminders)';
+    return 'RemindersState.loaded(reminders: $reminders, activeFilter: $activeFilter)';
   }
 
   @override
@@ -385,12 +413,17 @@ class _$RemindersLoadedImpl implements RemindersLoaded {
             const DeepCollectionEquality().equals(
               other._reminders,
               _reminders,
-            ));
+            ) &&
+            (identical(other.activeFilter, activeFilter) ||
+                other.activeFilter == activeFilter));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_reminders));
+  int get hashCode => Object.hash(
+    runtimeType,
+    const DeepCollectionEquality().hash(_reminders),
+    activeFilter,
+  );
 
   /// Create a copy of RemindersState
   /// with the given fields replaced by the non-null parameter values.
@@ -408,10 +441,14 @@ class _$RemindersLoadedImpl implements RemindersLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Reminder> reminders) loaded,
+    required TResult Function(
+      List<Reminder> reminders,
+      ReminderFilter activeFilter,
+    )
+    loaded,
     required TResult Function(String message) error,
   }) {
-    return loaded(reminders);
+    return loaded(reminders, activeFilter);
   }
 
   @override
@@ -419,10 +456,11 @@ class _$RemindersLoadedImpl implements RemindersLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Reminder> reminders)? loaded,
+    TResult? Function(List<Reminder> reminders, ReminderFilter activeFilter)?
+    loaded,
     TResult? Function(String message)? error,
   }) {
-    return loaded?.call(reminders);
+    return loaded?.call(reminders, activeFilter);
   }
 
   @override
@@ -430,12 +468,13 @@ class _$RemindersLoadedImpl implements RemindersLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Reminder> reminders)? loaded,
+    TResult Function(List<Reminder> reminders, ReminderFilter activeFilter)?
+    loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(reminders);
+      return loaded(reminders, activeFilter);
     }
     return orElse();
   }
@@ -479,10 +518,13 @@ class _$RemindersLoadedImpl implements RemindersLoaded {
 }
 
 abstract class RemindersLoaded implements RemindersState {
-  const factory RemindersLoaded({required final List<Reminder> reminders}) =
-      _$RemindersLoadedImpl;
+  const factory RemindersLoaded({
+    required final List<Reminder> reminders,
+    final ReminderFilter activeFilter,
+  }) = _$RemindersLoadedImpl;
 
   List<Reminder> get reminders;
+  ReminderFilter get activeFilter;
 
   /// Create a copy of RemindersState
   /// with the given fields replaced by the non-null parameter values.
@@ -566,7 +608,11 @@ class _$RemindersErrorImpl implements RemindersError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Reminder> reminders) loaded,
+    required TResult Function(
+      List<Reminder> reminders,
+      ReminderFilter activeFilter,
+    )
+    loaded,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -577,7 +623,8 @@ class _$RemindersErrorImpl implements RemindersError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Reminder> reminders)? loaded,
+    TResult? Function(List<Reminder> reminders, ReminderFilter activeFilter)?
+    loaded,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -588,7 +635,8 @@ class _$RemindersErrorImpl implements RemindersError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Reminder> reminders)? loaded,
+    TResult Function(List<Reminder> reminders, ReminderFilter activeFilter)?
+    loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {

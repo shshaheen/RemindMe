@@ -10,6 +10,7 @@ import '../../data/repositories/settings_repository_impl.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../../domain/repositories/reminders_repository.dart';
 import '../../domain/repositories/settings_repository.dart';
+import '../../domain/usecases/filter_reminders.dart';
 
 import '../../presentation/alarm/blocs/alarm_bloc.dart';
 import '../../presentation/auth/blocs/auth_bloc.dart';
@@ -95,8 +96,15 @@ void _initAlarmFeature() {
 
 /// Dependency Injection setup for the Reminders feature
 void _initRemindersFeature() {
+  // Use cases
+  sl.registerLazySingleton<FilterRemindersUseCase>(
+    () => const FilterRemindersUseCase(),
+  );
+
   // Blocs
-  sl.registerFactory(() => RemindersBloc(repository: sl()));
+  sl.registerFactory(
+    () => RemindersBloc(repository: sl(), filterReminders: sl()),
+  );
 
   // Repository implementations
   sl.registerLazySingleton<RemindersRepository>(

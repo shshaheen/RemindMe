@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import '../../../core/enums/reminder_filter.dart';
 
-/// Gradient welcome card showing today's date and the total reminder count.
+/// Gradient welcome card showing today's date and the active reminder count.
 ///
-/// Accepts [reminderCount] so the parent can feed it from a [BlocSelector],
-/// keeping this widget purely presentational and easy to test.
+/// Accepts [reminderCount] and [activeFilter] from [BlocSelector] in the
+/// parent, keeping this widget purely presentational and easy to test.
 class RemindersHeaderCard extends StatelessWidget {
   final bool isDarkMode;
   final int reminderCount;
+  final ReminderFilter activeFilter;
 
   static const _dayImage = AssetImage('assets/images/day_sky.jpg');
   static const _nightImage = AssetImage('assets/images/night_sky.jpg');
@@ -15,26 +17,38 @@ class RemindersHeaderCard extends StatelessWidget {
     super.key,
     required this.isDarkMode,
     required this.reminderCount,
+    this.activeFilter = ReminderFilter.all,
   });
 
   String _formattedDate() {
     final now = DateTime.now();
     const weekdays = [
-      'Monday', 'Tuesday', 'Wednesday', 'Thursday',
-      'Friday', 'Saturday', 'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday',
     ];
     const months = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
     ];
     return '${weekdays[now.weekday - 1]}, ${months[now.month - 1]} ${now.day}, ${now.year}';
   }
 
-  String _countLabel() {
-    if (reminderCount == 0) return 'No reminders scheduled';
-    if (reminderCount == 1) return '1 active reminder';
-    return '$reminderCount active reminders';
-  }
+  String _countLabel() => activeFilter.subtitle(reminderCount);
 
   @override
   Widget build(BuildContext context) {
@@ -65,15 +79,22 @@ class RemindersHeaderCard extends StatelessWidget {
               Text(
                 _formattedDate(),
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.85),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onPrimary.withOpacity(0.85),
                   fontWeight: FontWeight.w600,
                   fontSize: 14,
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.15),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onPrimary.withOpacity(0.15),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(

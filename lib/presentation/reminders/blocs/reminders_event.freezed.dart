@@ -25,6 +25,7 @@ mixin _$RemindersEvent {
     required TResult Function(String id) deleteReminder,
     required TResult Function(String query) searchReminders,
     required TResult Function(String reminderId) snoozeReminder,
+    required TResult Function(ReminderFilter filter) filterChanged,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
@@ -34,6 +35,7 @@ mixin _$RemindersEvent {
     TResult? Function(String id)? deleteReminder,
     TResult? Function(String query)? searchReminders,
     TResult? Function(String reminderId)? snoozeReminder,
+    TResult? Function(ReminderFilter filter)? filterChanged,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
@@ -43,6 +45,7 @@ mixin _$RemindersEvent {
     TResult Function(String id)? deleteReminder,
     TResult Function(String query)? searchReminders,
     TResult Function(String reminderId)? snoozeReminder,
+    TResult Function(ReminderFilter filter)? filterChanged,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -53,6 +56,7 @@ mixin _$RemindersEvent {
     required TResult Function(DeleteReminder value) deleteReminder,
     required TResult Function(SearchReminders value) searchReminders,
     required TResult Function(SnoozeReminder value) snoozeReminder,
+    required TResult Function(FilterChanged value) filterChanged,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
@@ -62,6 +66,7 @@ mixin _$RemindersEvent {
     TResult? Function(DeleteReminder value)? deleteReminder,
     TResult? Function(SearchReminders value)? searchReminders,
     TResult? Function(SnoozeReminder value)? snoozeReminder,
+    TResult? Function(FilterChanged value)? filterChanged,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
@@ -71,6 +76,7 @@ mixin _$RemindersEvent {
     TResult Function(DeleteReminder value)? deleteReminder,
     TResult Function(SearchReminders value)? searchReminders,
     TResult Function(SnoozeReminder value)? snoozeReminder,
+    TResult Function(FilterChanged value)? filterChanged,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 }
@@ -146,6 +152,7 @@ class _$LoadRemindersImpl implements LoadReminders {
     required TResult Function(String id) deleteReminder,
     required TResult Function(String query) searchReminders,
     required TResult Function(String reminderId) snoozeReminder,
+    required TResult Function(ReminderFilter filter) filterChanged,
   }) {
     return loadReminders();
   }
@@ -159,6 +166,7 @@ class _$LoadRemindersImpl implements LoadReminders {
     TResult? Function(String id)? deleteReminder,
     TResult? Function(String query)? searchReminders,
     TResult? Function(String reminderId)? snoozeReminder,
+    TResult? Function(ReminderFilter filter)? filterChanged,
   }) {
     return loadReminders?.call();
   }
@@ -172,6 +180,7 @@ class _$LoadRemindersImpl implements LoadReminders {
     TResult Function(String id)? deleteReminder,
     TResult Function(String query)? searchReminders,
     TResult Function(String reminderId)? snoozeReminder,
+    TResult Function(ReminderFilter filter)? filterChanged,
     required TResult orElse(),
   }) {
     if (loadReminders != null) {
@@ -189,6 +198,7 @@ class _$LoadRemindersImpl implements LoadReminders {
     required TResult Function(DeleteReminder value) deleteReminder,
     required TResult Function(SearchReminders value) searchReminders,
     required TResult Function(SnoozeReminder value) snoozeReminder,
+    required TResult Function(FilterChanged value) filterChanged,
   }) {
     return loadReminders(this);
   }
@@ -202,6 +212,7 @@ class _$LoadRemindersImpl implements LoadReminders {
     TResult? Function(DeleteReminder value)? deleteReminder,
     TResult? Function(SearchReminders value)? searchReminders,
     TResult? Function(SnoozeReminder value)? snoozeReminder,
+    TResult? Function(FilterChanged value)? filterChanged,
   }) {
     return loadReminders?.call(this);
   }
@@ -215,6 +226,7 @@ class _$LoadRemindersImpl implements LoadReminders {
     TResult Function(DeleteReminder value)? deleteReminder,
     TResult Function(SearchReminders value)? searchReminders,
     TResult Function(SnoozeReminder value)? snoozeReminder,
+    TResult Function(FilterChanged value)? filterChanged,
     required TResult orElse(),
   }) {
     if (loadReminders != null) {
@@ -305,6 +317,7 @@ class _$AddReminderImpl implements AddReminder {
     required TResult Function(String id) deleteReminder,
     required TResult Function(String query) searchReminders,
     required TResult Function(String reminderId) snoozeReminder,
+    required TResult Function(ReminderFilter filter) filterChanged,
   }) {
     return addReminder(reminder);
   }
@@ -318,6 +331,7 @@ class _$AddReminderImpl implements AddReminder {
     TResult? Function(String id)? deleteReminder,
     TResult? Function(String query)? searchReminders,
     TResult? Function(String reminderId)? snoozeReminder,
+    TResult? Function(ReminderFilter filter)? filterChanged,
   }) {
     return addReminder?.call(reminder);
   }
@@ -331,6 +345,7 @@ class _$AddReminderImpl implements AddReminder {
     TResult Function(String id)? deleteReminder,
     TResult Function(String query)? searchReminders,
     TResult Function(String reminderId)? snoozeReminder,
+    TResult Function(ReminderFilter filter)? filterChanged,
     required TResult orElse(),
   }) {
     if (addReminder != null) {
@@ -348,6 +363,7 @@ class _$AddReminderImpl implements AddReminder {
     required TResult Function(DeleteReminder value) deleteReminder,
     required TResult Function(SearchReminders value) searchReminders,
     required TResult Function(SnoozeReminder value) snoozeReminder,
+    required TResult Function(FilterChanged value) filterChanged,
   }) {
     return addReminder(this);
   }
@@ -361,6 +377,7 @@ class _$AddReminderImpl implements AddReminder {
     TResult? Function(DeleteReminder value)? deleteReminder,
     TResult? Function(SearchReminders value)? searchReminders,
     TResult? Function(SnoozeReminder value)? snoozeReminder,
+    TResult? Function(FilterChanged value)? filterChanged,
   }) {
     return addReminder?.call(this);
   }
@@ -374,6 +391,7 @@ class _$AddReminderImpl implements AddReminder {
     TResult Function(DeleteReminder value)? deleteReminder,
     TResult Function(SearchReminders value)? searchReminders,
     TResult Function(SnoozeReminder value)? snoozeReminder,
+    TResult Function(FilterChanged value)? filterChanged,
     required TResult orElse(),
   }) {
     if (addReminder != null) {
@@ -476,6 +494,7 @@ class _$UpdateReminderImpl implements UpdateReminder {
     required TResult Function(String id) deleteReminder,
     required TResult Function(String query) searchReminders,
     required TResult Function(String reminderId) snoozeReminder,
+    required TResult Function(ReminderFilter filter) filterChanged,
   }) {
     return updateReminder(reminder);
   }
@@ -489,6 +508,7 @@ class _$UpdateReminderImpl implements UpdateReminder {
     TResult? Function(String id)? deleteReminder,
     TResult? Function(String query)? searchReminders,
     TResult? Function(String reminderId)? snoozeReminder,
+    TResult? Function(ReminderFilter filter)? filterChanged,
   }) {
     return updateReminder?.call(reminder);
   }
@@ -502,6 +522,7 @@ class _$UpdateReminderImpl implements UpdateReminder {
     TResult Function(String id)? deleteReminder,
     TResult Function(String query)? searchReminders,
     TResult Function(String reminderId)? snoozeReminder,
+    TResult Function(ReminderFilter filter)? filterChanged,
     required TResult orElse(),
   }) {
     if (updateReminder != null) {
@@ -519,6 +540,7 @@ class _$UpdateReminderImpl implements UpdateReminder {
     required TResult Function(DeleteReminder value) deleteReminder,
     required TResult Function(SearchReminders value) searchReminders,
     required TResult Function(SnoozeReminder value) snoozeReminder,
+    required TResult Function(FilterChanged value) filterChanged,
   }) {
     return updateReminder(this);
   }
@@ -532,6 +554,7 @@ class _$UpdateReminderImpl implements UpdateReminder {
     TResult? Function(DeleteReminder value)? deleteReminder,
     TResult? Function(SearchReminders value)? searchReminders,
     TResult? Function(SnoozeReminder value)? snoozeReminder,
+    TResult? Function(FilterChanged value)? filterChanged,
   }) {
     return updateReminder?.call(this);
   }
@@ -545,6 +568,7 @@ class _$UpdateReminderImpl implements UpdateReminder {
     TResult Function(DeleteReminder value)? deleteReminder,
     TResult Function(SearchReminders value)? searchReminders,
     TResult Function(SnoozeReminder value)? snoozeReminder,
+    TResult Function(FilterChanged value)? filterChanged,
     required TResult orElse(),
   }) {
     if (updateReminder != null) {
@@ -646,6 +670,7 @@ class _$DeleteReminderImpl implements DeleteReminder {
     required TResult Function(String id) deleteReminder,
     required TResult Function(String query) searchReminders,
     required TResult Function(String reminderId) snoozeReminder,
+    required TResult Function(ReminderFilter filter) filterChanged,
   }) {
     return deleteReminder(id);
   }
@@ -659,6 +684,7 @@ class _$DeleteReminderImpl implements DeleteReminder {
     TResult? Function(String id)? deleteReminder,
     TResult? Function(String query)? searchReminders,
     TResult? Function(String reminderId)? snoozeReminder,
+    TResult? Function(ReminderFilter filter)? filterChanged,
   }) {
     return deleteReminder?.call(id);
   }
@@ -672,6 +698,7 @@ class _$DeleteReminderImpl implements DeleteReminder {
     TResult Function(String id)? deleteReminder,
     TResult Function(String query)? searchReminders,
     TResult Function(String reminderId)? snoozeReminder,
+    TResult Function(ReminderFilter filter)? filterChanged,
     required TResult orElse(),
   }) {
     if (deleteReminder != null) {
@@ -689,6 +716,7 @@ class _$DeleteReminderImpl implements DeleteReminder {
     required TResult Function(DeleteReminder value) deleteReminder,
     required TResult Function(SearchReminders value) searchReminders,
     required TResult Function(SnoozeReminder value) snoozeReminder,
+    required TResult Function(FilterChanged value) filterChanged,
   }) {
     return deleteReminder(this);
   }
@@ -702,6 +730,7 @@ class _$DeleteReminderImpl implements DeleteReminder {
     TResult? Function(DeleteReminder value)? deleteReminder,
     TResult? Function(SearchReminders value)? searchReminders,
     TResult? Function(SnoozeReminder value)? snoozeReminder,
+    TResult? Function(FilterChanged value)? filterChanged,
   }) {
     return deleteReminder?.call(this);
   }
@@ -715,6 +744,7 @@ class _$DeleteReminderImpl implements DeleteReminder {
     TResult Function(DeleteReminder value)? deleteReminder,
     TResult Function(SearchReminders value)? searchReminders,
     TResult Function(SnoozeReminder value)? snoozeReminder,
+    TResult Function(FilterChanged value)? filterChanged,
     required TResult orElse(),
   }) {
     if (deleteReminder != null) {
@@ -816,6 +846,7 @@ class _$SearchRemindersImpl implements SearchReminders {
     required TResult Function(String id) deleteReminder,
     required TResult Function(String query) searchReminders,
     required TResult Function(String reminderId) snoozeReminder,
+    required TResult Function(ReminderFilter filter) filterChanged,
   }) {
     return searchReminders(query);
   }
@@ -829,6 +860,7 @@ class _$SearchRemindersImpl implements SearchReminders {
     TResult? Function(String id)? deleteReminder,
     TResult? Function(String query)? searchReminders,
     TResult? Function(String reminderId)? snoozeReminder,
+    TResult? Function(ReminderFilter filter)? filterChanged,
   }) {
     return searchReminders?.call(query);
   }
@@ -842,6 +874,7 @@ class _$SearchRemindersImpl implements SearchReminders {
     TResult Function(String id)? deleteReminder,
     TResult Function(String query)? searchReminders,
     TResult Function(String reminderId)? snoozeReminder,
+    TResult Function(ReminderFilter filter)? filterChanged,
     required TResult orElse(),
   }) {
     if (searchReminders != null) {
@@ -859,6 +892,7 @@ class _$SearchRemindersImpl implements SearchReminders {
     required TResult Function(DeleteReminder value) deleteReminder,
     required TResult Function(SearchReminders value) searchReminders,
     required TResult Function(SnoozeReminder value) snoozeReminder,
+    required TResult Function(FilterChanged value) filterChanged,
   }) {
     return searchReminders(this);
   }
@@ -872,6 +906,7 @@ class _$SearchRemindersImpl implements SearchReminders {
     TResult? Function(DeleteReminder value)? deleteReminder,
     TResult? Function(SearchReminders value)? searchReminders,
     TResult? Function(SnoozeReminder value)? snoozeReminder,
+    TResult? Function(FilterChanged value)? filterChanged,
   }) {
     return searchReminders?.call(this);
   }
@@ -885,6 +920,7 @@ class _$SearchRemindersImpl implements SearchReminders {
     TResult Function(DeleteReminder value)? deleteReminder,
     TResult Function(SearchReminders value)? searchReminders,
     TResult Function(SnoozeReminder value)? snoozeReminder,
+    TResult Function(FilterChanged value)? filterChanged,
     required TResult orElse(),
   }) {
     if (searchReminders != null) {
@@ -987,6 +1023,7 @@ class _$SnoozeReminderImpl implements SnoozeReminder {
     required TResult Function(String id) deleteReminder,
     required TResult Function(String query) searchReminders,
     required TResult Function(String reminderId) snoozeReminder,
+    required TResult Function(ReminderFilter filter) filterChanged,
   }) {
     return snoozeReminder(reminderId);
   }
@@ -1000,6 +1037,7 @@ class _$SnoozeReminderImpl implements SnoozeReminder {
     TResult? Function(String id)? deleteReminder,
     TResult? Function(String query)? searchReminders,
     TResult? Function(String reminderId)? snoozeReminder,
+    TResult? Function(ReminderFilter filter)? filterChanged,
   }) {
     return snoozeReminder?.call(reminderId);
   }
@@ -1013,6 +1051,7 @@ class _$SnoozeReminderImpl implements SnoozeReminder {
     TResult Function(String id)? deleteReminder,
     TResult Function(String query)? searchReminders,
     TResult Function(String reminderId)? snoozeReminder,
+    TResult Function(ReminderFilter filter)? filterChanged,
     required TResult orElse(),
   }) {
     if (snoozeReminder != null) {
@@ -1030,6 +1069,7 @@ class _$SnoozeReminderImpl implements SnoozeReminder {
     required TResult Function(DeleteReminder value) deleteReminder,
     required TResult Function(SearchReminders value) searchReminders,
     required TResult Function(SnoozeReminder value) snoozeReminder,
+    required TResult Function(FilterChanged value) filterChanged,
   }) {
     return snoozeReminder(this);
   }
@@ -1043,6 +1083,7 @@ class _$SnoozeReminderImpl implements SnoozeReminder {
     TResult? Function(DeleteReminder value)? deleteReminder,
     TResult? Function(SearchReminders value)? searchReminders,
     TResult? Function(SnoozeReminder value)? snoozeReminder,
+    TResult? Function(FilterChanged value)? filterChanged,
   }) {
     return snoozeReminder?.call(this);
   }
@@ -1056,6 +1097,7 @@ class _$SnoozeReminderImpl implements SnoozeReminder {
     TResult Function(DeleteReminder value)? deleteReminder,
     TResult Function(SearchReminders value)? searchReminders,
     TResult Function(SnoozeReminder value)? snoozeReminder,
+    TResult Function(FilterChanged value)? filterChanged,
     required TResult orElse(),
   }) {
     if (snoozeReminder != null) {
@@ -1075,5 +1117,178 @@ abstract class SnoozeReminder implements RemindersEvent {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SnoozeReminderImplCopyWith<_$SnoozeReminderImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FilterChangedImplCopyWith<$Res> {
+  factory _$$FilterChangedImplCopyWith(
+    _$FilterChangedImpl value,
+    $Res Function(_$FilterChangedImpl) then,
+  ) = __$$FilterChangedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ReminderFilter filter});
+}
+
+/// @nodoc
+class __$$FilterChangedImplCopyWithImpl<$Res>
+    extends _$RemindersEventCopyWithImpl<$Res, _$FilterChangedImpl>
+    implements _$$FilterChangedImplCopyWith<$Res> {
+  __$$FilterChangedImplCopyWithImpl(
+    _$FilterChangedImpl _value,
+    $Res Function(_$FilterChangedImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of RemindersEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? filter = null}) {
+    return _then(
+      _$FilterChangedImpl(
+        filter: null == filter
+            ? _value.filter
+            : filter // ignore: cast_nullable_to_non_nullable
+                  as ReminderFilter,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$FilterChangedImpl implements FilterChanged {
+  const _$FilterChangedImpl({required this.filter});
+
+  @override
+  final ReminderFilter filter;
+
+  @override
+  String toString() {
+    return 'RemindersEvent.filterChanged(filter: $filter)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FilterChangedImpl &&
+            (identical(other.filter, filter) || other.filter == filter));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, filter);
+
+  /// Create a copy of RemindersEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FilterChangedImplCopyWith<_$FilterChangedImpl> get copyWith =>
+      __$$FilterChangedImplCopyWithImpl<_$FilterChangedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadReminders,
+    required TResult Function(Reminder reminder) addReminder,
+    required TResult Function(Reminder reminder) updateReminder,
+    required TResult Function(String id) deleteReminder,
+    required TResult Function(String query) searchReminders,
+    required TResult Function(String reminderId) snoozeReminder,
+    required TResult Function(ReminderFilter filter) filterChanged,
+  }) {
+    return filterChanged(filter);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loadReminders,
+    TResult? Function(Reminder reminder)? addReminder,
+    TResult? Function(Reminder reminder)? updateReminder,
+    TResult? Function(String id)? deleteReminder,
+    TResult? Function(String query)? searchReminders,
+    TResult? Function(String reminderId)? snoozeReminder,
+    TResult? Function(ReminderFilter filter)? filterChanged,
+  }) {
+    return filterChanged?.call(filter);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadReminders,
+    TResult Function(Reminder reminder)? addReminder,
+    TResult Function(Reminder reminder)? updateReminder,
+    TResult Function(String id)? deleteReminder,
+    TResult Function(String query)? searchReminders,
+    TResult Function(String reminderId)? snoozeReminder,
+    TResult Function(ReminderFilter filter)? filterChanged,
+    required TResult orElse(),
+  }) {
+    if (filterChanged != null) {
+      return filterChanged(filter);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadReminders value) loadReminders,
+    required TResult Function(AddReminder value) addReminder,
+    required TResult Function(UpdateReminder value) updateReminder,
+    required TResult Function(DeleteReminder value) deleteReminder,
+    required TResult Function(SearchReminders value) searchReminders,
+    required TResult Function(SnoozeReminder value) snoozeReminder,
+    required TResult Function(FilterChanged value) filterChanged,
+  }) {
+    return filterChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadReminders value)? loadReminders,
+    TResult? Function(AddReminder value)? addReminder,
+    TResult? Function(UpdateReminder value)? updateReminder,
+    TResult? Function(DeleteReminder value)? deleteReminder,
+    TResult? Function(SearchReminders value)? searchReminders,
+    TResult? Function(SnoozeReminder value)? snoozeReminder,
+    TResult? Function(FilterChanged value)? filterChanged,
+  }) {
+    return filterChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadReminders value)? loadReminders,
+    TResult Function(AddReminder value)? addReminder,
+    TResult Function(UpdateReminder value)? updateReminder,
+    TResult Function(DeleteReminder value)? deleteReminder,
+    TResult Function(SearchReminders value)? searchReminders,
+    TResult Function(SnoozeReminder value)? snoozeReminder,
+    TResult Function(FilterChanged value)? filterChanged,
+    required TResult orElse(),
+  }) {
+    if (filterChanged != null) {
+      return filterChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class FilterChanged implements RemindersEvent {
+  const factory FilterChanged({required final ReminderFilter filter}) =
+      _$FilterChangedImpl;
+
+  ReminderFilter get filter;
+
+  /// Create a copy of RemindersEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FilterChangedImplCopyWith<_$FilterChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
