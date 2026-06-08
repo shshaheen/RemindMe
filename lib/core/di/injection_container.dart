@@ -10,6 +10,7 @@ import '../../data/repositories/settings_repository_impl.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../../domain/repositories/reminders_repository.dart';
 import '../../domain/repositories/settings_repository.dart';
+import '../../domain/usecases/bulk_delete_reminders.dart';
 import '../../domain/usecases/filter_reminders.dart';
 
 import '../../presentation/alarm/blocs/alarm_bloc.dart';
@@ -100,10 +101,17 @@ void _initRemindersFeature() {
   sl.registerLazySingleton<FilterRemindersUseCase>(
     () => const FilterRemindersUseCase(),
   );
+  sl.registerLazySingleton<BulkDeleteRemindersUseCase>(
+    () => BulkDeleteRemindersUseCase(repository: sl()),
+  );
 
   // Blocs
   sl.registerFactory(
-    () => RemindersBloc(repository: sl(), filterReminders: sl()),
+    () => RemindersBloc(
+      repository: sl(),
+      filterReminders: sl(),
+      bulkDeleteReminders: sl(),
+    ),
   );
 
   // Repository implementations

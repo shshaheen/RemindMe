@@ -23,11 +23,11 @@ class AlarmBloc extends Bloc<AlarmEvent, AlarmState> {
     required AlarmChannelService alarmChannelService,
     required TtsService ttsService,
     required NotificationService notificationService,
-  })  : _repository = repository,
-        _alarmChannelService = alarmChannelService,
-        _ttsService = ttsService,
-        _notificationService = notificationService,
-        super(const AlarmState.initial()) {
+  }) : _repository = repository,
+       _alarmChannelService = alarmChannelService,
+       _ttsService = ttsService,
+       _notificationService = notificationService,
+       super(const AlarmState.initial()) {
     on<AlarmEvent>((event, emit) async {
       await event.map(
         started: (e) => _onStarted(e, emit),
@@ -43,10 +43,7 @@ class AlarmBloc extends Bloc<AlarmEvent, AlarmState> {
   // Event handlers
   // ---------------------------------------------------------------------------
 
-  Future<void> _onStarted(
-    AlarmStarted event,
-    Emitter<AlarmState> emit,
-  ) async {
+  Future<void> _onStarted(AlarmStarted event, Emitter<AlarmState> emit) async {
     _reminderId = event.reminderId;
     emit(const AlarmState.loading());
     try {
@@ -103,10 +100,7 @@ class AlarmBloc extends Bloc<AlarmEvent, AlarmState> {
     );
   }
 
-  Future<void> _onSnoozed(
-    AlarmSnoozed event,
-    Emitter<AlarmState> emit,
-  ) async {
+  Future<void> _onSnoozed(AlarmSnoozed event, Emitter<AlarmState> emit) async {
     await _alarmChannelService.stopRingtone();
     await _ttsService.stop();
 
@@ -117,14 +111,17 @@ class AlarmBloc extends Bloc<AlarmEvent, AlarmState> {
       try {
         await _repository.snoozeReminder(_reminderId!);
       } catch (e) {
-        if (kDebugMode) debugPrint('AlarmBloc [snoozed] snoozeReminder error: $e');
+        if (kDebugMode)
+          debugPrint('AlarmBloc [snoozed] snoozeReminder error: $e');
       }
     }
 
-    emit(AlarmState.snoozedConfirmation(
-      snoozedMinutes: snoozedMinutes,
-      ringAt: ringAt,
-    ));
+    emit(
+      AlarmState.snoozedConfirmation(
+        snoozedMinutes: snoozedMinutes,
+        ringAt: ringAt,
+      ),
+    );
 
     Future.delayed(
       const Duration(milliseconds: 2400),

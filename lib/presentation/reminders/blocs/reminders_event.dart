@@ -25,4 +25,19 @@ class RemindersEvent with _$RemindersEvent {
 
   const factory RemindersEvent.filterChanged({required ReminderFilter filter}) =
       FilterChanged;
+
+  /// Enter selection mode with [firstSelectedId] pre-selected.
+  const factory RemindersEvent.enterSelectionMode({
+    required String firstSelectedId,
+  }) = EnterSelectionMode;
+
+  /// Toggle the selected state of a single reminder while in selection mode.
+  const factory RemindersEvent.toggleReminderSelection({required String id}) =
+      ToggleReminderSelection;
+
+  /// Clear all selections and exit selection mode.
+  const factory RemindersEvent.clearSelection() = ClearSelection;
+
+  /// Delete all currently selected reminders (after confirmation in the UI).
+  const factory RemindersEvent.bulkDeleteReminders() = BulkDeleteReminders;
 }

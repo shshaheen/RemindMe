@@ -26,9 +26,10 @@ class _PulsingLogoState extends State<PulsingLogo>
       duration: const Duration(milliseconds: 2500),
     )..repeat(reverse: true);
 
-    _scale = Tween<double>(begin: 0.94, end: 1.06).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _scale = Tween<double>(
+      begin: 0.94,
+      end: 1.06,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
   @override
@@ -51,10 +52,7 @@ class _PulsingLogoState extends State<PulsingLogo>
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: Colors.white.withOpacity(0.04),
-          border: Border.all(
-            color: Colors.white.withOpacity(0.08),
-            width: 1,
-          ),
+          border: Border.all(color: Colors.white.withOpacity(0.08), width: 1),
           boxShadow: [
             BoxShadow(
               color: glowColor.withOpacity(0.15),

@@ -38,8 +38,7 @@ class ReminderFilterChips extends StatelessWidget {
                 color: isSelected
                     ? colorScheme.onPrimary
                     : colorScheme.onSurfaceVariant,
-                fontWeight:
-                    isSelected ? FontWeight.w600 : FontWeight.w400,
+                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
                 fontSize: 13,
               ),
               shape: RoundedRectangleBorder(

@@ -16,7 +16,8 @@ class AlarmState with _$AlarmState {
   const factory AlarmState.idle({required Reminder reminder}) = AlarmIdle;
 
   /// User accepted — TTS is actively delivering the reminder.
-  const factory AlarmState.speaking({required Reminder reminder}) = AlarmSpeaking;
+  const factory AlarmState.speaking({required Reminder reminder}) =
+      AlarmSpeaking;
 
   /// TTS finished — showing success confirmation.
   const factory AlarmState.delivered() = AlarmDelivered;

@@ -26,6 +26,10 @@ mixin _$RemindersEvent {
     required TResult Function(String query) searchReminders,
     required TResult Function(String reminderId) snoozeReminder,
     required TResult Function(ReminderFilter filter) filterChanged,
+    required TResult Function(String firstSelectedId) enterSelectionMode,
+    required TResult Function(String id) toggleReminderSelection,
+    required TResult Function() clearSelection,
+    required TResult Function() bulkDeleteReminders,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
@@ -36,6 +40,10 @@ mixin _$RemindersEvent {
     TResult? Function(String query)? searchReminders,
     TResult? Function(String reminderId)? snoozeReminder,
     TResult? Function(ReminderFilter filter)? filterChanged,
+    TResult? Function(String firstSelectedId)? enterSelectionMode,
+    TResult? Function(String id)? toggleReminderSelection,
+    TResult? Function()? clearSelection,
+    TResult? Function()? bulkDeleteReminders,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
@@ -46,6 +54,10 @@ mixin _$RemindersEvent {
     TResult Function(String query)? searchReminders,
     TResult Function(String reminderId)? snoozeReminder,
     TResult Function(ReminderFilter filter)? filterChanged,
+    TResult Function(String firstSelectedId)? enterSelectionMode,
+    TResult Function(String id)? toggleReminderSelection,
+    TResult Function()? clearSelection,
+    TResult Function()? bulkDeleteReminders,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +69,11 @@ mixin _$RemindersEvent {
     required TResult Function(SearchReminders value) searchReminders,
     required TResult Function(SnoozeReminder value) snoozeReminder,
     required TResult Function(FilterChanged value) filterChanged,
+    required TResult Function(EnterSelectionMode value) enterSelectionMode,
+    required TResult Function(ToggleReminderSelection value)
+    toggleReminderSelection,
+    required TResult Function(ClearSelection value) clearSelection,
+    required TResult Function(BulkDeleteReminders value) bulkDeleteReminders,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
@@ -67,6 +84,10 @@ mixin _$RemindersEvent {
     TResult? Function(SearchReminders value)? searchReminders,
     TResult? Function(SnoozeReminder value)? snoozeReminder,
     TResult? Function(FilterChanged value)? filterChanged,
+    TResult? Function(EnterSelectionMode value)? enterSelectionMode,
+    TResult? Function(ToggleReminderSelection value)? toggleReminderSelection,
+    TResult? Function(ClearSelection value)? clearSelection,
+    TResult? Function(BulkDeleteReminders value)? bulkDeleteReminders,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
@@ -77,6 +98,10 @@ mixin _$RemindersEvent {
     TResult Function(SearchReminders value)? searchReminders,
     TResult Function(SnoozeReminder value)? snoozeReminder,
     TResult Function(FilterChanged value)? filterChanged,
+    TResult Function(EnterSelectionMode value)? enterSelectionMode,
+    TResult Function(ToggleReminderSelection value)? toggleReminderSelection,
+    TResult Function(ClearSelection value)? clearSelection,
+    TResult Function(BulkDeleteReminders value)? bulkDeleteReminders,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 }
@@ -153,6 +178,10 @@ class _$LoadRemindersImpl implements LoadReminders {
     required TResult Function(String query) searchReminders,
     required TResult Function(String reminderId) snoozeReminder,
     required TResult Function(ReminderFilter filter) filterChanged,
+    required TResult Function(String firstSelectedId) enterSelectionMode,
+    required TResult Function(String id) toggleReminderSelection,
+    required TResult Function() clearSelection,
+    required TResult Function() bulkDeleteReminders,
   }) {
     return loadReminders();
   }
@@ -167,6 +196,10 @@ class _$LoadRemindersImpl implements LoadReminders {
     TResult? Function(String query)? searchReminders,
     TResult? Function(String reminderId)? snoozeReminder,
     TResult? Function(ReminderFilter filter)? filterChanged,
+    TResult? Function(String firstSelectedId)? enterSelectionMode,
+    TResult? Function(String id)? toggleReminderSelection,
+    TResult? Function()? clearSelection,
+    TResult? Function()? bulkDeleteReminders,
   }) {
     return loadReminders?.call();
   }
@@ -181,6 +214,10 @@ class _$LoadRemindersImpl implements LoadReminders {
     TResult Function(String query)? searchReminders,
     TResult Function(String reminderId)? snoozeReminder,
     TResult Function(ReminderFilter filter)? filterChanged,
+    TResult Function(String firstSelectedId)? enterSelectionMode,
+    TResult Function(String id)? toggleReminderSelection,
+    TResult Function()? clearSelection,
+    TResult Function()? bulkDeleteReminders,
     required TResult orElse(),
   }) {
     if (loadReminders != null) {
@@ -199,6 +236,11 @@ class _$LoadRemindersImpl implements LoadReminders {
     required TResult Function(SearchReminders value) searchReminders,
     required TResult Function(SnoozeReminder value) snoozeReminder,
     required TResult Function(FilterChanged value) filterChanged,
+    required TResult Function(EnterSelectionMode value) enterSelectionMode,
+    required TResult Function(ToggleReminderSelection value)
+    toggleReminderSelection,
+    required TResult Function(ClearSelection value) clearSelection,
+    required TResult Function(BulkDeleteReminders value) bulkDeleteReminders,
   }) {
     return loadReminders(this);
   }
@@ -213,6 +255,10 @@ class _$LoadRemindersImpl implements LoadReminders {
     TResult? Function(SearchReminders value)? searchReminders,
     TResult? Function(SnoozeReminder value)? snoozeReminder,
     TResult? Function(FilterChanged value)? filterChanged,
+    TResult? Function(EnterSelectionMode value)? enterSelectionMode,
+    TResult? Function(ToggleReminderSelection value)? toggleReminderSelection,
+    TResult? Function(ClearSelection value)? clearSelection,
+    TResult? Function(BulkDeleteReminders value)? bulkDeleteReminders,
   }) {
     return loadReminders?.call(this);
   }
@@ -227,6 +273,10 @@ class _$LoadRemindersImpl implements LoadReminders {
     TResult Function(SearchReminders value)? searchReminders,
     TResult Function(SnoozeReminder value)? snoozeReminder,
     TResult Function(FilterChanged value)? filterChanged,
+    TResult Function(EnterSelectionMode value)? enterSelectionMode,
+    TResult Function(ToggleReminderSelection value)? toggleReminderSelection,
+    TResult Function(ClearSelection value)? clearSelection,
+    TResult Function(BulkDeleteReminders value)? bulkDeleteReminders,
     required TResult orElse(),
   }) {
     if (loadReminders != null) {
@@ -318,6 +368,10 @@ class _$AddReminderImpl implements AddReminder {
     required TResult Function(String query) searchReminders,
     required TResult Function(String reminderId) snoozeReminder,
     required TResult Function(ReminderFilter filter) filterChanged,
+    required TResult Function(String firstSelectedId) enterSelectionMode,
+    required TResult Function(String id) toggleReminderSelection,
+    required TResult Function() clearSelection,
+    required TResult Function() bulkDeleteReminders,
   }) {
     return addReminder(reminder);
   }
@@ -332,6 +386,10 @@ class _$AddReminderImpl implements AddReminder {
     TResult? Function(String query)? searchReminders,
     TResult? Function(String reminderId)? snoozeReminder,
     TResult? Function(ReminderFilter filter)? filterChanged,
+    TResult? Function(String firstSelectedId)? enterSelectionMode,
+    TResult? Function(String id)? toggleReminderSelection,
+    TResult? Function()? clearSelection,
+    TResult? Function()? bulkDeleteReminders,
   }) {
     return addReminder?.call(reminder);
   }
@@ -346,6 +404,10 @@ class _$AddReminderImpl implements AddReminder {
     TResult Function(String query)? searchReminders,
     TResult Function(String reminderId)? snoozeReminder,
     TResult Function(ReminderFilter filter)? filterChanged,
+    TResult Function(String firstSelectedId)? enterSelectionMode,
+    TResult Function(String id)? toggleReminderSelection,
+    TResult Function()? clearSelection,
+    TResult Function()? bulkDeleteReminders,
     required TResult orElse(),
   }) {
     if (addReminder != null) {
@@ -364,6 +426,11 @@ class _$AddReminderImpl implements AddReminder {
     required TResult Function(SearchReminders value) searchReminders,
     required TResult Function(SnoozeReminder value) snoozeReminder,
     required TResult Function(FilterChanged value) filterChanged,
+    required TResult Function(EnterSelectionMode value) enterSelectionMode,
+    required TResult Function(ToggleReminderSelection value)
+    toggleReminderSelection,
+    required TResult Function(ClearSelection value) clearSelection,
+    required TResult Function(BulkDeleteReminders value) bulkDeleteReminders,
   }) {
     return addReminder(this);
   }
@@ -378,6 +445,10 @@ class _$AddReminderImpl implements AddReminder {
     TResult? Function(SearchReminders value)? searchReminders,
     TResult? Function(SnoozeReminder value)? snoozeReminder,
     TResult? Function(FilterChanged value)? filterChanged,
+    TResult? Function(EnterSelectionMode value)? enterSelectionMode,
+    TResult? Function(ToggleReminderSelection value)? toggleReminderSelection,
+    TResult? Function(ClearSelection value)? clearSelection,
+    TResult? Function(BulkDeleteReminders value)? bulkDeleteReminders,
   }) {
     return addReminder?.call(this);
   }
@@ -392,6 +463,10 @@ class _$AddReminderImpl implements AddReminder {
     TResult Function(SearchReminders value)? searchReminders,
     TResult Function(SnoozeReminder value)? snoozeReminder,
     TResult Function(FilterChanged value)? filterChanged,
+    TResult Function(EnterSelectionMode value)? enterSelectionMode,
+    TResult Function(ToggleReminderSelection value)? toggleReminderSelection,
+    TResult Function(ClearSelection value)? clearSelection,
+    TResult Function(BulkDeleteReminders value)? bulkDeleteReminders,
     required TResult orElse(),
   }) {
     if (addReminder != null) {
@@ -495,6 +570,10 @@ class _$UpdateReminderImpl implements UpdateReminder {
     required TResult Function(String query) searchReminders,
     required TResult Function(String reminderId) snoozeReminder,
     required TResult Function(ReminderFilter filter) filterChanged,
+    required TResult Function(String firstSelectedId) enterSelectionMode,
+    required TResult Function(String id) toggleReminderSelection,
+    required TResult Function() clearSelection,
+    required TResult Function() bulkDeleteReminders,
   }) {
     return updateReminder(reminder);
   }
@@ -509,6 +588,10 @@ class _$UpdateReminderImpl implements UpdateReminder {
     TResult? Function(String query)? searchReminders,
     TResult? Function(String reminderId)? snoozeReminder,
     TResult? Function(ReminderFilter filter)? filterChanged,
+    TResult? Function(String firstSelectedId)? enterSelectionMode,
+    TResult? Function(String id)? toggleReminderSelection,
+    TResult? Function()? clearSelection,
+    TResult? Function()? bulkDeleteReminders,
   }) {
     return updateReminder?.call(reminder);
   }
@@ -523,6 +606,10 @@ class _$UpdateReminderImpl implements UpdateReminder {
     TResult Function(String query)? searchReminders,
     TResult Function(String reminderId)? snoozeReminder,
     TResult Function(ReminderFilter filter)? filterChanged,
+    TResult Function(String firstSelectedId)? enterSelectionMode,
+    TResult Function(String id)? toggleReminderSelection,
+    TResult Function()? clearSelection,
+    TResult Function()? bulkDeleteReminders,
     required TResult orElse(),
   }) {
     if (updateReminder != null) {
@@ -541,6 +628,11 @@ class _$UpdateReminderImpl implements UpdateReminder {
     required TResult Function(SearchReminders value) searchReminders,
     required TResult Function(SnoozeReminder value) snoozeReminder,
     required TResult Function(FilterChanged value) filterChanged,
+    required TResult Function(EnterSelectionMode value) enterSelectionMode,
+    required TResult Function(ToggleReminderSelection value)
+    toggleReminderSelection,
+    required TResult Function(ClearSelection value) clearSelection,
+    required TResult Function(BulkDeleteReminders value) bulkDeleteReminders,
   }) {
     return updateReminder(this);
   }
@@ -555,6 +647,10 @@ class _$UpdateReminderImpl implements UpdateReminder {
     TResult? Function(SearchReminders value)? searchReminders,
     TResult? Function(SnoozeReminder value)? snoozeReminder,
     TResult? Function(FilterChanged value)? filterChanged,
+    TResult? Function(EnterSelectionMode value)? enterSelectionMode,
+    TResult? Function(ToggleReminderSelection value)? toggleReminderSelection,
+    TResult? Function(ClearSelection value)? clearSelection,
+    TResult? Function(BulkDeleteReminders value)? bulkDeleteReminders,
   }) {
     return updateReminder?.call(this);
   }
@@ -569,6 +665,10 @@ class _$UpdateReminderImpl implements UpdateReminder {
     TResult Function(SearchReminders value)? searchReminders,
     TResult Function(SnoozeReminder value)? snoozeReminder,
     TResult Function(FilterChanged value)? filterChanged,
+    TResult Function(EnterSelectionMode value)? enterSelectionMode,
+    TResult Function(ToggleReminderSelection value)? toggleReminderSelection,
+    TResult Function(ClearSelection value)? clearSelection,
+    TResult Function(BulkDeleteReminders value)? bulkDeleteReminders,
     required TResult orElse(),
   }) {
     if (updateReminder != null) {
@@ -671,6 +771,10 @@ class _$DeleteReminderImpl implements DeleteReminder {
     required TResult Function(String query) searchReminders,
     required TResult Function(String reminderId) snoozeReminder,
     required TResult Function(ReminderFilter filter) filterChanged,
+    required TResult Function(String firstSelectedId) enterSelectionMode,
+    required TResult Function(String id) toggleReminderSelection,
+    required TResult Function() clearSelection,
+    required TResult Function() bulkDeleteReminders,
   }) {
     return deleteReminder(id);
   }
@@ -685,6 +789,10 @@ class _$DeleteReminderImpl implements DeleteReminder {
     TResult? Function(String query)? searchReminders,
     TResult? Function(String reminderId)? snoozeReminder,
     TResult? Function(ReminderFilter filter)? filterChanged,
+    TResult? Function(String firstSelectedId)? enterSelectionMode,
+    TResult? Function(String id)? toggleReminderSelection,
+    TResult? Function()? clearSelection,
+    TResult? Function()? bulkDeleteReminders,
   }) {
     return deleteReminder?.call(id);
   }
@@ -699,6 +807,10 @@ class _$DeleteReminderImpl implements DeleteReminder {
     TResult Function(String query)? searchReminders,
     TResult Function(String reminderId)? snoozeReminder,
     TResult Function(ReminderFilter filter)? filterChanged,
+    TResult Function(String firstSelectedId)? enterSelectionMode,
+    TResult Function(String id)? toggleReminderSelection,
+    TResult Function()? clearSelection,
+    TResult Function()? bulkDeleteReminders,
     required TResult orElse(),
   }) {
     if (deleteReminder != null) {
@@ -717,6 +829,11 @@ class _$DeleteReminderImpl implements DeleteReminder {
     required TResult Function(SearchReminders value) searchReminders,
     required TResult Function(SnoozeReminder value) snoozeReminder,
     required TResult Function(FilterChanged value) filterChanged,
+    required TResult Function(EnterSelectionMode value) enterSelectionMode,
+    required TResult Function(ToggleReminderSelection value)
+    toggleReminderSelection,
+    required TResult Function(ClearSelection value) clearSelection,
+    required TResult Function(BulkDeleteReminders value) bulkDeleteReminders,
   }) {
     return deleteReminder(this);
   }
@@ -731,6 +848,10 @@ class _$DeleteReminderImpl implements DeleteReminder {
     TResult? Function(SearchReminders value)? searchReminders,
     TResult? Function(SnoozeReminder value)? snoozeReminder,
     TResult? Function(FilterChanged value)? filterChanged,
+    TResult? Function(EnterSelectionMode value)? enterSelectionMode,
+    TResult? Function(ToggleReminderSelection value)? toggleReminderSelection,
+    TResult? Function(ClearSelection value)? clearSelection,
+    TResult? Function(BulkDeleteReminders value)? bulkDeleteReminders,
   }) {
     return deleteReminder?.call(this);
   }
@@ -745,6 +866,10 @@ class _$DeleteReminderImpl implements DeleteReminder {
     TResult Function(SearchReminders value)? searchReminders,
     TResult Function(SnoozeReminder value)? snoozeReminder,
     TResult Function(FilterChanged value)? filterChanged,
+    TResult Function(EnterSelectionMode value)? enterSelectionMode,
+    TResult Function(ToggleReminderSelection value)? toggleReminderSelection,
+    TResult Function(ClearSelection value)? clearSelection,
+    TResult Function(BulkDeleteReminders value)? bulkDeleteReminders,
     required TResult orElse(),
   }) {
     if (deleteReminder != null) {
@@ -847,6 +972,10 @@ class _$SearchRemindersImpl implements SearchReminders {
     required TResult Function(String query) searchReminders,
     required TResult Function(String reminderId) snoozeReminder,
     required TResult Function(ReminderFilter filter) filterChanged,
+    required TResult Function(String firstSelectedId) enterSelectionMode,
+    required TResult Function(String id) toggleReminderSelection,
+    required TResult Function() clearSelection,
+    required TResult Function() bulkDeleteReminders,
   }) {
     return searchReminders(query);
   }
@@ -861,6 +990,10 @@ class _$SearchRemindersImpl implements SearchReminders {
     TResult? Function(String query)? searchReminders,
     TResult? Function(String reminderId)? snoozeReminder,
     TResult? Function(ReminderFilter filter)? filterChanged,
+    TResult? Function(String firstSelectedId)? enterSelectionMode,
+    TResult? Function(String id)? toggleReminderSelection,
+    TResult? Function()? clearSelection,
+    TResult? Function()? bulkDeleteReminders,
   }) {
     return searchReminders?.call(query);
   }
@@ -875,6 +1008,10 @@ class _$SearchRemindersImpl implements SearchReminders {
     TResult Function(String query)? searchReminders,
     TResult Function(String reminderId)? snoozeReminder,
     TResult Function(ReminderFilter filter)? filterChanged,
+    TResult Function(String firstSelectedId)? enterSelectionMode,
+    TResult Function(String id)? toggleReminderSelection,
+    TResult Function()? clearSelection,
+    TResult Function()? bulkDeleteReminders,
     required TResult orElse(),
   }) {
     if (searchReminders != null) {
@@ -893,6 +1030,11 @@ class _$SearchRemindersImpl implements SearchReminders {
     required TResult Function(SearchReminders value) searchReminders,
     required TResult Function(SnoozeReminder value) snoozeReminder,
     required TResult Function(FilterChanged value) filterChanged,
+    required TResult Function(EnterSelectionMode value) enterSelectionMode,
+    required TResult Function(ToggleReminderSelection value)
+    toggleReminderSelection,
+    required TResult Function(ClearSelection value) clearSelection,
+    required TResult Function(BulkDeleteReminders value) bulkDeleteReminders,
   }) {
     return searchReminders(this);
   }
@@ -907,6 +1049,10 @@ class _$SearchRemindersImpl implements SearchReminders {
     TResult? Function(SearchReminders value)? searchReminders,
     TResult? Function(SnoozeReminder value)? snoozeReminder,
     TResult? Function(FilterChanged value)? filterChanged,
+    TResult? Function(EnterSelectionMode value)? enterSelectionMode,
+    TResult? Function(ToggleReminderSelection value)? toggleReminderSelection,
+    TResult? Function(ClearSelection value)? clearSelection,
+    TResult? Function(BulkDeleteReminders value)? bulkDeleteReminders,
   }) {
     return searchReminders?.call(this);
   }
@@ -921,6 +1067,10 @@ class _$SearchRemindersImpl implements SearchReminders {
     TResult Function(SearchReminders value)? searchReminders,
     TResult Function(SnoozeReminder value)? snoozeReminder,
     TResult Function(FilterChanged value)? filterChanged,
+    TResult Function(EnterSelectionMode value)? enterSelectionMode,
+    TResult Function(ToggleReminderSelection value)? toggleReminderSelection,
+    TResult Function(ClearSelection value)? clearSelection,
+    TResult Function(BulkDeleteReminders value)? bulkDeleteReminders,
     required TResult orElse(),
   }) {
     if (searchReminders != null) {
@@ -1024,6 +1174,10 @@ class _$SnoozeReminderImpl implements SnoozeReminder {
     required TResult Function(String query) searchReminders,
     required TResult Function(String reminderId) snoozeReminder,
     required TResult Function(ReminderFilter filter) filterChanged,
+    required TResult Function(String firstSelectedId) enterSelectionMode,
+    required TResult Function(String id) toggleReminderSelection,
+    required TResult Function() clearSelection,
+    required TResult Function() bulkDeleteReminders,
   }) {
     return snoozeReminder(reminderId);
   }
@@ -1038,6 +1192,10 @@ class _$SnoozeReminderImpl implements SnoozeReminder {
     TResult? Function(String query)? searchReminders,
     TResult? Function(String reminderId)? snoozeReminder,
     TResult? Function(ReminderFilter filter)? filterChanged,
+    TResult? Function(String firstSelectedId)? enterSelectionMode,
+    TResult? Function(String id)? toggleReminderSelection,
+    TResult? Function()? clearSelection,
+    TResult? Function()? bulkDeleteReminders,
   }) {
     return snoozeReminder?.call(reminderId);
   }
@@ -1052,6 +1210,10 @@ class _$SnoozeReminderImpl implements SnoozeReminder {
     TResult Function(String query)? searchReminders,
     TResult Function(String reminderId)? snoozeReminder,
     TResult Function(ReminderFilter filter)? filterChanged,
+    TResult Function(String firstSelectedId)? enterSelectionMode,
+    TResult Function(String id)? toggleReminderSelection,
+    TResult Function()? clearSelection,
+    TResult Function()? bulkDeleteReminders,
     required TResult orElse(),
   }) {
     if (snoozeReminder != null) {
@@ -1070,6 +1232,11 @@ class _$SnoozeReminderImpl implements SnoozeReminder {
     required TResult Function(SearchReminders value) searchReminders,
     required TResult Function(SnoozeReminder value) snoozeReminder,
     required TResult Function(FilterChanged value) filterChanged,
+    required TResult Function(EnterSelectionMode value) enterSelectionMode,
+    required TResult Function(ToggleReminderSelection value)
+    toggleReminderSelection,
+    required TResult Function(ClearSelection value) clearSelection,
+    required TResult Function(BulkDeleteReminders value) bulkDeleteReminders,
   }) {
     return snoozeReminder(this);
   }
@@ -1084,6 +1251,10 @@ class _$SnoozeReminderImpl implements SnoozeReminder {
     TResult? Function(SearchReminders value)? searchReminders,
     TResult? Function(SnoozeReminder value)? snoozeReminder,
     TResult? Function(FilterChanged value)? filterChanged,
+    TResult? Function(EnterSelectionMode value)? enterSelectionMode,
+    TResult? Function(ToggleReminderSelection value)? toggleReminderSelection,
+    TResult? Function(ClearSelection value)? clearSelection,
+    TResult? Function(BulkDeleteReminders value)? bulkDeleteReminders,
   }) {
     return snoozeReminder?.call(this);
   }
@@ -1098,6 +1269,10 @@ class _$SnoozeReminderImpl implements SnoozeReminder {
     TResult Function(SearchReminders value)? searchReminders,
     TResult Function(SnoozeReminder value)? snoozeReminder,
     TResult Function(FilterChanged value)? filterChanged,
+    TResult Function(EnterSelectionMode value)? enterSelectionMode,
+    TResult Function(ToggleReminderSelection value)? toggleReminderSelection,
+    TResult Function(ClearSelection value)? clearSelection,
+    TResult Function(BulkDeleteReminders value)? bulkDeleteReminders,
     required TResult orElse(),
   }) {
     if (snoozeReminder != null) {
@@ -1197,6 +1372,10 @@ class _$FilterChangedImpl implements FilterChanged {
     required TResult Function(String query) searchReminders,
     required TResult Function(String reminderId) snoozeReminder,
     required TResult Function(ReminderFilter filter) filterChanged,
+    required TResult Function(String firstSelectedId) enterSelectionMode,
+    required TResult Function(String id) toggleReminderSelection,
+    required TResult Function() clearSelection,
+    required TResult Function() bulkDeleteReminders,
   }) {
     return filterChanged(filter);
   }
@@ -1211,6 +1390,10 @@ class _$FilterChangedImpl implements FilterChanged {
     TResult? Function(String query)? searchReminders,
     TResult? Function(String reminderId)? snoozeReminder,
     TResult? Function(ReminderFilter filter)? filterChanged,
+    TResult? Function(String firstSelectedId)? enterSelectionMode,
+    TResult? Function(String id)? toggleReminderSelection,
+    TResult? Function()? clearSelection,
+    TResult? Function()? bulkDeleteReminders,
   }) {
     return filterChanged?.call(filter);
   }
@@ -1225,6 +1408,10 @@ class _$FilterChangedImpl implements FilterChanged {
     TResult Function(String query)? searchReminders,
     TResult Function(String reminderId)? snoozeReminder,
     TResult Function(ReminderFilter filter)? filterChanged,
+    TResult Function(String firstSelectedId)? enterSelectionMode,
+    TResult Function(String id)? toggleReminderSelection,
+    TResult Function()? clearSelection,
+    TResult Function()? bulkDeleteReminders,
     required TResult orElse(),
   }) {
     if (filterChanged != null) {
@@ -1243,6 +1430,11 @@ class _$FilterChangedImpl implements FilterChanged {
     required TResult Function(SearchReminders value) searchReminders,
     required TResult Function(SnoozeReminder value) snoozeReminder,
     required TResult Function(FilterChanged value) filterChanged,
+    required TResult Function(EnterSelectionMode value) enterSelectionMode,
+    required TResult Function(ToggleReminderSelection value)
+    toggleReminderSelection,
+    required TResult Function(ClearSelection value) clearSelection,
+    required TResult Function(BulkDeleteReminders value) bulkDeleteReminders,
   }) {
     return filterChanged(this);
   }
@@ -1257,6 +1449,10 @@ class _$FilterChangedImpl implements FilterChanged {
     TResult? Function(SearchReminders value)? searchReminders,
     TResult? Function(SnoozeReminder value)? snoozeReminder,
     TResult? Function(FilterChanged value)? filterChanged,
+    TResult? Function(EnterSelectionMode value)? enterSelectionMode,
+    TResult? Function(ToggleReminderSelection value)? toggleReminderSelection,
+    TResult? Function(ClearSelection value)? clearSelection,
+    TResult? Function(BulkDeleteReminders value)? bulkDeleteReminders,
   }) {
     return filterChanged?.call(this);
   }
@@ -1271,6 +1467,10 @@ class _$FilterChangedImpl implements FilterChanged {
     TResult Function(SearchReminders value)? searchReminders,
     TResult Function(SnoozeReminder value)? snoozeReminder,
     TResult Function(FilterChanged value)? filterChanged,
+    TResult Function(EnterSelectionMode value)? enterSelectionMode,
+    TResult Function(ToggleReminderSelection value)? toggleReminderSelection,
+    TResult Function(ClearSelection value)? clearSelection,
+    TResult Function(BulkDeleteReminders value)? bulkDeleteReminders,
     required TResult orElse(),
   }) {
     if (filterChanged != null) {
@@ -1291,4 +1491,732 @@ abstract class FilterChanged implements RemindersEvent {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FilterChangedImplCopyWith<_$FilterChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$EnterSelectionModeImplCopyWith<$Res> {
+  factory _$$EnterSelectionModeImplCopyWith(
+    _$EnterSelectionModeImpl value,
+    $Res Function(_$EnterSelectionModeImpl) then,
+  ) = __$$EnterSelectionModeImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String firstSelectedId});
+}
+
+/// @nodoc
+class __$$EnterSelectionModeImplCopyWithImpl<$Res>
+    extends _$RemindersEventCopyWithImpl<$Res, _$EnterSelectionModeImpl>
+    implements _$$EnterSelectionModeImplCopyWith<$Res> {
+  __$$EnterSelectionModeImplCopyWithImpl(
+    _$EnterSelectionModeImpl _value,
+    $Res Function(_$EnterSelectionModeImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of RemindersEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? firstSelectedId = null}) {
+    return _then(
+      _$EnterSelectionModeImpl(
+        firstSelectedId: null == firstSelectedId
+            ? _value.firstSelectedId
+            : firstSelectedId // ignore: cast_nullable_to_non_nullable
+                  as String,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$EnterSelectionModeImpl implements EnterSelectionMode {
+  const _$EnterSelectionModeImpl({required this.firstSelectedId});
+
+  @override
+  final String firstSelectedId;
+
+  @override
+  String toString() {
+    return 'RemindersEvent.enterSelectionMode(firstSelectedId: $firstSelectedId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$EnterSelectionModeImpl &&
+            (identical(other.firstSelectedId, firstSelectedId) ||
+                other.firstSelectedId == firstSelectedId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, firstSelectedId);
+
+  /// Create a copy of RemindersEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$EnterSelectionModeImplCopyWith<_$EnterSelectionModeImpl> get copyWith =>
+      __$$EnterSelectionModeImplCopyWithImpl<_$EnterSelectionModeImpl>(
+        this,
+        _$identity,
+      );
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadReminders,
+    required TResult Function(Reminder reminder) addReminder,
+    required TResult Function(Reminder reminder) updateReminder,
+    required TResult Function(String id) deleteReminder,
+    required TResult Function(String query) searchReminders,
+    required TResult Function(String reminderId) snoozeReminder,
+    required TResult Function(ReminderFilter filter) filterChanged,
+    required TResult Function(String firstSelectedId) enterSelectionMode,
+    required TResult Function(String id) toggleReminderSelection,
+    required TResult Function() clearSelection,
+    required TResult Function() bulkDeleteReminders,
+  }) {
+    return enterSelectionMode(firstSelectedId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loadReminders,
+    TResult? Function(Reminder reminder)? addReminder,
+    TResult? Function(Reminder reminder)? updateReminder,
+    TResult? Function(String id)? deleteReminder,
+    TResult? Function(String query)? searchReminders,
+    TResult? Function(String reminderId)? snoozeReminder,
+    TResult? Function(ReminderFilter filter)? filterChanged,
+    TResult? Function(String firstSelectedId)? enterSelectionMode,
+    TResult? Function(String id)? toggleReminderSelection,
+    TResult? Function()? clearSelection,
+    TResult? Function()? bulkDeleteReminders,
+  }) {
+    return enterSelectionMode?.call(firstSelectedId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadReminders,
+    TResult Function(Reminder reminder)? addReminder,
+    TResult Function(Reminder reminder)? updateReminder,
+    TResult Function(String id)? deleteReminder,
+    TResult Function(String query)? searchReminders,
+    TResult Function(String reminderId)? snoozeReminder,
+    TResult Function(ReminderFilter filter)? filterChanged,
+    TResult Function(String firstSelectedId)? enterSelectionMode,
+    TResult Function(String id)? toggleReminderSelection,
+    TResult Function()? clearSelection,
+    TResult Function()? bulkDeleteReminders,
+    required TResult orElse(),
+  }) {
+    if (enterSelectionMode != null) {
+      return enterSelectionMode(firstSelectedId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadReminders value) loadReminders,
+    required TResult Function(AddReminder value) addReminder,
+    required TResult Function(UpdateReminder value) updateReminder,
+    required TResult Function(DeleteReminder value) deleteReminder,
+    required TResult Function(SearchReminders value) searchReminders,
+    required TResult Function(SnoozeReminder value) snoozeReminder,
+    required TResult Function(FilterChanged value) filterChanged,
+    required TResult Function(EnterSelectionMode value) enterSelectionMode,
+    required TResult Function(ToggleReminderSelection value)
+    toggleReminderSelection,
+    required TResult Function(ClearSelection value) clearSelection,
+    required TResult Function(BulkDeleteReminders value) bulkDeleteReminders,
+  }) {
+    return enterSelectionMode(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadReminders value)? loadReminders,
+    TResult? Function(AddReminder value)? addReminder,
+    TResult? Function(UpdateReminder value)? updateReminder,
+    TResult? Function(DeleteReminder value)? deleteReminder,
+    TResult? Function(SearchReminders value)? searchReminders,
+    TResult? Function(SnoozeReminder value)? snoozeReminder,
+    TResult? Function(FilterChanged value)? filterChanged,
+    TResult? Function(EnterSelectionMode value)? enterSelectionMode,
+    TResult? Function(ToggleReminderSelection value)? toggleReminderSelection,
+    TResult? Function(ClearSelection value)? clearSelection,
+    TResult? Function(BulkDeleteReminders value)? bulkDeleteReminders,
+  }) {
+    return enterSelectionMode?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadReminders value)? loadReminders,
+    TResult Function(AddReminder value)? addReminder,
+    TResult Function(UpdateReminder value)? updateReminder,
+    TResult Function(DeleteReminder value)? deleteReminder,
+    TResult Function(SearchReminders value)? searchReminders,
+    TResult Function(SnoozeReminder value)? snoozeReminder,
+    TResult Function(FilterChanged value)? filterChanged,
+    TResult Function(EnterSelectionMode value)? enterSelectionMode,
+    TResult Function(ToggleReminderSelection value)? toggleReminderSelection,
+    TResult Function(ClearSelection value)? clearSelection,
+    TResult Function(BulkDeleteReminders value)? bulkDeleteReminders,
+    required TResult orElse(),
+  }) {
+    if (enterSelectionMode != null) {
+      return enterSelectionMode(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class EnterSelectionMode implements RemindersEvent {
+  const factory EnterSelectionMode({required final String firstSelectedId}) =
+      _$EnterSelectionModeImpl;
+
+  String get firstSelectedId;
+
+  /// Create a copy of RemindersEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$EnterSelectionModeImplCopyWith<_$EnterSelectionModeImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ToggleReminderSelectionImplCopyWith<$Res> {
+  factory _$$ToggleReminderSelectionImplCopyWith(
+    _$ToggleReminderSelectionImpl value,
+    $Res Function(_$ToggleReminderSelectionImpl) then,
+  ) = __$$ToggleReminderSelectionImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String id});
+}
+
+/// @nodoc
+class __$$ToggleReminderSelectionImplCopyWithImpl<$Res>
+    extends _$RemindersEventCopyWithImpl<$Res, _$ToggleReminderSelectionImpl>
+    implements _$$ToggleReminderSelectionImplCopyWith<$Res> {
+  __$$ToggleReminderSelectionImplCopyWithImpl(
+    _$ToggleReminderSelectionImpl _value,
+    $Res Function(_$ToggleReminderSelectionImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of RemindersEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? id = null}) {
+    return _then(
+      _$ToggleReminderSelectionImpl(
+        id: null == id
+            ? _value.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as String,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$ToggleReminderSelectionImpl implements ToggleReminderSelection {
+  const _$ToggleReminderSelectionImpl({required this.id});
+
+  @override
+  final String id;
+
+  @override
+  String toString() {
+    return 'RemindersEvent.toggleReminderSelection(id: $id)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ToggleReminderSelectionImpl &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id);
+
+  /// Create a copy of RemindersEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ToggleReminderSelectionImplCopyWith<_$ToggleReminderSelectionImpl>
+  get copyWith =>
+      __$$ToggleReminderSelectionImplCopyWithImpl<
+        _$ToggleReminderSelectionImpl
+      >(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadReminders,
+    required TResult Function(Reminder reminder) addReminder,
+    required TResult Function(Reminder reminder) updateReminder,
+    required TResult Function(String id) deleteReminder,
+    required TResult Function(String query) searchReminders,
+    required TResult Function(String reminderId) snoozeReminder,
+    required TResult Function(ReminderFilter filter) filterChanged,
+    required TResult Function(String firstSelectedId) enterSelectionMode,
+    required TResult Function(String id) toggleReminderSelection,
+    required TResult Function() clearSelection,
+    required TResult Function() bulkDeleteReminders,
+  }) {
+    return toggleReminderSelection(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loadReminders,
+    TResult? Function(Reminder reminder)? addReminder,
+    TResult? Function(Reminder reminder)? updateReminder,
+    TResult? Function(String id)? deleteReminder,
+    TResult? Function(String query)? searchReminders,
+    TResult? Function(String reminderId)? snoozeReminder,
+    TResult? Function(ReminderFilter filter)? filterChanged,
+    TResult? Function(String firstSelectedId)? enterSelectionMode,
+    TResult? Function(String id)? toggleReminderSelection,
+    TResult? Function()? clearSelection,
+    TResult? Function()? bulkDeleteReminders,
+  }) {
+    return toggleReminderSelection?.call(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadReminders,
+    TResult Function(Reminder reminder)? addReminder,
+    TResult Function(Reminder reminder)? updateReminder,
+    TResult Function(String id)? deleteReminder,
+    TResult Function(String query)? searchReminders,
+    TResult Function(String reminderId)? snoozeReminder,
+    TResult Function(ReminderFilter filter)? filterChanged,
+    TResult Function(String firstSelectedId)? enterSelectionMode,
+    TResult Function(String id)? toggleReminderSelection,
+    TResult Function()? clearSelection,
+    TResult Function()? bulkDeleteReminders,
+    required TResult orElse(),
+  }) {
+    if (toggleReminderSelection != null) {
+      return toggleReminderSelection(id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadReminders value) loadReminders,
+    required TResult Function(AddReminder value) addReminder,
+    required TResult Function(UpdateReminder value) updateReminder,
+    required TResult Function(DeleteReminder value) deleteReminder,
+    required TResult Function(SearchReminders value) searchReminders,
+    required TResult Function(SnoozeReminder value) snoozeReminder,
+    required TResult Function(FilterChanged value) filterChanged,
+    required TResult Function(EnterSelectionMode value) enterSelectionMode,
+    required TResult Function(ToggleReminderSelection value)
+    toggleReminderSelection,
+    required TResult Function(ClearSelection value) clearSelection,
+    required TResult Function(BulkDeleteReminders value) bulkDeleteReminders,
+  }) {
+    return toggleReminderSelection(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadReminders value)? loadReminders,
+    TResult? Function(AddReminder value)? addReminder,
+    TResult? Function(UpdateReminder value)? updateReminder,
+    TResult? Function(DeleteReminder value)? deleteReminder,
+    TResult? Function(SearchReminders value)? searchReminders,
+    TResult? Function(SnoozeReminder value)? snoozeReminder,
+    TResult? Function(FilterChanged value)? filterChanged,
+    TResult? Function(EnterSelectionMode value)? enterSelectionMode,
+    TResult? Function(ToggleReminderSelection value)? toggleReminderSelection,
+    TResult? Function(ClearSelection value)? clearSelection,
+    TResult? Function(BulkDeleteReminders value)? bulkDeleteReminders,
+  }) {
+    return toggleReminderSelection?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadReminders value)? loadReminders,
+    TResult Function(AddReminder value)? addReminder,
+    TResult Function(UpdateReminder value)? updateReminder,
+    TResult Function(DeleteReminder value)? deleteReminder,
+    TResult Function(SearchReminders value)? searchReminders,
+    TResult Function(SnoozeReminder value)? snoozeReminder,
+    TResult Function(FilterChanged value)? filterChanged,
+    TResult Function(EnterSelectionMode value)? enterSelectionMode,
+    TResult Function(ToggleReminderSelection value)? toggleReminderSelection,
+    TResult Function(ClearSelection value)? clearSelection,
+    TResult Function(BulkDeleteReminders value)? bulkDeleteReminders,
+    required TResult orElse(),
+  }) {
+    if (toggleReminderSelection != null) {
+      return toggleReminderSelection(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ToggleReminderSelection implements RemindersEvent {
+  const factory ToggleReminderSelection({required final String id}) =
+      _$ToggleReminderSelectionImpl;
+
+  String get id;
+
+  /// Create a copy of RemindersEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ToggleReminderSelectionImplCopyWith<_$ToggleReminderSelectionImpl>
+  get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ClearSelectionImplCopyWith<$Res> {
+  factory _$$ClearSelectionImplCopyWith(
+    _$ClearSelectionImpl value,
+    $Res Function(_$ClearSelectionImpl) then,
+  ) = __$$ClearSelectionImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ClearSelectionImplCopyWithImpl<$Res>
+    extends _$RemindersEventCopyWithImpl<$Res, _$ClearSelectionImpl>
+    implements _$$ClearSelectionImplCopyWith<$Res> {
+  __$$ClearSelectionImplCopyWithImpl(
+    _$ClearSelectionImpl _value,
+    $Res Function(_$ClearSelectionImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of RemindersEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ClearSelectionImpl implements ClearSelection {
+  const _$ClearSelectionImpl();
+
+  @override
+  String toString() {
+    return 'RemindersEvent.clearSelection()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ClearSelectionImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadReminders,
+    required TResult Function(Reminder reminder) addReminder,
+    required TResult Function(Reminder reminder) updateReminder,
+    required TResult Function(String id) deleteReminder,
+    required TResult Function(String query) searchReminders,
+    required TResult Function(String reminderId) snoozeReminder,
+    required TResult Function(ReminderFilter filter) filterChanged,
+    required TResult Function(String firstSelectedId) enterSelectionMode,
+    required TResult Function(String id) toggleReminderSelection,
+    required TResult Function() clearSelection,
+    required TResult Function() bulkDeleteReminders,
+  }) {
+    return clearSelection();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loadReminders,
+    TResult? Function(Reminder reminder)? addReminder,
+    TResult? Function(Reminder reminder)? updateReminder,
+    TResult? Function(String id)? deleteReminder,
+    TResult? Function(String query)? searchReminders,
+    TResult? Function(String reminderId)? snoozeReminder,
+    TResult? Function(ReminderFilter filter)? filterChanged,
+    TResult? Function(String firstSelectedId)? enterSelectionMode,
+    TResult? Function(String id)? toggleReminderSelection,
+    TResult? Function()? clearSelection,
+    TResult? Function()? bulkDeleteReminders,
+  }) {
+    return clearSelection?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadReminders,
+    TResult Function(Reminder reminder)? addReminder,
+    TResult Function(Reminder reminder)? updateReminder,
+    TResult Function(String id)? deleteReminder,
+    TResult Function(String query)? searchReminders,
+    TResult Function(String reminderId)? snoozeReminder,
+    TResult Function(ReminderFilter filter)? filterChanged,
+    TResult Function(String firstSelectedId)? enterSelectionMode,
+    TResult Function(String id)? toggleReminderSelection,
+    TResult Function()? clearSelection,
+    TResult Function()? bulkDeleteReminders,
+    required TResult orElse(),
+  }) {
+    if (clearSelection != null) {
+      return clearSelection();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadReminders value) loadReminders,
+    required TResult Function(AddReminder value) addReminder,
+    required TResult Function(UpdateReminder value) updateReminder,
+    required TResult Function(DeleteReminder value) deleteReminder,
+    required TResult Function(SearchReminders value) searchReminders,
+    required TResult Function(SnoozeReminder value) snoozeReminder,
+    required TResult Function(FilterChanged value) filterChanged,
+    required TResult Function(EnterSelectionMode value) enterSelectionMode,
+    required TResult Function(ToggleReminderSelection value)
+    toggleReminderSelection,
+    required TResult Function(ClearSelection value) clearSelection,
+    required TResult Function(BulkDeleteReminders value) bulkDeleteReminders,
+  }) {
+    return clearSelection(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadReminders value)? loadReminders,
+    TResult? Function(AddReminder value)? addReminder,
+    TResult? Function(UpdateReminder value)? updateReminder,
+    TResult? Function(DeleteReminder value)? deleteReminder,
+    TResult? Function(SearchReminders value)? searchReminders,
+    TResult? Function(SnoozeReminder value)? snoozeReminder,
+    TResult? Function(FilterChanged value)? filterChanged,
+    TResult? Function(EnterSelectionMode value)? enterSelectionMode,
+    TResult? Function(ToggleReminderSelection value)? toggleReminderSelection,
+    TResult? Function(ClearSelection value)? clearSelection,
+    TResult? Function(BulkDeleteReminders value)? bulkDeleteReminders,
+  }) {
+    return clearSelection?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadReminders value)? loadReminders,
+    TResult Function(AddReminder value)? addReminder,
+    TResult Function(UpdateReminder value)? updateReminder,
+    TResult Function(DeleteReminder value)? deleteReminder,
+    TResult Function(SearchReminders value)? searchReminders,
+    TResult Function(SnoozeReminder value)? snoozeReminder,
+    TResult Function(FilterChanged value)? filterChanged,
+    TResult Function(EnterSelectionMode value)? enterSelectionMode,
+    TResult Function(ToggleReminderSelection value)? toggleReminderSelection,
+    TResult Function(ClearSelection value)? clearSelection,
+    TResult Function(BulkDeleteReminders value)? bulkDeleteReminders,
+    required TResult orElse(),
+  }) {
+    if (clearSelection != null) {
+      return clearSelection(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ClearSelection implements RemindersEvent {
+  const factory ClearSelection() = _$ClearSelectionImpl;
+}
+
+/// @nodoc
+abstract class _$$BulkDeleteRemindersImplCopyWith<$Res> {
+  factory _$$BulkDeleteRemindersImplCopyWith(
+    _$BulkDeleteRemindersImpl value,
+    $Res Function(_$BulkDeleteRemindersImpl) then,
+  ) = __$$BulkDeleteRemindersImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$BulkDeleteRemindersImplCopyWithImpl<$Res>
+    extends _$RemindersEventCopyWithImpl<$Res, _$BulkDeleteRemindersImpl>
+    implements _$$BulkDeleteRemindersImplCopyWith<$Res> {
+  __$$BulkDeleteRemindersImplCopyWithImpl(
+    _$BulkDeleteRemindersImpl _value,
+    $Res Function(_$BulkDeleteRemindersImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of RemindersEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$BulkDeleteRemindersImpl implements BulkDeleteReminders {
+  const _$BulkDeleteRemindersImpl();
+
+  @override
+  String toString() {
+    return 'RemindersEvent.bulkDeleteReminders()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BulkDeleteRemindersImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadReminders,
+    required TResult Function(Reminder reminder) addReminder,
+    required TResult Function(Reminder reminder) updateReminder,
+    required TResult Function(String id) deleteReminder,
+    required TResult Function(String query) searchReminders,
+    required TResult Function(String reminderId) snoozeReminder,
+    required TResult Function(ReminderFilter filter) filterChanged,
+    required TResult Function(String firstSelectedId) enterSelectionMode,
+    required TResult Function(String id) toggleReminderSelection,
+    required TResult Function() clearSelection,
+    required TResult Function() bulkDeleteReminders,
+  }) {
+    return bulkDeleteReminders();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loadReminders,
+    TResult? Function(Reminder reminder)? addReminder,
+    TResult? Function(Reminder reminder)? updateReminder,
+    TResult? Function(String id)? deleteReminder,
+    TResult? Function(String query)? searchReminders,
+    TResult? Function(String reminderId)? snoozeReminder,
+    TResult? Function(ReminderFilter filter)? filterChanged,
+    TResult? Function(String firstSelectedId)? enterSelectionMode,
+    TResult? Function(String id)? toggleReminderSelection,
+    TResult? Function()? clearSelection,
+    TResult? Function()? bulkDeleteReminders,
+  }) {
+    return bulkDeleteReminders?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadReminders,
+    TResult Function(Reminder reminder)? addReminder,
+    TResult Function(Reminder reminder)? updateReminder,
+    TResult Function(String id)? deleteReminder,
+    TResult Function(String query)? searchReminders,
+    TResult Function(String reminderId)? snoozeReminder,
+    TResult Function(ReminderFilter filter)? filterChanged,
+    TResult Function(String firstSelectedId)? enterSelectionMode,
+    TResult Function(String id)? toggleReminderSelection,
+    TResult Function()? clearSelection,
+    TResult Function()? bulkDeleteReminders,
+    required TResult orElse(),
+  }) {
+    if (bulkDeleteReminders != null) {
+      return bulkDeleteReminders();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadReminders value) loadReminders,
+    required TResult Function(AddReminder value) addReminder,
+    required TResult Function(UpdateReminder value) updateReminder,
+    required TResult Function(DeleteReminder value) deleteReminder,
+    required TResult Function(SearchReminders value) searchReminders,
+    required TResult Function(SnoozeReminder value) snoozeReminder,
+    required TResult Function(FilterChanged value) filterChanged,
+    required TResult Function(EnterSelectionMode value) enterSelectionMode,
+    required TResult Function(ToggleReminderSelection value)
+    toggleReminderSelection,
+    required TResult Function(ClearSelection value) clearSelection,
+    required TResult Function(BulkDeleteReminders value) bulkDeleteReminders,
+  }) {
+    return bulkDeleteReminders(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadReminders value)? loadReminders,
+    TResult? Function(AddReminder value)? addReminder,
+    TResult? Function(UpdateReminder value)? updateReminder,
+    TResult? Function(DeleteReminder value)? deleteReminder,
+    TResult? Function(SearchReminders value)? searchReminders,
+    TResult? Function(SnoozeReminder value)? snoozeReminder,
+    TResult? Function(FilterChanged value)? filterChanged,
+    TResult? Function(EnterSelectionMode value)? enterSelectionMode,
+    TResult? Function(ToggleReminderSelection value)? toggleReminderSelection,
+    TResult? Function(ClearSelection value)? clearSelection,
+    TResult? Function(BulkDeleteReminders value)? bulkDeleteReminders,
+  }) {
+    return bulkDeleteReminders?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadReminders value)? loadReminders,
+    TResult Function(AddReminder value)? addReminder,
+    TResult Function(UpdateReminder value)? updateReminder,
+    TResult Function(DeleteReminder value)? deleteReminder,
+    TResult Function(SearchReminders value)? searchReminders,
+    TResult Function(SnoozeReminder value)? snoozeReminder,
+    TResult Function(FilterChanged value)? filterChanged,
+    TResult Function(EnterSelectionMode value)? enterSelectionMode,
+    TResult Function(ToggleReminderSelection value)? toggleReminderSelection,
+    TResult Function(ClearSelection value)? clearSelection,
+    TResult Function(BulkDeleteReminders value)? bulkDeleteReminders,
+    required TResult orElse(),
+  }) {
+    if (bulkDeleteReminders != null) {
+      return bulkDeleteReminders(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class BulkDeleteReminders implements RemindersEvent {
+  const factory BulkDeleteReminders() = _$BulkDeleteRemindersImpl;
 }

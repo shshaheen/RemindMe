@@ -39,8 +39,7 @@ class AlarmBottomActions extends StatelessWidget {
           child: AnimatedButton(
             onPressed: onDismiss,
             child: Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 48, vertical: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 16),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
                 border: Border.all(

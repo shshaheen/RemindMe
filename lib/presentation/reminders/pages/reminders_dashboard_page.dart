@@ -15,6 +15,7 @@ import '../blocs/reminders_state.dart';
 import '../widgets/reminder_filter_chips.dart';
 import '../widgets/reminders_header_card.dart';
 import '../widgets/reminders_list_view.dart';
+import '../widgets/selection_app_bar.dart';
 
 class RemindersDashboardPage extends StatefulWidget {
   const RemindersDashboardPage({super.key});
@@ -54,83 +55,192 @@ class _RemindersDashboardPageState extends State<RemindersDashboardPage> {
   void _onDelete(String id) =>
       context.read<RemindersBloc>().add(RemindersEvent.deleteReminder(id: id));
 
+  void _onLongPress(String id) => context.read<RemindersBloc>().add(
+    RemindersEvent.enterSelectionMode(firstSelectedId: id),
+  );
+
+  void _onToggleSelect(String id) => context.read<RemindersBloc>().add(
+    RemindersEvent.toggleReminderSelection(id: id),
+  );
+
+  void _onClearSelection() =>
+      context.read<RemindersBloc>().add(const RemindersEvent.clearSelection());
+
+  /// Shows the bulk-delete confirmation dialog; only dispatches the Bloc event
+  /// after the user explicitly confirms.
+  Future<void> _onBulkDeleteConfirmation() async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogCtx) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: const Text('Delete Reminders'),
+        content: const Text(
+          'Are you sure you want to delete the selected reminders?',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogCtx).pop(false),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(dialogCtx).pop(true),
+            child: Text(
+              'Delete',
+              style: TextStyle(color: Theme.of(context).colorScheme.error),
+            ),
+          ),
+        ],
+      ),
+    );
+    if (confirmed == true && mounted) {
+      context.read<RemindersBloc>().add(
+        const RemindersEvent.bulkDeleteReminders(),
+      );
+    }
+  }
+
   // ── Build ──────────────────────────────────────────────────────────────────
 
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
-    return Scaffold(
-      appBar: _buildAppBar(context),
-      body: Container(
-        // Light mode: the gradient gives BackdropFilter a coloured surface to
-        // blur against — without it cards blur white-on-white (invisible).
-        decoration: BoxDecoration(
-          gradient: isDarkMode
-              ? const LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [Color(0xFF14213D), Color(0xFF1B263B)],
-                )
-              : LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Theme.of(context).colorScheme.primary.withOpacity(0.05),
-                    const Color(0xFFF5F2FF),
-                  ],
-                ),
-        ),
-        child: Column(
-          children: [
-            _buildSearchBar(context),
-
-            // Filter chips — BlocSelector rebuilds only when activeFilter changes
-            BlocSelector<RemindersBloc, RemindersState, ReminderFilter>(
-              selector: (state) => state.maybeWhen(
-                loaded: (_, filter) => filter,
-                orElse: () => ReminderFilter.all,
-              ),
-              builder: (_, activeFilter) => Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: ReminderFilterChips(
-                  activeFilter: activeFilter,
-                  onFilterSelected: _onFilterChanged,
-                ),
-              ),
-            ),
-
-            // Header card — BlocSelector rebuilds only when count or filter changes
-            BlocSelector<RemindersBloc, RemindersState, (int, ReminderFilter)>(
-              selector: (state) => state.maybeWhen(
-                loaded: (reminders, filter) => (reminders.length, filter),
-                orElse: () => (0, ReminderFilter.all),
-              ),
-              builder: (_, record) => RemindersHeaderCard(
-                isDarkMode: isDarkMode,
-                reminderCount: record.$1,
-                activeFilter: record.$2,
-              ),
-            ),
-
-            // Reactive list area
-            Expanded(
-              child: RemindersListView(
-                isDarkMode: isDarkMode,
-                onEdit: _onEdit,
-                onDelete: _onDelete,
-              ),
-            ),
-          ],
-        ),
+    // BlocSelector tracks only isSelectionMode so PopScope only rebuilds on
+    // mode transitions — not on every list or filter state change.
+    return BlocSelector<RemindersBloc, RemindersState, bool>(
+      selector: (state) => state.maybeWhen(
+        loaded: (_, __, isSelectionMode, ___) => isSelectionMode,
+        orElse: () => false,
       ),
-      floatingActionButton: _buildFab(context, isDarkMode),
-    );
+      builder: (_, isSelectionMode) => PopScope(
+        // Allow the OS back button to pop only when NOT in selection mode.
+        canPop: !isSelectionMode,
+        onPopInvokedWithResult: (didPop, __) {
+          // didPop is false when canPop was false — intercept to exit selection.
+          if (!didPop) _onClearSelection();
+        },
+        child: Scaffold(
+          // ── AppBar switches between normal and selection mode ───────────────────
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(kToolbarHeight),
+            child: BlocSelector<RemindersBloc, RemindersState, (bool, int)>(
+              selector: (state) => state.maybeWhen(
+                loaded: (_, __, isSelectionMode, selectedIds) =>
+                    (isSelectionMode, selectedIds.length),
+                orElse: () => (false, 0),
+              ),
+              builder: (_, selection) {
+                final (isSelectionMode, count) = selection;
+                if (isSelectionMode) {
+                  return SelectionAppBar(
+                    selectedCount: count,
+                    onDelete: _onBulkDeleteConfirmation,
+                    onClearSelection: _onClearSelection,
+                  );
+                }
+                return _buildNormalAppBar(context);
+              },
+            ),
+          ),
+
+          body: Container(
+            // Light mode: the gradient gives BackdropFilter a coloured surface to
+            // blur against — without it cards blur white-on-white (invisible).
+            decoration: BoxDecoration(
+              gradient: isDarkMode
+                  ? const LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [Color(0xFF14213D), Color(0xFF1B263B)],
+                    )
+                  : LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Theme.of(context).colorScheme.primary.withOpacity(0.05),
+                        const Color(0xFFF5F2FF),
+                      ],
+                    ),
+            ),
+            // ── Body collapses search/filter/header during selection mode ──────────
+            child: BlocSelector<RemindersBloc, RemindersState, bool>(
+              selector: (state) => state.maybeWhen(
+                loaded: (_, __, isSelectionMode, ___) => isSelectionMode,
+                orElse: () => false,
+              ),
+              builder: (_, isSelectionMode) => Column(
+                children: [
+                  if (!isSelectionMode) ...[
+                    _buildSearchBar(context),
+
+                    // Filter chips
+                    BlocSelector<RemindersBloc, RemindersState, ReminderFilter>(
+                      selector: (state) => state.maybeWhen(
+                        loaded: (_, filter, __, ___) => filter,
+                        orElse: () => ReminderFilter.all,
+                      ),
+                      builder: (_, activeFilter) => Padding(
+                        padding: const EdgeInsets.only(bottom: 8),
+                        child: ReminderFilterChips(
+                          activeFilter: activeFilter,
+                          onFilterSelected: _onFilterChanged,
+                        ),
+                      ),
+                    ),
+
+                    // Header card
+                    BlocSelector<
+                      RemindersBloc,
+                      RemindersState,
+                      (int, ReminderFilter)
+                    >(
+                      selector: (state) => state.maybeWhen(
+                        loaded: (reminders, filter, __, ___) =>
+                            (reminders.length, filter),
+                        orElse: () => (0, ReminderFilter.all),
+                      ),
+                      builder: (_, record) => RemindersHeaderCard(
+                        isDarkMode: isDarkMode,
+                        reminderCount: record.$1,
+                        activeFilter: record.$2,
+                      ),
+                    ),
+                  ],
+
+                  // Reactive list — always visible
+                  Expanded(
+                    child: RemindersListView(
+                      isDarkMode: isDarkMode,
+                      onEdit: _onEdit,
+                      onDelete: _onDelete,
+                      onLongPress: _onLongPress,
+                      onToggleSelect: _onToggleSelect,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          // Hide FAB in selection mode
+          floatingActionButton:
+              BlocSelector<RemindersBloc, RemindersState, bool>(
+                selector: (state) => state.maybeWhen(
+                  loaded: (_, __, isSelectionMode, ___) => isSelectionMode,
+                  orElse: () => false,
+                ),
+                builder: (_, isSelectionMode) => isSelectionMode
+                    ? const SizedBox.shrink()
+                    : _buildFab(context, isDarkMode),
+              ),
+        ), // closes Scaffold
+      ), // closes PopScope
+    ); // closes BlocSelector
   }
 
   // ── Private build helpers ──────────────────────────────────────────────────
 
-  AppBar _buildAppBar(BuildContext context) {
+  AppBar _buildNormalAppBar(BuildContext context) {
     return AppBar(
       title: const Text(
         'RemindMe',

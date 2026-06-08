@@ -11,6 +11,8 @@ class RemindersState with _$RemindersState {
   const factory RemindersState.loaded({
     required List<Reminder> reminders,
     @Default(ReminderFilter.all) ReminderFilter activeFilter,
+    @Default(false) bool isSelectionMode,
+    @Default(<String>{}) Set<String> selectedReminderIds,
   }) = RemindersLoaded;
   const factory RemindersState.error({required String message}) =
       RemindersError;

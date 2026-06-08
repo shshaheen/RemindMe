@@ -46,16 +46,24 @@ class FilterRemindersUseCase {
         case ReminderFilter.all:
           return true;
         case ReminderFilter.today:
-          return dt.isAfter(todayStart.subtract(const Duration(microseconds: 1))) &&
+          return dt.isAfter(
+                todayStart.subtract(const Duration(microseconds: 1)),
+              ) &&
               dt.isBefore(todayEnd);
         case ReminderFilter.tomorrow:
-          return dt.isAfter(tomorrowStart.subtract(const Duration(microseconds: 1))) &&
+          return dt.isAfter(
+                tomorrowStart.subtract(const Duration(microseconds: 1)),
+              ) &&
               dt.isBefore(tomorrowEnd);
         case ReminderFilter.thisWeek:
-          return dt.isAfter(todayStart.subtract(const Duration(microseconds: 1))) &&
+          return dt.isAfter(
+                todayStart.subtract(const Duration(microseconds: 1)),
+              ) &&
               dt.isBefore(weekEnd);
         case ReminderFilter.upcoming:
-          return dt.isAfter(todayStart.subtract(const Duration(microseconds: 1)));
+          return dt.isAfter(
+            todayStart.subtract(const Duration(microseconds: 1)),
+          );
       }
     }).toList();
   }
