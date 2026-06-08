@@ -1,4 +1,4 @@
-package com.example.reminder_app
+package com.shaheen.reminderme
 
 import android.app.KeyguardManager
 import android.content.Context
