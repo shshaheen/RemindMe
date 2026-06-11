@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:go_router/go_router.dart';
-import 'package:reminder_app/core/di/injection_container.dart';
 import 'package:reminder_app/core/router/app_router.dart';
 import '../blocs/auth_bloc.dart';
 import '../blocs/auth_state.dart';
@@ -15,53 +13,36 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  bool _isAlarmLaunch = false;
 
   @override
   void initState() {
     super.initState();
-    _checkAlarmLaunch();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        final state = context.read<AuthBloc>().state;
+        _handleAuthState(state);
+      }
+    });
   }
 
-  Future<void> _checkAlarmLaunch() async {
-    try {
-      final notificationAppLaunchDetails =
-          await sl<FlutterLocalNotificationsPlugin>()
-              .getNotificationAppLaunchDetails();
-      if (notificationAppLaunchDetails?.didNotificationLaunchApp ?? false) {
-        final payload =
-            notificationAppLaunchDetails?.notificationResponse?.payload;
-        if (payload != null && payload.isNotEmpty) {
-          if (mounted) {
-            setState(() {
-              _isAlarmLaunch = true;
-            });
-            context.go('${AppRouter.alarmScreen}?id=$payload');
-          }
-        }
-      }
-    } catch (e) {
-      debugPrint('SplashPage [DEBUG]: Error checking alarm launch details: $e');
-    }
+  void _handleAuthState(AuthState state) {
+    state.maybeWhen(
+      needsPasswordSetup: () => context.go(AppRouter.createPasswordScreen),
+      unauthenticated: () => context.go(AppRouter.loginScreen),
+      authenticated: () => context.go(AppRouter.remindersScreen),
+      error: (msg) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(msg), backgroundColor: Colors.red),
+        );
+      },
+      orElse: () {},
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
-      listener: (context, state) {
-        if (_isAlarmLaunch) return;
-        state.maybeWhen(
-          needsPasswordSetup: () => context.go(AppRouter.createPasswordScreen),
-          unauthenticated: () => context.go(AppRouter.loginScreen),
-          authenticated: () => context.go(AppRouter.remindersScreen),
-          error: (msg) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(msg), backgroundColor: Colors.red),
-            );
-          },
-          orElse: () {},
-        );
-      },
+      listener: (context, state) => _handleAuthState(state),
       child: Scaffold(
         body: SizedBox.expand(
           child: Container(

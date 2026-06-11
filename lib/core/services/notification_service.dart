@@ -1,27 +1,27 @@
+import 'dart:async';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
+import 'package:alarm/alarm.dart';
+import 'package:alarm/utils/alarm_set.dart';
 import '../router/app_router.dart';
 
-class NotificationService {
-  final FlutterLocalNotificationsPlugin _localNotificationsPlugin;
-  bool _canScheduleExact = true;
+class NotificationService with WidgetsBindingObserver {
+  final Map<int, Timer> _timeoutTimers = {};
 
-  NotificationService(this._localNotificationsPlugin);
+  NotificationService();
 
-  static const String channelId = 'reminder_alarm_channel_v7';
-  static const String channelName = 'Reminders';
-  static const String channelDesc =
-      'Notification channel for scheduled reminder alarms';
-
-  /// Initializes the local notifications plugin and timezone databases.
+  /// Initializes the timezone databases and the alarm package.
   Future<void> init() async {
     if (kDebugMode) {
       debugPrint('NotificationService [DEBUG]: Starting initialization...');
     }
+
+    // Register this class as a lifecycle observer
+    WidgetsBinding.instance.addObserver(this);
 
     // 1. Initialize timezone database and set local location
     tz.initializeTimeZones();
@@ -43,55 +43,30 @@ class NotificationService {
       }
     }
 
-    // 2. Set default initialization settings for platforms
-    const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+    // 2. Initialize the Alarm package
+    await Alarm.init();
 
-    const DarwinInitializationSettings initializationSettingsDarwin =
-        DarwinInitializationSettings(
-          requestAlertPermission: false,
-          requestBadgePermission: false,
-          requestSoundPermission: false,
-        );
+    // 3. Listen to the alarm ring stream to start a 60-second timeout timer
+    Alarm.ringStream.stream.listen((alarmSettings) {
+      if (kDebugMode) {
+        debugPrint('NotificationService [DEBUG]: Alarm ringing: ${alarmSettings.id}');
+      }
+      _startTimeoutTimer(alarmSettings.id);
+    });
 
-    const InitializationSettings initializationSettings =
-        InitializationSettings(
-          android: initializationSettingsAndroid,
-          iOS: initializationSettingsDarwin,
-        );
-
-    await _localNotificationsPlugin.initialize(
-      initializationSettings,
-      onDidReceiveNotificationResponse: (NotificationResponse response) {
-        if (kDebugMode) {
-          debugPrint(
-            'NotificationService [DEBUG]: Notification clicked: ${response.payload}',
-          );
+    // Listen to ringing status changes globally to cancel timeout timers
+    Alarm.ringing.listen((AlarmSet ringingAlarms) {
+      final activeTimerIds = List<int>.from(_timeoutTimers.keys);
+      for (final id in activeTimerIds) {
+        if (!ringingAlarms.containsId(id)) {
+          if (kDebugMode) {
+            debugPrint('NotificationService: Canceling timeout timer for stopped alarm $id.');
+          }
+          _timeoutTimers[id]?.cancel();
+          _timeoutTimers.remove(id);
         }
-        final payload = response.payload;
-        if (payload != null && payload.isNotEmpty) {
-          AppRouter.router.go('/alarm?id=$payload');
-        }
-      },
-    );
-
-    // 3. Create Android notification channel (essential for Android 8.0+)
-    const AndroidNotificationChannel channel = AndroidNotificationChannel(
-      channelId,
-      channelName,
-      description: channelDesc,
-      importance: Importance.max,
-      playSound: true,
-      sound: UriAndroidNotificationSound('content://settings/system/ringtone'),
-      audioAttributesUsage: AudioAttributesUsage.notificationRingtone,
-      enableVibration: true,
-    );
-
-    await _localNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin
-        >()
-        ?.createNotificationChannel(channel);
+      }
+    });
 
     // 4. Proactively request notifications permissions on app startup
     final permissionGranted = await requestNotificationPermissions();
@@ -101,44 +76,46 @@ class NotificationService {
       );
     }
 
-    // 5. Check and Request exact alarm permission (Android 12+)
-    final androidImplementation = _localNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin
-        >();
-    if (androidImplementation != null) {
-      try {
-        final exactAllowed = await androidImplementation
-            .canScheduleExactNotifications();
-        _canScheduleExact = exactAllowed ?? false;
-        if (kDebugMode) {
-          debugPrint(
-            'NotificationService [DEBUG]: Exact Alarms Permitted? $_canScheduleExact',
-          );
-        }
+    // 5. Navigate immediately if an alarm is already ringing on launch
+    await _checkAndNavigateToRingingAlarm();
+  }
 
-        if (!_canScheduleExact) {
-          if (kDebugMode) {
-            debugPrint(
-              'NotificationService [DEBUG]: Requesting Exact Alarms Permission at runtime...',
-            );
-          }
-          final requestResult = await androidImplementation
-              .requestExactAlarmsPermission();
-          if (kDebugMode) {
-            debugPrint(
-              'NotificationService [DEBUG]: Exact Alarm Request Result: $requestResult',
-            );
-          }
-          final finalExactCheck = await androidImplementation
-              .canScheduleExactNotifications();
-          _canScheduleExact = finalExactCheck ?? false;
-        }
-      } catch (e) {
+  void _startTimeoutTimer(int alarmId) {
+    _timeoutTimers[alarmId]?.cancel();
+    _timeoutTimers[alarmId] = Timer(const Duration(seconds: 60), () async {
+      final isRinging = await Alarm.isRinging(alarmId);
+      if (isRinging) {
         if (kDebugMode) {
-          debugPrint(
-            'NotificationService [DEBUG]: Error configuring exact alarms permission: $e',
-          );
+          debugPrint('NotificationService: Alarm $alarmId timed out after 60 seconds. Stopping.');
+        }
+        await cancelNotification(alarmId);
+      }
+      _timeoutTimers.remove(alarmId);
+    });
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      _checkAndNavigateToRingingAlarm();
+    }
+  }
+
+  Future<void> _checkAndNavigateToRingingAlarm() async {
+    final ringingSet = Alarm.ringing.value.alarms;
+    if (ringingSet.isNotEmpty) {
+      final activeAlarm = ringingSet.first;
+      final payload = activeAlarm.payload;
+      if (payload != null && payload.isNotEmpty) {
+        final currentRoute =
+            AppRouter.router.routeInformationProvider.value.uri.path;
+        if (currentRoute != '/alarm') {
+          if (kDebugMode) {
+            debugPrint(
+              'NotificationService: Ringing alarm detected on resume. Navigating to alarm screen.',
+            );
+          }
+          AppRouter.router.go('/alarm?id=$payload');
         }
       }
     }
@@ -160,7 +137,7 @@ class NotificationService {
     return await Permission.notification.status;
   }
 
-  /// Schedule a local timezone-aware notification.
+  /// Schedule a local timezone-aware alarm.
   Future<void> scheduleNotification({
     required int id,
     required String title,
@@ -180,70 +157,36 @@ class NotificationService {
       throw ArgumentError('Scheduled date must be in the future.');
     }
 
-    final AndroidNotificationDetails androidDetails =
-        AndroidNotificationDetails(
-          channelId,
-          channelName,
-          channelDescription: channelDesc,
-          importance: Importance.max,
-          priority: Priority.max,
-          playSound: true,
-          sound: const UriAndroidNotificationSound(
-            'content://settings/system/ringtone',
-          ),
-          audioAttributesUsage: AudioAttributesUsage.notificationRingtone,
-          category: AndroidNotificationCategory.alarm,
-          visibility: NotificationVisibility.public,
-          fullScreenIntent: true,
-          additionalFlags: Int32List.fromList(<int>[
-            4,
-          ]), // Insistent (looping) alarm sound/vibration
-          actions: <AndroidNotificationAction>[
-            const AndroidNotificationAction(
-              'dismiss_alarm',
-              'Dismiss',
-              cancelNotification: true,
-            ),
-          ],
-        );
-
-    const DarwinNotificationDetails iosDetails = DarwinNotificationDetails(
-      presentAlert: true,
-      presentBadge: true,
-      presentSound: true,
-    );
-
-    final NotificationDetails platformDetails = NotificationDetails(
-      android: androidDetails,
-      iOS: iosDetails,
-    );
-
-    // Determine the optimal Android schedule mode based on permissions
-    final actualScheduleMode = _canScheduleExact
-        ? AndroidScheduleMode.exactAllowWhileIdle
-        : AndroidScheduleMode.inexactAllowWhileIdle;
-
     if (kDebugMode) {
       debugPrint(
-        'NotificationService [DEBUG]: Scheduling Alarm ID $id at $tzScheduledDate (${tzScheduledDate.difference(tzNow).inSeconds}s from now). Mode: $actualScheduleMode',
+        'NotificationService [DEBUG]: Scheduling Alarm ID $id at $tzScheduledDate via Alarm package',
       );
     }
 
     try {
-      await _localNotificationsPlugin.zonedSchedule(
-        id,
-        title,
-        body,
-        tzScheduledDate,
-        platformDetails,
-        androidScheduleMode: actualScheduleMode,
-        uiLocalNotificationDateInterpretation:
-            UILocalNotificationDateInterpretation.absoluteTime,
+      final alarmSettings = AlarmSettings(
+        id: id,
+        dateTime: scheduledDate,
+        assetAudioPath: 'assets/music_alarm.mp3',
+        loopAudio: true,
+        vibrate: true,
+        volumeSettings: const VolumeSettings.fixed(
+          volume: 1.0,
+          volumeEnforced: true,
+          showSystemUI: false,
+        ),
+        androidFullScreenIntent: true,
+        notificationSettings: NotificationSettings(
+          title: title,
+          body: body,
+          stopButton: 'Stop',
+        ),
         payload: payload,
       );
+      await Alarm.set(alarmSettings: alarmSettings);
       if (kDebugMode) {
         debugPrint(
-          'NotificationService [DEBUG]: Alarm ID $id successfully registered in OS.',
+          'NotificationService [DEBUG]: Alarm ID $id successfully registered in OS via Alarm package.',
         );
       }
     } catch (e, stack) {
@@ -265,45 +208,30 @@ class NotificationService {
       );
     }
 
-    const AndroidNotificationDetails androidDetails =
-        AndroidNotificationDetails(
-          channelId,
-          channelName,
-          channelDescription: channelDesc,
-          importance: Importance.max,
-          priority: Priority.max,
-          playSound: true,
-          sound: UriAndroidNotificationSound(
-            'content://settings/system/ringtone',
-          ),
-          audioAttributesUsage: AudioAttributesUsage.notificationRingtone,
-          category: AndroidNotificationCategory.alarm,
-          visibility: NotificationVisibility.public,
-          fullScreenIntent: true,
-        );
-
-    const DarwinNotificationDetails iosDetails = DarwinNotificationDetails(
-      presentAlert: true,
-      presentBadge: true,
-      presentSound: true,
-    );
-
-    const NotificationDetails platformDetails = NotificationDetails(
-      android: androidDetails,
-      iOS: iosDetails,
-    );
-
     try {
-      await _localNotificationsPlugin.show(
-        999, // Static ID for immediate debug notifications
-        'Immediate Debug Alarm',
-        'This is a persistent test notification triggered immediately!',
-        platformDetails,
+      final alarmSettings = AlarmSettings(
+        id: 999,
+        dateTime: DateTime.now().add(const Duration(milliseconds: 50)),
+        assetAudioPath: 'assets/music_alarm.mp3',
+        loopAudio: true,
+        vibrate: true,
+        volumeSettings: const VolumeSettings.fixed(
+          volume: 1.0,
+          volumeEnforced: true,
+          showSystemUI: false,
+        ),
+        androidFullScreenIntent: true,
+        notificationSettings: const NotificationSettings(
+          title: 'Immediate Debug Alarm',
+          body: 'This is a test notification triggered immediately!',
+          stopButton: 'Stop',
+        ),
         payload: 'debug_immediate_payload',
       );
+      await Alarm.set(alarmSettings: alarmSettings);
       if (kDebugMode) {
         debugPrint(
-          'NotificationService [DEBUG]: Immediate notification triggered successfully.',
+          'NotificationService [DEBUG]: Immediate alarm triggered successfully.',
         );
       }
     } catch (e, stack) {
@@ -316,8 +244,8 @@ class NotificationService {
     }
   }
 
-  /// Re-schedule a notification after a snooze delay.
-  /// Cancels any existing notification with [id] before scheduling.
+  /// Re-schedule an alarm after a snooze delay.
+  /// Cancels any existing alarm with [id] before scheduling.
   Future<void> scheduleSnoozeNotification({
     required int id,
     required int snoozeDurationMinutes,
@@ -325,7 +253,7 @@ class NotificationService {
   }) async {
     if (kDebugMode) {
       debugPrint(
-        'NotificationService [DEBUG]: Snoozing notification ID $id for $snoozeDurationMinutes min.',
+        'NotificationService [DEBUG]: Snoozing alarm ID $id for $snoozeDurationMinutes min.',
       );
     }
     final snoozeTime = DateTime.now().add(
@@ -340,20 +268,20 @@ class NotificationService {
     );
   }
 
-  /// Cancel a specific notification by ID.
+  /// Cancel a specific alarm by ID.
   Future<void> cancelNotification(int id) async {
     if (kDebugMode) {
-      debugPrint('NotificationService [DEBUG]: Canceling notification ID: $id');
+      debugPrint('NotificationService [DEBUG]: Canceling alarm ID: $id');
     }
-    await _localNotificationsPlugin.cancel(id);
+    await Alarm.stop(id);
   }
 
-  /// Cancel all scheduled notifications.
+  /// Cancel all scheduled alarms.
   Future<void> cancelAllNotifications() async {
     if (kDebugMode) {
-      debugPrint('NotificationService [DEBUG]: Canceling all notifications');
+      debugPrint('NotificationService [DEBUG]: Canceling all alarms');
     }
-    await _localNotificationsPlugin.cancelAll();
+    await Alarm.stopAll();
   }
 
   /// Maps common timezone aliases (such as Asia/Calcutta) to database compatible equivalents
