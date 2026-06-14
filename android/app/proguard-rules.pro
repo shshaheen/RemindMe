@@ -33,3 +33,20 @@
 -dontwarn androidx.startup.**
 -dontwarn androidx.window.**
 
+# Flutter Engine & Plugin classes
+-keep class io.flutter.app.** { *; }
+-keep class io.flutter.plugin.** { *; }
+-keep class io.flutter.util.** { *; }
+-keep class io.flutter.view.** { *; }
+-keep class io.flutter.** { *; }
+-keep class io.flutter.plugins.** { *; }
+-keep class io.flutter.plugins.GeneratedPluginRegistrant { *; }
+
+# Keep Alarm plugin package
+-keep class com.gdelataillade.alarm.alarm.** { *; }
+
+# Ignore warnings for missing Google Play Core classes referenced by Flutter Engine
+-dontwarn com.google.android.play.core.**
+
+
+

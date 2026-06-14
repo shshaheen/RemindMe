@@ -66,5 +66,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app requires microphone permission to listen to your voice and transcribe it to text for reminders.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>This app requires speech recognition permission to transcribe audio to text for reminders.</string>
 </dict>
 </plist>

@@ -2,17 +2,20 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:alarm/alarm.dart';
 import 'package:alarm/utils/alarm_set.dart';
 import '../router/app_router.dart';
+import '../permissions/app_permission.dart';
+import '../permissions/app_permission_status.dart';
+import '../permissions/permission_manager.dart';
 
 class NotificationService with WidgetsBindingObserver {
   final Map<int, Timer> _timeoutTimers = {};
+  final PermissionManager permissionManager;
 
-  NotificationService();
+  NotificationService({required this.permissionManager});
 
   /// Initializes the timezone databases and the alarm package.
   Future<void> init() async {
@@ -121,20 +124,20 @@ class NotificationService with WidgetsBindingObserver {
     }
   }
 
-  /// Check and request notification permissions dynamically using permission_handler.
+  /// Check and request notification permissions dynamically using PermissionManager.
   /// Returns true if permission is granted, false otherwise.
   Future<bool> requestNotificationPermissions() async {
-    final status = await Permission.notification.status;
-    if (status.isGranted) {
+    final status = await permissionManager.getPermissionStatus(AppPermission.notifications);
+    if (status == AppPermissionStatus.granted || status == AppPermissionStatus.limited) {
       return true;
     }
-    final result = await Permission.notification.request();
-    return result.isGranted;
+    final result = await permissionManager.requestPermission(AppPermission.notifications);
+    return result == AppPermissionStatus.granted || result == AppPermissionStatus.limited;
   }
 
   /// Check current notification permission status.
-  Future<PermissionStatus> getPermissionStatus() async {
-    return await Permission.notification.status;
+  Future<AppPermissionStatus> getPermissionStatus() async {
+    return await permissionManager.getPermissionStatus(AppPermission.notifications);
   }
 
   /// Schedule a local timezone-aware alarm.

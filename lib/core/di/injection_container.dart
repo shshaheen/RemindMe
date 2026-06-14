@@ -20,6 +20,10 @@ import '../../domain/usecases/filter_reminders.dart';
  import '../services/secure_storage_service.dart';
  import '../services/alarm_channel_service.dart';
  import '../services/tts_service.dart';
+ import '../permissions/permission_manager.dart';
+ import '../permissions/permission_manager_impl.dart';
+ import '../services/speech_recognition_service.dart';
+ import '../../presentation/reminders/cubits/speech_input/speech_input_cubit.dart';
  
  final GetIt sl = GetIt.instance;
  
@@ -44,12 +48,18 @@ import '../../domain/usecases/filter_reminders.dart';
   );
 
   sl.registerLazySingleton<NotificationService>(
-    () => NotificationService(),
+    () => NotificationService(permissionManager: sl<PermissionManager>()),
   );
 
   sl.registerLazySingleton<AlarmChannelService>(() => AlarmChannelService());
 
   sl.registerLazySingleton<TtsService>(() => TtsService());
+
+  sl.registerLazySingleton<PermissionManager>(() => PermissionManagerImpl());
+
+  sl.registerLazySingleton<SpeechRecognitionService>(
+    () => SpeechRecognitionService(),
+  );
 
   // ==========================================
   // 3. Features registration blocks
@@ -105,6 +115,14 @@ void _initRemindersFeature() {
       repository: sl(),
       filterReminders: sl(),
       bulkDeleteReminders: sl(),
+    ),
+  );
+
+  // Speech Cubit
+  sl.registerFactory(
+    () => SpeechInputCubit(
+      speechService: sl(),
+      permissionManager: sl(),
     ),
   );
 
