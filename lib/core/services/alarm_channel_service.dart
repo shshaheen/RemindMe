@@ -1,52 +1,34 @@
 import 'package:flutter/services.dart';
 
 class AlarmChannelService {
-  static const MethodChannel _channel = MethodChannel(
-    'com.example.reminder_app/alarm',
-  );
+  AlarmChannelService();
 
   /// Starts playing the looping alarm ringtone.
   Future<void> startRingtone() async {
-    try {
-      await _channel.invokeMethod('startRingtone');
-    } on PlatformException catch (_) {
-      // Ignore or log error on non-Android platforms
-    }
+    // Managed automatically by the alarm package upon triggering.
   }
 
   /// Stops the alarm ringtone.
   Future<void> stopRingtone() async {
-    try {
-      await _channel.invokeMethod('stopRingtone');
-    } on PlatformException catch (_) {
-      // Ignore or log error on non-Android platforms
-    }
+    // Managed automatically by the alarm package when the alarm is cancelled/stopped.
   }
 
   /// Request the system to dismiss the keyguard/lockscreen on Android 8.0+.
   Future<void> dismissKeyguard() async {
-    try {
-      await _channel.invokeMethod('dismissKeyguard');
-    } on PlatformException catch (_) {
-      // Ignore or log error on non-Android platforms
-    }
+    // Handled by the alarm package's fullScreenIntent activity.
   }
 
   /// Close the application activity cleanly.
   Future<void> closeApp() async {
     try {
-      await _channel.invokeMethod('closeApp');
-    } on PlatformException catch (_) {
-      // Ignore or log error on non-Android platforms
+      await SystemNavigator.pop();
+    } catch (_) {
+      // Ignore or log error
     }
   }
 
   /// Explicitly wake the screen and set show when locked flags.
   Future<void> turnScreenOn() async {
-    try {
-      await _channel.invokeMethod('turnScreenOn');
-    } on PlatformException catch (_) {
-      // Ignore or log error on non-Android platforms
-    }
+    // Handled by the alarm package's fullScreenIntent activity.
   }
 }

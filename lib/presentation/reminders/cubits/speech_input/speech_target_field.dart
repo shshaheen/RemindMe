@@ -1,0 +1,4 @@
+enum SpeechTargetField {
+  title,
+  description,
+}

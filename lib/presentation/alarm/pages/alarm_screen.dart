@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:alarm/alarm.dart';
+import 'package:go_router/go_router.dart';
 
 import '../blocs/alarm_bloc.dart';
 import '../blocs/alarm_event.dart';
@@ -20,7 +23,7 @@ class AlarmScreen extends StatelessWidget {
   const AlarmScreen({super.key, required this.reminderId});
 
   @override
-  Widget build(BuildContext context) => const _AlarmView();
+  Widget build(BuildContext context) => _AlarmView(reminderId: reminderId);
 }
 
 // ---------------------------------------------------------------------------
@@ -30,14 +33,16 @@ class AlarmScreen extends StatelessWidget {
 // ---------------------------------------------------------------------------
 
 class _AlarmView extends StatefulWidget {
-  const _AlarmView();
+  final String reminderId;
+
+  const _AlarmView({super.key, required this.reminderId});
 
   @override
   State<_AlarmView> createState() => _AlarmViewState();
 }
 
 class _AlarmViewState extends State<_AlarmView>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   late AnimationController _entranceController;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
@@ -45,6 +50,7 @@ class _AlarmViewState extends State<_AlarmView>
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _entranceController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 900),
@@ -65,8 +71,27 @@ class _AlarmViewState extends State<_AlarmView>
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _entranceController.dispose();
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      _checkAlarmStatus();
+    }
+  }
+
+  Future<void> _checkAlarmStatus() async {
+    final notificationId = widget.reminderId.hashCode.abs() & 0x7FFFFFFF;
+    final isRinging = await Alarm.isRinging(notificationId);
+    if (!isRinging && mounted) {
+      if (kDebugMode) {
+        debugPrint('AlarmScreen: Alarm ${widget.reminderId} (notification: $notificationId) is no longer ringing. Redirecting to home.');
+      }
+      context.go('/');
+    }
   }
 
   @override

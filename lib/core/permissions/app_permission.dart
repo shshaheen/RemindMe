@@ -1,0 +1,4 @@
+enum AppPermission {
+  microphone,
+  notifications,
+}
